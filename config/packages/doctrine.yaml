@@ -1,6 +1,11 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
+        types:
+            CommentStatusType: App\DBAL\Types\CommentStatusType
+            ResourceStatusType: App\DBAL\Types\ResourceStatusType
+            ProgressStatusType: App\DBAL\Types\ProgressStatusType
+            ResourceType: App\DBAL\Types\ResourceType
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
