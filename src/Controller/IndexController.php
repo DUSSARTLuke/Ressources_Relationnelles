@@ -10,7 +10,7 @@ class IndexController extends AbstractController
     /**
      * @Rest\Get(
      *     name="home",
-     *     path="/app{path}",
+     *     path="/{path}",
      *     requirements={
      *         "path"=".*"
      *     },
@@ -18,6 +18,6 @@ class IndexController extends AbstractController
      */
     public function home()
     {
-        return $this->render("base.html.twig");
+        return $this->render("index/index.html.twig");
     }
 }
