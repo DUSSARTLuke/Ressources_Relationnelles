@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDom from "react-dom";
-import "../styles/app.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+window.React = React;
 
 ReactDom.render(
     <BrowserRouter>
