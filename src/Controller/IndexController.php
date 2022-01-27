@@ -13,7 +13,7 @@ class IndexController extends AbstractController
     /**
      * @Rest\Get(
      *     name="home",
-     *     path="/{path}",
+     *     path="/app{path}",
      *     requirements={
      *         "path"=".*"
      *     },

@@ -33,3 +33,7 @@ yarn-error.log
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+/my-admin/node_modules/
+/migrations/Version20220126114846.php
+
+.env
