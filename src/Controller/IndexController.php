@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use FOS\RestBundle\Controller\Annotations as Rest;
+
 
 class IndexController extends AbstractController
 {
@@ -18,6 +21,6 @@ class IndexController extends AbstractController
      */
     public function home()
     {
-        return $this->render("index/index.html.twig");
+        return $this->render("index.html.twig");
     }
 }
