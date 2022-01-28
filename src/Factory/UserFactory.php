@@ -45,6 +45,7 @@ final class UserFactory extends ModelFactory
             'roles' => ['ROLE_USER'],
             'password' => self::faker()->sha256(),
             'isActive' => self::faker()->boolean(),
+            'isRGPD' => true,
         ];
     }
 

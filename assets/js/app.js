@@ -1,8 +1,11 @@
-// ./src/js/app.js
+import Navbar from "./components/navbar";
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Navbar from './components/navbar';
 
-ReactDOM.render(<Navbar />, document.getElementById('root'));
+
+export default function App() {
+    return (
+        <div>
+            <Navbar />
+        </div>
+    );
+}

@@ -51,28 +51,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, nullable=true)
      * @Groups({"user:read", "user:write", "user:collection:read"})
      */
-    private $address1;
+    private $address1 = null;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
      * @Groups({"user:read", "user:write", "user:collection:read"})
      */
-    private $address2;
+    private $address2 = null;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=5, nullable=true)
      * @Groups({"user:read", "user:write", "user:collection:read"})
      */
-    private $postalCode;
+    private $postalCode = null;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      * @Groups({"user:read", "user:write", "user:collection:read"})
      */
-    private $city;
+    private $city = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -92,7 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=45, nullable=true)
      * @Groups({"user:read", "user:write", "user:collection:read"})
      */
-    private $socialSituation;
+    private $socialSituation = null;
 
     /**
      * @ORM\Column(type="json")
@@ -158,6 +158,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user:read"})
      */
     private $createdResources;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     * @Groups({"user:read", "user:write", "user:collection:read"})
+     *
+     * @ApiProperty(
+     *     attributes={
+     *         "openapi_context"={
+     *             "example"= false
+     *         }
+     *     }
+     * )
+     */
+    private $isRGPD;
 
     public function __construct()
     {
@@ -249,7 +263,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getBirthday(): ?string
     {
-        return $this->birthday->format('d/m/Y');
+        return $this->birthday;
     }
 
     public function setBirthday(\DateTimeInterface $birthday): self
@@ -475,6 +489,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $createdResource->setCreatedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsRGPD(): ?bool
+    {
+        return $this->isRGPD;
+    }
+
+    public function setIsRGPD(bool $isRGPD): self
+    {
+        $this->isRGPD = $isRGPD;
 
         return $this;
     }
