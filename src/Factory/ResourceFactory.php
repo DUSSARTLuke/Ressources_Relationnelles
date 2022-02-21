@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use App\DBAL\Types\ResourceStatusType;
+use App\Entity\RelationType;
 use App\Entity\Resource;
 use App\Repository\ResourceRepository;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -42,7 +43,8 @@ final class ResourceFactory extends ModelFactory
             'status' => self::faker()->randomElement(['CR', 'WA', 'PU', 'DE']),
             'category' => CategoryFactory::random(),
             'resourceType' => self::faker()->randomElement(['GA', 'AR', 'CH', 'PC', 'WO', 'RS', 'OG', 'VI']),
-            'createdBy' => UserFactory::random()
+            'createdBy' => UserFactory::random(),
+            'relationType' => RelationTypeFactory::random()
         ];
     }
 
