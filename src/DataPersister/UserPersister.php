@@ -4,6 +4,7 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints\Date;
@@ -11,13 +12,11 @@ use Symfony\Component\Validator\Constraints\Date;
 class UserPersister implements ContextAwareDataPersisterInterface
 {
 
-    private $entityManager;
-    private $userPasswordEncoder;
+    private $uRepo;
 
-    public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $userPasswordEncoder)
+    public function __construct(UserRepository $uRepo)
     {
-        $this->entityManager = $entityManager;
-        $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->uRepo = $uRepo;
     }
 
 
@@ -29,20 +28,22 @@ class UserPersister implements ContextAwareDataPersisterInterface
     /**
      * @param User $data
      * @param array $context
-     * @return object|void
+     * @return User|string
      */
     public function persist($data, array $context = [])
     {
-        if ($data->getPassword()) {
-            $data->setPassword(
-                $this->userPasswordEncoder->encodePassword($data, $data->getPassword()));
-            $data->eraseCredentials();
-        }
-        $data->setRoles(["ROLE_USER"]);
-        $data->setCreatedAt(new \DateTime());
-
-        $this->entityManager->persist($data);
-        $this->entityManager->flush();
+        return $this->uRepo->persist($data);
+//            if ($data->getPassword()) {
+//                $data->setPassword(
+//                    $this->userPasswordEncoder->encodePassword($data, $data->getPassword()));
+//                $data->eraseCredentials();
+//            }
+//            $data->setRoles(["ROLE_USER"]);
+//            $data->setCreatedAt(new \DateTime());
+//
+//            $this->entityManager->persist($data);
+//            $this->entityManager->flush();
+//            return 'ok';
     }
 
     public function remove($data, array $context = [])
