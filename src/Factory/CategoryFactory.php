@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use Doctrine\Persistence\ObjectManager;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -31,6 +32,71 @@ final class CategoryFactory extends ModelFactory
     public function __construct()
     {
         parent::__construct();
+    }
+    public function createCategory(ObjectManager $manager)
+    {
+        $categories = [
+            [
+                'id' => 1,
+                'name' => 'Communication'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Cultures'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Développement personnel'
+            ],
+            [
+                'id' => 4,
+                'name' => 'Intelligence émotionnelle'
+            ],
+            [
+                'id' => 5,
+                'name' => 'Loisirs'
+            ],
+            [
+                'id' => 6,
+                'name' => 'Monde professionnel'
+            ],
+            [
+                'id' => 7,
+                'name' => 'Parentalité'
+            ],
+            [
+                'id' => 8,
+                'name' => 'Qualité de vie'
+            ],
+            [
+                'id' => 9,
+                'name' => 'Recherche de sens'
+            ],
+            [
+                'id' => 10,
+                'name' => 'Santé physique'
+            ],
+            [
+                'id' => 11,
+                'name' => 'Santé psychique'
+            ],
+            [
+                'id' => 12,
+                'name' => 'Spiritualité'
+            ],
+            [
+                'id' => 13,
+                'name' => 'Vie affective'
+            ],
+        ];
+
+        foreach ($categories as $category){
+            $cat = new Category();
+            $cat
+                ->setName($category['name']);
+            $manager->persist($cat);
+        }
+        $manager->flush();
     }
 
     protected function getDefaults(): array

@@ -16,9 +16,9 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        CategoryFactory::new()->createMany(10);
-        RelationTypeFactory::new()->createMany(15);
-        UserFactory::new()->createMany(100);
+        CategoryFactory::new()->createCategory($manager);
+        RelationTypeFactory::new()->createRelationType($manager);
+        UserFactory::new()->createUsers($manager);
         ResourceFactory::new()->createMany(70, ['relationType' => RelationTypeFactory::randomRange(1, 5)]);
         CommentFactory::new()->createMany(25);
         FavoriteFactory::new()->createMany(15);
