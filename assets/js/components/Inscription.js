@@ -1,8 +1,6 @@
 import React from "react";
 import axios from 'axios';
-import {format} from 'date-fns';
 import "react-datetime/css/react-datetime.css";
-import {Link} from "react-router-dom";
 
 
 export default function Inscription() {
@@ -28,7 +26,7 @@ export default function Inscription() {
         event.preventDefault();
         if (state.password === state.conf_password) {
 
-            console.log(state.donnees);
+            // console.log(state.donnees);
             axios.post(`https://localhost:8000/api/users`, {
                 'username': state.username,
                 'password': state.password,
@@ -37,7 +35,7 @@ export default function Inscription() {
                 'birthday': new Date(state.birthday),
             })
                 .then(res => {
-                    window.location.href('https://localhost:8000/app/');
+            window.location.href = "https://localhost:8000/app/connexion";
                 })
 
         } else {

@@ -261,7 +261,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBirthday(): ?string
+    public function getBirthday(): ?\DateTime
     {
         return $this->birthday;
     }

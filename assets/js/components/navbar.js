@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Routes, Route, Link} from "react-router-dom";
 import Home from "./Home";
 import Connexion from "./Connexion";
@@ -15,7 +15,6 @@ export default class Navbar extends Component {
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false"
                                 aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
                         </button>
 
                         <div className="collapse navbar-collapse" id="navbarColor02">
