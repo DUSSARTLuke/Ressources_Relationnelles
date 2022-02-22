@@ -19,6 +19,20 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    /**
+     *
+     */
+    public function findCommentsWithAuthor()
+    {
+        $qb = $this->createQueryBuilder('comments')
+            ->select('comment, author, resource')
+            ->from('App\Entity\Comment', 'comment')
+            ->innerJoin('comment.user', 'author')
+            ->innerJoin('comment.resource', 'resource')
+            ->orderBy('comment.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
     // /**
     //  * @return Comment[] Returns an array of Comment objects
     //  */
