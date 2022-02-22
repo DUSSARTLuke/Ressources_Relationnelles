@@ -198,7 +198,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return (string)$this->username;
     }
 
     public function setUsername(string $username): self
@@ -516,11 +516,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->confPassword;
     }
 
-    /**
-     * @param string $confPassword
-     */
-    public function setConfPassword(string $confPassword): void
+
+    public function setConfPassword(string $confPassword): self
     {
         $this->confPassword = $confPassword;
+
+        return $this;
     }
 }

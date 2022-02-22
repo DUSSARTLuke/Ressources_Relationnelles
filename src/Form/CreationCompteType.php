@@ -20,7 +20,6 @@ class CreationCompteType extends AbstractType
             ->add('password', PasswordType::class)
             ->add('email', EmailType::class)
             ->add('confPassword', PasswordType::class)
-            ->add('birthday', DateTimeType::class)
         ;
     }
 

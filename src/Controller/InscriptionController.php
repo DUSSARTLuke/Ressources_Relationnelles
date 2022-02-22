@@ -20,8 +20,9 @@ class InscriptionController extends AbstractController
 {
     /**
      * @Route("compte", name="compte")
+     * @throws \Exception
      */
-    public function index(Request $request, EntityManagerInterface $manager, User $compte, UserRepository $uRepo, UserPasswordEncoderInterface $encoder): Response
+    public function index(Request $request, EntityManagerInterface $manager, UserRepository $uRepo, UserPasswordEncoderInterface $encoder): Response
     {
         $compte = new User();
         $form = $this->createForm(CreationCompteType::class, $compte);
@@ -29,21 +30,23 @@ class InscriptionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $username = $form->get('username')->getData();
             if ($uRepo->isUsernameExist($username) === 'ok') {
-
-                $this->addFlash('warning', 'Un compte est déjà créé avec ce numéro de licence');
+//                dd('ok');
+                $this->addFlash('warning', 'Un compte est déjà créé avec ce pseudo');
             }
             else if ($uRepo->isMailExist($form->get('email')->getData()) === 'ok') {
 
                 $this->addFlash('warning', 'Un compte est déjà créé avec cette adresse mail');
             }
             else {
-                $compte->setRoles(["ROLE_USER"]);
                 $mdp = $form->get('password')->getData();
                 $vmdp = $form->get('confPassword')->getData();
                 if ($mdp === $vmdp) {
                     $encoder = $encoder->encodePassword($compte, $mdp);
                     $compte->setPassword($encoder);
                     $compte->setconfPassword($encoder);
+                    $compte->setBirthday(new \DateTime($_POST['birthday']));
+                    isset($_POST['rgpd']) ? $compte->setIsRGPD(true) : $compte->setIsRGPD(false);
+                    $compte->setRoles(["ROLE_USER"]);
 //
 //                    $compte->setActivationToken(md5(uniqid()));
 //
@@ -60,13 +63,16 @@ class InscriptionController extends AbstractController
 
 
 
+
                     $this->addFlash('success', " Votre demande a bien été prise en compte ! Veuillez la valider par mail ! ");
+                    return $this->redirectToRoute('home');
+
                 } else {
                     $this->addFlash('warning', " Les mots de passes doivent êtres identiques !");
                 };
             }
         }
-        return $this->render('Inscription/creationCompte.html.twig', [
+        return $this->render('pages/Inscription/creationCompte.html.twig', [
             'form' => $form->createView(),
         ]);
     }
