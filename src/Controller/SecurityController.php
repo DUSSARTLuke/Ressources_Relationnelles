@@ -1,19 +1,16 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-
-class ConnexionController extends AbstractController
+class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
@@ -29,13 +26,13 @@ class ConnexionController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('pages/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
      * @Route("/logout", name="app_logout")
      */
-    public function logout()
+    public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
@@ -43,7 +40,7 @@ class ConnexionController extends AbstractController
     /**
      * @Route("/mdpOublie", name="mdpOublie")
      */
-    public function mdpOublie(Request $request, UserRepository $usersRepo, \Swift_Mailer $mailer)
+    public function mdpOublie(Request $request, UserRepository $usersRepo)
     {
         if ($_POST) {
             $user = $usersRepo->findOneByEmail($_POST['email']);
@@ -71,13 +68,13 @@ class ConnexionController extends AbstractController
 //            GestionContact::send($user->getEmail(), 'Vous', 'Réinitialisation de votre mot de passe', '<p> Bonjour, </p>
 //            <p>Vous avez fait une demande de réinitialisation de mot de passe, veuillez cliquer sur le lien ci-dessou pour y accéder :</p>
 //                    <a href=' . $url . '> Activer votre compte </a>', 'text/html');
-//
+
 
             $this->addFlash('success', 'Un email de réinitialisation de mot de passe vous a été envoyé');
 
         };
 
-        return $this->render('security/mdpOublie.html.twig');
+        return $this->render('pages/security/mdpOublie.html.twig');
     }
 
     /**
@@ -104,8 +101,7 @@ class ConnexionController extends AbstractController
 
             return $this->redirectToRoute('app_login');
         } else {
-            return $this->render('security/reset_password.html.twig', ['token' => $token]);
+            return $this->render('pages/security/reset_password.html.twig', ['token' => $token]);
         }
     }
-
 }
