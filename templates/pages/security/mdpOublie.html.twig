@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <form method="post">
+            <div class="InscriptionBox">
+                <h1 class="h3" id="loginH1">Veuillez renseigner votre email afin de réinitialiser votre mot de
+                    passe</h1>
+                <div class="form-floating mb-3">
+                    <input type="text" name="email" id="email" placeholder="Entrez votre email"
+                           class="form-control col-5" required autofocus/>
+                    <label for="inputNumLicence">Email</label>
+                </div>
+            </div>
+            <div id="loginBtn">
+                <button class="btn btn-primary" style="margin: 0 10px" type="submit">Demande de réinitialisation
+                </button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

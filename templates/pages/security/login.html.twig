@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
+        <div class="container">
+            <div class="InscriptionBox">
+                <h1 class="h3" id="loginH1">Veuillez vous connecter</h1>
+                <div class="row">
+                    <div class="form-floating mb-3 col-6">
+                        <input type="text" value="{{ last_username }}" name="username" id="inputUsername"
+                               placeholder="Pseudo" class="form-control" required autofocus/>
+                        <label for="inputUsername">Pseudo : </label>
+                    </div>
+                    <div class="form-floating mb-3 col-6">
+                        <input type="password" name="password" id="inputPassword"
+                               placeholder="Entrez votre mot de passe" class="form-control" required/>
+                        <label for="inputPassword">Mot de passe</label>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <a style="font-size: 0.9em" href="{{ path('mdpOublie') }}">Mot de passe oublié ?</a>
+                </div>
+            </div>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+
+            <div class="d-flex justify-content-around mt-5">
+                <button class="btn btn-primary" style="margin: 0 10px" type="submit">Connexion</button>
+                <div class="btn btn-primary" style="margin: 0 10px" type="submit">
+                    <a href="{{ path('creation_compte') }}" style="text-decoration:none;color:white;">Inscrivez-vous</a>
+                </div>
+            </div>
+        </div>
+
+
+        {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+        #}
+
+    </form>
+{% endblock %}
