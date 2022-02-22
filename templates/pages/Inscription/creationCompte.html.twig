@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+{% block body %}
+
+
+    </br>
+    <div class="container">
+        <div class="InscriptionBox">
+            <div>
+                <h2> Remplissez ce formulaire afin de vous créer un compte ! </h2>
+            </div>
+            {{form_start(form)}}
+            <div class="row">
+                <div class="form-floating mb-3 col-5">
+                    {{ form_widget(form.username, {'attr': {'placeholder': 'Pseudo', 'class': 'form-control'}}) }}
+                    {{ form_label(form.username, 'Pseudo') }}
+                </div>
+                <div class="form-floating mb-3 col-5">
+                    {{ form_widget(form.email, {'attr': {'placeholder': 'Adresse mail', 'class': 'form-control'}}) }}
+                    {{ form_label(form.email, 'Adresse mail') }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating mb-3 col-5">
+                    {{ form_widget(form.password, {'attr': {'placeholder': 'Mot de passe', 'class': 'form-control'}}) }}
+                    {{ form_label(form.password, 'Mot de passe') }}
+                </div>
+                <div class="form-floating mb-3 col-5">
+                    {{ form_widget(form.confPassword, {'attr': {'placeholder': 'Confirmer le mot de passe', 'class': 'form-control'}}) }}
+                    {{ form_label(form.confPassword, 'Confirmer le mot de passe') }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-5">
+                    <input type="date" name="birthday">
+                    <label for="birthday">Votre date d'anniversaire</label>
+                </div>
+                <div class="form-check col-lg-5">
+                    <input class="form-check-input" type="checkbox" name="rgpd"/>
+                    <label class="form-check-label" for="rgpd">
+                        Je consens à ce que mes données personnelles soient traitées pour que le ministère des
+                        solidarités et de la santé puisse effectuer des statistiques.
+                    </label>
+                </div>
+            </div>
+            <div class="mt-5 text-center">
+                <button type='submit' class='btn btn-success'>Demande d'enregistrement</button>
+
+            </div>
+        </div>
+        {{form_end(form)}}
+    </div>
+
+{% endblock %}

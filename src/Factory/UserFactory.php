@@ -106,6 +106,7 @@ final class UserFactory extends ModelFactory
             ->setBirthday($user['birthday'])
             ->setRoles($user['roles'])
             ->setPassword($this->userPasswordEncoder->encodePassword($userReturn, $user['password']))
+            ->setConfPassword($this->userPasswordEncoder->encodePassword($userReturn, $user['password']))
             ->setIsActive($user['isActive'])
             ->setIsRGPD(true);
 

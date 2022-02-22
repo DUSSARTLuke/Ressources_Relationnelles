@@ -45,46 +45,33 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function getUsernames()
-    {
-        $query = $this->createQueryBuilder('u');
-        dd('ok');
-        return $query
-            ->select('u.username')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function persist(User $user)
-    {
-        $users = $this->findAll();
-        $erreur = '';
-
-        foreach ($users as $userDB) {
-            if($userDB->getUserIdentifier() === $user->getUserIdentifier()){
-                $erreur = 'erreur';
-            }
-        }
-        if($erreur === '') {
-//            dd('ok');
-            if ($user->getPassword()) {
-                $user->setPassword(
-                    $this->userPasswordEncoder->encodePassword($user, $user->getPassword()));
-                $user->eraseCredentials();
-            }
-            $user->setRoles(["ROLE_USER"]);
-            $user->setCreatedAt(new \DateTime());
-
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
-
-        return $user;
-        } else {
-
-//            dd($erreur);
-            return $erreur;
+    public function isUsernameExist(string $username){
+        $dql = $this->getEntityManager()->createQuery('select l.username '
+            . 'from App\Entity\User l '
+            . 'where l.username = :username');
+        $dql->setParameter('username', $username);
+        $result = $dql->getResult();
+        if($result){
+            return 'ok';
+        }else{
+            return 'ko';
         }
     }
+
+    public function isMailExist(string $email){
+        $dql = $this->getEntityManager()->createQuery('select u.id '
+            . 'from App\Entity\User u '
+            . 'where u.email = :email');
+        $dql->setParameter('email', $email);
+        $result = $dql->getResult();
+        if($result){
+            return 'ok';
+        }else{
+            return 'ko';
+        }
+    }
+
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
