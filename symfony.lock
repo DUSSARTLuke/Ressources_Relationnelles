@@ -700,7 +700,7 @@
             "./assets/bootstrap.js",
             "./assets/controllers.json",
             "./assets/controllers/hello_controller.js",
-            "./assets/styles/app.css",
+            "./assets/styles/app.scss",
             "./config/packages/assets.yaml",
             "./config/packages/prod/webpack_encore.yaml",
             "./config/packages/test/webpack_encore.yaml",

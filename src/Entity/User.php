@@ -196,7 +196,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @deprecated since Symfony 5.3, use getUserIdentifier instead
      */
-    public function getUsername(): string
+    public function getUserIdentifier(): string
     {
         return (string) $this->username;
     }
@@ -290,16 +290,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->socialSituation = $socialSituation;
 
         return $this;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->username;
     }
 
     /**
@@ -510,6 +500,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isRGPD = $isRGPD;
 
         return $this;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+
     }
 
     /**

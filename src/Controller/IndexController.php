@@ -18,9 +18,10 @@ class IndexController extends AbstractController
      *         "path"=".*"
      *     },
      * )
+     * @Rest\Route(path="home", name="home")
      */
     public function home()
     {
-        return $this->render("index.html.twig");
+        return $this->render("pages/index/index.html.twig");
     }
 }
