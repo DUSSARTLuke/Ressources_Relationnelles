@@ -36,6 +36,33 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function isUsernameExist(string $username){
+        $dql = $this->getEntityManager()->createQuery('select l.username '
+            . 'from App\Entity\User l '
+            . 'where l.username = :username');
+        $dql->setParameter('username', $username);
+        $result = $dql->getResult();
+        if($result){
+            return 'ok';
+        }else{
+            return 'ko';
+        }
+    }
+
+    public function isMailExist(string $email){
+        $dql = $this->getEntityManager()->createQuery('select u.id '
+            . 'from App\Entity\User u '
+            . 'where u.email = :email');
+        $dql->setParameter('email', $email);
+        $result = $dql->getResult();
+        if($result){
+            return 'ok';
+        }else{
+            return 'ko';
+        }
+    }
+
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

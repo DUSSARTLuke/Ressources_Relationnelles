@@ -107,6 +107,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
+     * @var string The hashed confirmation of password
+     * @ORM\Column(type="string")
+     * @Groups({"user:read", "user:write"})
+     */
+    private $confPassword;
+
+    /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      * @Groups({"user:read", "user:collection:read"})
@@ -503,5 +510,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isRGPD = $isRGPD;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConfPassword(): string
+    {
+        return $this->confPassword;
+    }
+
+    /**
+     * @param string $confPassword
+     */
+    public function setConfPassword(string $confPassword): void
+    {
+        $this->confPassword = $confPassword;
     }
 }

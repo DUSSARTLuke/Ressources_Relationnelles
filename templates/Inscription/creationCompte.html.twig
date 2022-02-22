@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+{% block body %}
+
+
+    </br>
+    <div class="container">
+        <div class="InscriptionBox">
+            <div>
+                <h2> Remplissez ce formulaire afin de vous créer un compte ! </h2>
+            </div>
+            {{form_start(form)}}
+            <div class="InscriptionBoxInput form-floating mb-3">
+                {{ form_widget(form.username, {'attr': {'placeholder': 'Pseudo'}}) }}
+                {{ form_label(form.username, 'Pseudo') }}
+            </div>
+            <div class="InscriptionBoxInput form-floating mb-3">
+                {{ form_widget(form.email, {'attr': {'placeholder': 'Adresse mail'}}) }}
+                {{ form_label(form.email, 'Adresse mail') }}
+            </div>
+            <div class="InscriptionBoxInput form-floating mb-3">
+                {{ form_widget(form.password, {'attr': {'placeholder': 'Mot de passe'}}) }}
+                {{ form_label(form.password, 'Mot de passe') }}
+            </div>
+            <div class="InscriptionBoxInput form-floating mb-3">
+                {{ form_widget(form.confPassword, {'attr': {'placeholder': 'Confirmer le mot de passe'}}) }}
+                {{ form_label(form.confPassword, 'Confirmer le mot de passe') }}
+            </div>
+            <div class="InscriptionBoxInput form-floating mb-3">
+                {{ form_widget(form.birthday, {'attr': {'placeholder': 'Confirmer le mot de passe'}}) }}
+                {{ form_label(form.birthday, 'Votre date d\'anniversaire') }}
+            </div>
+            <div class="form-check col-lg-6">
+                <input class="form-check-input" type="checkbox" name="donnees"/>
+                <label class="form-check-label" for="donnees">
+                    Je consens à ce que mes données personnelles soient traitées pour que le ministère des
+                    solidarités et de la santé puisse effectuer des statistiques.
+                </label>
+            </div>
+            </br>
+
+            <button type='submit' class='btn btn-success'>Demande d'enregistrement</button>
+        </div>
+        {{form_end(form)}}
+    </div>
+
+{% endblock %}
