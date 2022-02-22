@@ -35,7 +35,7 @@
             {% if app.user %}
                 <a class="btn btn-success" href="{{ path('app_logout') }}">Déconnexion</a>
             {% else %}
-                <a href="{{ path('app_login') }}" class="btn btn-primary">Se connecter</a>
+                <a href="{{ path('app_login') }}" class="btn btn-primary" style="margin-right: 5px;">Se connecter</a>
                 <a href="{{ path('creation_compte') }}" class="btn btn-primary">S'inscrire</a>
             {% endif %}
         </div>
