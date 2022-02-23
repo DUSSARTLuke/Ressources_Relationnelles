@@ -8,11 +8,6 @@ body {
 }
 
 .footer{
-  width: 100%;
-  background-color: #423e3e;
-  color: white;
-  padding: 20px 0;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
+  display:flex;
+  justify-content: center;
 }

@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes ressources {% endblock %}
+
+{% block stylesheets %}
+    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let table = new DataTable('#ressourcesList', {
+                language: {
+                    processing: "Traitement en cours...",
+                    search: "Rechercher&nbsp;:",
+                    lengthMenu: "Afficher les _MENU_ premiers",
+                    info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix: "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable: "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first: "Premier",
+                        previous: "Pr&eacute;c&eacute;dent",
+                        next: "Suivant",
+                        last: "Dernier"
+                    },
+                    aria: {
+                        sortAscending: ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block body %}
+
+    <h1 class="text-center"> Mes ressources : </h1>
+    <div class="container">
+        <table id="ressourcesList" class="table table-light table-striped">
+            <thead>
+            <tr>
+                <th class="col"></th>
+                <th class="col"> Nom</th>
+                <th class="col"> Contenu</th>
+                <th class="col"> Type de Ressource</th>
+                <th class="col"> Catégorie</th>
+                <th class="col"> Type de Relations</th>
+                <th class="col"> Status</th>
+                <th class="col"> Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ressource in ressources %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ ressource.name }}</td>
+                    <td class="hover_text"><span
+                                class="text_visible">{{ ressource.content|u.truncate(100, '...', false) }}</span>
+                        <span class="text_hidden">{{ ressource.content }}</span></td>
+                    <td>{{ ressource.resourceType }}</td>
+                    <td>{{ ressource.category.name }}</td>
+                    <td>
+                        {% for relation in ressource.relationType %}
+                            <span>{{ relation.name }}</span>
+                        {% endfor %}
+                    </td>
+                    {% if ressource.status == 'Supprimé' %}
+                        {% set classBadge = 'danger' %}
+                    {% elseif ressource.status == 'Publié' %}
+                        {% set classBadge = 'success' %}
+                    {% elseif ressource.status == 'En attente de validation' %}
+                        {% set classBadge = 'info' %}
+                    {% else %}
+                        {% set classBadge = 'primary' %}
+                    {% endif %}
+                    <td class="text-center">
+                        <span class="badge bg-{{ classBadge }}">{{ ressource.status }}</span>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+
