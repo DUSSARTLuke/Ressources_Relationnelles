@@ -1,47 +1,96 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('home') }}">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="#"><img class="logo" src="{{ asset('images/logo-app.png') }}"
+                                              alt="Logo de l'application"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarColor02">
-            <ul class="navbar-nav me-auto">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ path('home') }}">Home
-                        <span class="visually-hidden">(current)</span>
+                    <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="ressourcesDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Ressources
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="ressourcesDropdown">
+                        <li><a class="dropdown-item" href="#">Créer une ressource</a></li>
+                        <li><a class="dropdown-item" href="#">Voir la liste des ressources</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-
             </ul>
-
-            {% if app.user %}
-                <span class="navbar-text">{{ app.user.username }}</span>
-            {% endif %}
-        </div>
-
-
-        <div class="d-flex">
-            {% if app.user %}
-                <a class="btn btn-success" href="{{ path('app_logout') }}">Déconnexion</a>
-            {% else %}
-                <a href="{{ path('app_login') }}" class="btn btn-primary" style="margin-right: 5px;">Se connecter</a>
-                <a href="{{ path('creation_compte') }}" class="btn btn-primary">S'inscrire</a>
-            {% endif %}
+            <div class="d-flex">
+                {% if app.user %}
+                    <a class="btn btn-success" href="{{ path('app_logout') }}">Déconnexion</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="btn btn-primary" style="margin-right: 5px;">Se
+                        connecter</a>
+                    <a href="{{ path('creation_compte') }}" class="btn btn-primary">S'inscrire</a>
+                {% endif %}
+            </div>
         </div>
         <div class="d-flex">
             <a href="{{ path('creation_ressource') }}" class="btn btn-primary">Créer une ressource</a>
         </div>
     </div>
 </nav>
+
+
+{# <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> #}
+{#    <div class="container-fluid"> #}
+{#        <a class="navbar-brand" href="{{ path('home') }}">Home</a> #}
+{#        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" #}
+{#                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation"> #}
+{#            <span class="navbar-toggler-icon"></span> #}
+{#        </button> #}
+
+{#        <div class="collapse navbar-collapse" id="navbarColor02"> #}
+{#            <ul class="navbar-nav me-auto"> #}
+{#                <li class="nav-item"> #}
+{#                    <a class="nav-link active" href="{{ path('home') }}">Home #}
+{#                        <span class="visually-hidden">(current)</span> #}
+{#                    </a> #}
+{#                </li> #}
+{#                <li class="nav-item"> #}
+{#                    <a class="nav-link" href="#">Features</a> #}
+{#                </li> #}
+{#                <li class="nav-item"> #}
+{#                    <a class="nav-link" href="#">Pricing</a> #}
+{#                </li> #}
+{#                <li class="nav-item"> #}
+{#                    <a class="nav-link" href="#">About</a> #}
+{#                </li> #}
+
+{#            </ul> #}
+
+{#            {% if app.user %} #}
+{#                <span class="navbar-text">{{ app.user.username }}</span> #}
+{#            {% endif %} #}
+{#        </div> #}
+
+
+{#        <div class="d-flex"> #}
+{#            {% if app.user %} #}
+{#                <a class="btn btn-success" href="{{ path('app_logout') }}">Déconnexion</a> #}
+{#            {% else %} #}
+{#                <a href="{{ path('app_login') }}" class="btn btn-primary" style="margin-right: 5px;">Se connecter</a> #}
+{#                <a href="{{ path('creation_compte') }}" class="btn btn-primary">S'inscrire</a> #}
+{#            {% endif %} #}
+{#        </div> #}
+{#    </div> #}
+{# </nav> #}
 
