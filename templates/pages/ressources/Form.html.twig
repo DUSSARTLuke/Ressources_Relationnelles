@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title  %}
+{% if from  == 'create' %}
+    Ajouter une Ressource
+{% else %}
+    Modifier une Ressource
+{% endif %}
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <div class="RessourcesAddBox">
+            <div>
+                {% if from == 'create' %}
+                    <h2> Remplissez ce formulaire afin de créer une ressource ! </h2>
+                {% else %}
+                    <h2> Remplissez ce formulaire afin de modifier votre ressource ! </h2>
+                {% endif %}
+            </div>
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        {{ form_widget(form.name, {'attr': {'placeholder': 'Nom', 'class': 'form-control'}}) }}
+                        {{ form_label(form.name, 'Nom') }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.category, 'Catégorie') }}
+                        {{ form_widget(form.category, {'attr': {'placeholder': 'Veuillez choisir une catégorie', 'class': 'form-select'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.relationType, 'Relations') }}
+                        {{ form_widget(form.relationType, {'attr': {'placeholder': 'Veuillez choisir une ou plusieurs relations', 'class': 'form-select', 'style' : 'height:170px'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.resourceType, 'Type de ressource') }}
+                        {{ form_widget(form.resourceType, {'attr': {'placeholder': 'Veuillez choisir un type de ressource', 'class': 'form-select'}}) }}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating">
+                        {{ form_widget(form.content, {'attr': {'placeholder': 'Veuillez remplir le contenu', 'class': 'form-control', 'style' : 'height:446px'}}) }}
+                        {{ form_label(form.content, 'Contenu') }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 text-center">
+                {% if from == 'create' %}
+                    <button type='submit' class='btn btn-success'>Ajouter une ressource</button>
+                {% else %}
+                    <button type='submit' class='btn btn-success'>Modifier une ressource</button>
+                {% endif %}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
