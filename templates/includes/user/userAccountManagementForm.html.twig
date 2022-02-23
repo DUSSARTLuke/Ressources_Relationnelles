@@ -1,0 +1,8 @@
+{{ form_start(form, {'action': path('user_update_role', {id: id})}) }}
+<div class="row">
+    {{ form_row(form.roles) }}
+</div>
+<div class="mb-3 row">
+    {{ form_row(form.save) }}
+</div>
+{{ form_end(form) }}

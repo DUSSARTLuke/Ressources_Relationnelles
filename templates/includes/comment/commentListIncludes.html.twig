@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% for comment in comments %}
+        <div class="col-10 mt-2 mb-2 ">
+            <div class="card justify-content-center bg-light">
+                <div class="card-body">
+                    <p>{{ comment.user.username }} - {{ comment.createdAt }}</p>
+                    <p>{{ comment.content }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
