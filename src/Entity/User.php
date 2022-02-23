@@ -107,6 +107,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
+     * @var string The hashed confirmation of password
+     * @ORM\Column(type="string")
+     * @Groups({"user:read", "user:write"})
+     */
+    private $confPassword;
+
+    /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      * @Groups({"user:read", "user:collection:read"})
@@ -191,7 +198,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return (string)$this->username;
     }
 
     public function setUsername(string $username): self
@@ -497,6 +504,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->username;
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getConfPassword(): string
+    {
+        return $this->confPassword;
+    }
+
+
+    public function setConfPassword(string $confPassword): self
+    {
+        $this->confPassword = $confPassword;
+
+        return $this;
     }
 }
