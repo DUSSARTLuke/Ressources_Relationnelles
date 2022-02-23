@@ -12,12 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/ressources/", name="creation_")
+ * @Route("/ressources/", name="ressources_")
  */
 class RessourcesAddController extends AbstractController
 {
     /**
-     * @Route("ressource", name="ressource")
+     * @Route("create", name="create")
      */
     public function AddRessources(Request $request, EntityManagerInterface $manager): Response
     {
@@ -25,14 +25,9 @@ class RessourcesAddController extends AbstractController
         $form = $this->createForm(CreationRessourceType::class, $resource);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $name = $form->get('name')->getData();
-            if ($name = '' or $name = null) {
-                $this->addFlash('warning', 'Veuillez renseigner un nom pour votre ressource');
-            }
-            $name = $form->get('name')->getData();
-            if ($name = '' or $name = null) {
-                $this->addFlash('warning', 'Veuillez renseigner un nom pour votre ressource');
-            }
+            $resource->setCreatedAt(new \DateTime());
+            $resource->setCreatedBy($this->getUser());
+
             $manager->persist($resource);
             $manager->flush();
 
@@ -42,7 +37,30 @@ class RessourcesAddController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('ressources/ressourcesAdd.html.twig', ['form' => $form->createView()]);
+        return $this->render('pages/ressources/Form.html.twig', ['form' => $form->createView(), 'from' => 'create']);
+    }
+
+    /**
+     * @Route("edit/{id}", name="edit")
+     */
+    public function EditRessources(Request $request, EntityManagerInterface $manager, Resource $resource): Response
+    {
+        $form = $this->createForm(CreationRessourceType::class, $resource);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $resource->setUpdatedAt(new \DateTime());
+
+            $manager->persist($resource);
+            $manager->flush();
+
+            $this->addFlash('success', " Votre ressource a bien été modifiée !");
+
+            return $this->redirectToRoute('ressources_edit', [
+                "id" => $resource->getId()
+            ]);
+        }
+
+        return $this->render('pages/ressources/Form.html.twig', ['form' => $form->createView(), 'from' => 'edit']);
     }
 }
 
