@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 {% set submit_url = path('comment_update', {id: comment.id}) %}
-            {{render(controller('App\\Controller\\CommentController:update',
+            {{render(controller('App\\Controller\\CommentController:updateComment',
                 {id: comment.id, save: submit_url }))
             }}
             </div>
@@ -19,18 +19,3 @@
         </div>
     </div>
 </div>
-
-{#            <div class="modal-body">#}
-{#                {{ form_row(form.Matricule, { 'label': 'Matricule' }) }}#}
-{#                {{ form_row(form.Parking, { 'label': 'Matricule' }) }}#}
-{#                {{ form_row(form.Date, { 'label': 'Date' }) }}#}
-{#                {{ form_row(form.montant, { 'label': 'Montant' }) }}#}
-{#                <div class="modal-footer">#}
-{#                </div>#}
-{#                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>#}
-{#                <button type="submit" class="btn btn-success"><i class="ti-save"></i> Save</button>#}
-{#            </div>#}
-{#            {{ form_end(form) }}#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}

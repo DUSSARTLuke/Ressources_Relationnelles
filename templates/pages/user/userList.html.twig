@@ -1,0 +1,36 @@
+{% include 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <table class="table table-bordered border-light">
+                <thead>
+                <tr class="table-light">
+                    <th scope="col">Nom d'utilisateur</th>
+                    <th scope="col">Date d'inscription</th>
+                    <th scope="col">Compte actif</th>
+                    <th scope="col">Rôle</th>
+                    <th scope="col">Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.createdAt }}</td>
+                        <td>
+                            {{ render(controller('App\\Controller\\UserController:updateIsActiveUser',
+                                {id: user.id, save: path('user_update_is_active', {id: user.id}) })) }}
+                        </td>
+                        <td class="mx-auto">
+                            {{ render(controller('App\\Controller\\UserController:updateRoleUser',
+                                {id: user.id, save: path('user_update_role', {id: user.id}) })) }}
+                        </td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

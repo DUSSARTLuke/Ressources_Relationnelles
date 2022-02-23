@@ -13,9 +13,27 @@
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
+                {% if is_granted('ROLE_MODERATOR') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('comment_list') }}">Commentaires</a>
+                    <a class="nav-link" href="{{ path('comment_admin_list') }}">Modérer les commentaires</a>
                 </li>
+                {% endif %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('resources_admin') }}">Modérer les ressources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('user_list') }}">Gérer les comptes</a>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('comment_admin_list') }}">Statistiques</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('comment_admin_list') }}">Catégories</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
                 </li>

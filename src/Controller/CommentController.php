@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 class CommentController extends AbstractController
 {
     /**
-     * @Route(path="/commentaires", name="comment_list")
+     * @Route(path="/admin/commentaires", name="comment_admin_list")
      */
     public function adminCommentList(CommentRepository $commentRepository): Response
     {
@@ -30,7 +30,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route(path="/utilisateur-commentaires", name="comment_list")
+     * @Route(path="/utilisateur-commentaires", name="comment_user_list")
      */
     public function userCommentList(CommentRepository $commentRepository): Response
     {
@@ -66,7 +66,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route(path="/modifier-un-commentaire/{id}", name="comment_update")
+     * @Route(path="/admin/modifier-un-commentaire/{id}", name="comment_update")
      */
     public function updateComment(Comment $comment, Request $request, EntityManagerInterface $em)
     {
@@ -92,7 +92,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route(path="/supprimer-un-commentaire/{id}", name="comment_delete")
+     * @Route(path="/admin/supprimer-un-commentaire/{id}", name="comment_delete")
      */
     public function deleteComment($id, Request $request, CommentRepository $commentRepository, EntityManagerInterface $em): \Symfony\Component\HttpFoundation\RedirectResponse
     {
