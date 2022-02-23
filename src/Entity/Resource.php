@@ -191,7 +191,11 @@ class Resource
 
     public function getResourceType(): ?string
     {
-        return ResourceType::getReadableValue($this->resourceType);
+        if($this->resourceType != null){
+            return ResourceType::getReadableValue($this->resourceType);
+        } else {
+            return '';
+        }
     }
 
     public function setResourceType(string $resourceType): self
