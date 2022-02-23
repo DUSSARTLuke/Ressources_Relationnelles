@@ -18,7 +18,7 @@ class IndexController extends AbstractController
      *         "path"=".*"
      *     },
      * )
-     * @Rest\Route(path="home", name="home")
+     * @Rest\Route(path="/", name="home")
      */
     public function home()
     {
