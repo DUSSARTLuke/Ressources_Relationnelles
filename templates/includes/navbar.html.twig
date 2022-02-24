@@ -33,24 +33,23 @@
                         <a class="nav-link" href="{{ path('comment_admin_list') }}">Catégories</a>
                     </li>
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="ressourcesDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Ressources
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="ressourcesDropdown">
-                        <li><a class="dropdown-item" href="{{ path('ressources_create') }}">Créer une ressource</a></li>
-                        <li><a class="dropdown-item" href="#">Voir la liste des ressources</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
+                {% if app.user and is_granted('ROLE_USER') %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ressourcesDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Ressources
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="ressourcesDropdown">
+                            <li><a class="dropdown-item" href="{{ path('ressources_create') }}">Créer une ressource</a></li>
+
+                            <li><a class="dropdown-item" href="{{ path('ressources_list') }}">Voir la liste de mes ressources</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
@@ -67,4 +66,3 @@
         </div>
     </div>
 </nav>
-
