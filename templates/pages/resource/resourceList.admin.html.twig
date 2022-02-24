@@ -2,36 +2,40 @@
 
 {% block body %}
     <div class="container">
-        <div class="d-flex justify-content-center">
-            <table class="table table-bordered border-light">
-                <thead>
-                <tr class="table-light text-center">
-                    <th scope="col">Titre</th>
-                    <th scope="col">Date de création</th>
-                    <th scope="col">Auteur</th>
-                    <th scope="col">Catégorie(s)</th>
-                    <th scope="col">Type de resource</th>
-                    <th scope="col">Types de relation</th>
-                    <th scope="col">Nombre de commentaires</th>
-                    <th scope="col">Statut</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for resource in resources %}
-                    <tr>
-                        <td>{{ resource.name }}</td>
-                        <td>{{ resource.createdAt }}</td>
-                        <td>{{ resource.createdBy.username }}</td>
-                        <td>{{ resource.category.name }}</td>
-                        <td>{{ resource.resourceType }}</td>
-                        <td class="text-center">
-                            {% for relation in resource.relationType %}
-                                <span class="badge bg-info text-dark mb-2 ">{{ relation.name }}</span>
-                            {% endfor %}
-                        </td>
-                        <td>{{ resource.comments | length }}</td>
-                        <td class="text-center">
+
+    </div>
+
+
+    <div class="d-flex justify-content-center">
+        <table class="table table-bordered border-light">
+            <thead>
+            <tr class="table-light text-center">
+                <th scope="col">Titre</th>
+                <th scope="col">Date de création</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Catégorie(s)</th>
+                <th scope="col">Type de resource</th>
+                <th scope="col">Types de relation</th>
+                <th scope="col">Nombre de commentaires</th>
+                <th scope="col">Statut</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for resource in resources %}
+                <tr>
+                    <td>{{ resource.name }}</td>
+                    <td>{{ resource.createdAt }}</td>
+                    <td>{{ resource.createdBy.username }}</td>
+                    <td>{{ resource.category.name }}</td>
+                    <td>{{ resource.resourceType }}</td>
+                    <td class="text-center">
+                        {% for relation in resource.relationType %}
+                            <span class="badge bg-info text-dark mb-2 ">{{ relation.name }}</span>
+                        {% endfor %}
+                    </td>
+                    <td>{{ resource.comments | length }}</td>
+                    <td class="text-center">
                         {% if resource.status == 'Créé' %}
                             <span class="badge bg-info">{{ resource.status }}</span>
                         {% elseif resource.status == 'En attente de validation' %}
@@ -42,18 +46,22 @@
                             <span class="badge bg-dark">{{ resource.status }}</span>
 
                         {% endif %}
-                        </td>
-                         <td class="text-center">
-                         <button type="button" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#updateResourceModal-{{ resource.id }}">Modifier</button>
-                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteResourceModal-{{ resource.id }}">Supprimer</button>
-                         </td>
-                    </tr>
-                    {% set submit_url = path('resource_admin_update', {'id': resource.id}) %}
-                    {{ include('/includes/resource/updateResourceModal.admin.html.twig', {url: submit_url}) }}
-{#                    {% include '/includes/comment/modal/deleteCommentModal.html.twig' %}#}
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#updateResourceModal-{{ resource.id }}">Modifier
+                        </button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#deleteResourceModal-{{ resource.id }}">Supprimer
+                        </button>
+                    </td>
+                </tr>
+                {% set submit_url = path('resource_admin_update', {'id': resource.id}) %}
+                {{ include('/includes/resource/updateResourceModal.admin.html.twig', {url: submit_url}) }}
+                {# {% include '/includes/comment/modal/deleteCommentModal.html.twig' %} #}
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
+
 {% endblock %}

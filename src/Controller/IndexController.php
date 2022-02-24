@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ResourceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,8 +21,15 @@ class IndexController extends AbstractController
      * )
      * @Rest\Route(path="/", name="home")
      */
-    public function home()
+    public function home(ResourceRepository $resourceRepository)
     {
-        return $this->render("pages/index/index.html.twig");
+        $resources = $resourceRepository->findBy([
+            'status' => 'PU'
+        ]);
+
+
+        return $this->render("pages/index/index.html.twig", [
+            'resources' => $resources
+        ]);
     }
 }
