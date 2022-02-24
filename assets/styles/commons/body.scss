@@ -2,16 +2,20 @@ body {
   background-color: lightgray;
 }
 
+.marge-bottom {
+  margin-bottom: 100px;
+}
+
 .formulaire-connect {
   display: flex;
   align-content: center;
 }
 
-.footer {
+.footer{
+  position: fixed;
+  bottom: 0;
   width: 100%;
-  background-color: #423e3e;
-  color: white;
-  padding: 20px 0;
-  text-align: center;
-  margin-top: 50px;
+  background-color: #f5f5f5;
+  display:flex;
+  justify-content: center;
 }

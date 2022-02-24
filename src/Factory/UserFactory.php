@@ -77,12 +77,33 @@ final class UserFactory extends ModelFactory
             ],
             [
                 'username' => 'testCesi',
-                'email' => 'luke.dussart@viacesi.fr',
+                'email' => 'test@test.com',
                 'address1' => "28 rue Jean Jaurès",
                 'postalCode' => '34790',
                 'city' => 'Grabels',
                 'birthday' => new \DateTime('28-10-1999 00:00:00'),
                 'roles' => ['ROLE_USER'],
+                'password' => 'test',
+                'isActive' => 'true',
+            ],
+        ];
+
+        foreach ($users as $user) {
+            $this->createUser($user, $manager);
+        }
+    }
+
+    public function createUsersAdmin(ObjectManager $manager)
+    {
+        $users = [
+            [
+                'username' => 'testAdmin',
+                'email' => 'admin@admin.fr',
+                'address1' => "28 rue Jean Jaurès",
+                'postalCode' => '34790',
+                'city' => 'Grabels',
+                'birthday' => new \DateTime('28-10-1999 00:00:00'),
+                'roles' => ['ROLE_ADMIN'],
                 'password' => 'test',
                 'isActive' => 'true',
             ],
