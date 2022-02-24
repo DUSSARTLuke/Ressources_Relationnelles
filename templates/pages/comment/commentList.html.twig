@@ -1,0 +1,38 @@
+{% include 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <table class="table table-bordered border-light">
+                <thead>
+                <tr class="table-light">
+                    <th scope="col">Date de création</th>
+                    <th scope="col">Contenu</th>
+                    <th scope="col">Auteur</th>
+                    <th scope="col">Ressource concernée</th>
+                    <th scope="col">Statut</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td>{{ comment.createdAt }}</td>
+                        <td>{{ comment.content }}</td>
+                        <td>{{ comment.user.username }}</td>
+                        <td>{{ comment.resource.name }}</td>
+                        <td>{{ comment.status }}</td>
+                        <td>
+                            <button type="button" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#updateCommentModal-{{ comment.id }}">Modifier</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCommentModal-{{ comment.id }}">Supprimer</button>
+                        </td>
+                    </tr>
+                    {% set submit_url = path('comment_update', {'id': comment.id}) %}
+                    {{ include('/includes/comment/modal/updateCommentModal.html.twig', {url: submit_url}) }}
+                    {% include '/includes/comment/modal/deleteCommentModal.html.twig' %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

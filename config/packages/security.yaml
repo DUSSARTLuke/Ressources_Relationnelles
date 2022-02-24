@@ -17,18 +17,20 @@ security:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
-    api:
-      pattern: ^/api
-      stateless: true
-      jwt: ~
+#    api:
+#      pattern: ^/api
+#      stateless: true
+#      jwt: ~
     main:
       lazy: true
       provider: app_user_provider
-      logout:
-        path: app_logout
-        # where to redirect after logout
-        target: home
       custom_authenticator: App\Security\UsersAuthenticator
+      logout: true
+#      logout:
+#        path: app_logout
+#        # where to redirect after logout
+#        target: home
+#      custom_authenticator: App\Security\UsersAuthenticator
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
@@ -40,6 +42,6 @@ security:
   # Note: Only the *first* access control that matches will be used
   access_control:
     - { path: ^/login, roles: PUBLIC_ACCESS }
-    - { path: ^/docs, roles: PUBLIC_ACCESS }
-    - { path: ^/api, roles: PUBLIC_ACCESS }
-    - { path: ^/api/*,       roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/, roles: PUBLIC_ACCESS }
+    - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN, ROLE_MODERATOR] }
+    - { path: ^/*, roles: ROLE_USER }
