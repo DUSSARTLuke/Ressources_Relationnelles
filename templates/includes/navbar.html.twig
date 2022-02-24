@@ -33,10 +33,6 @@
                         <a class="nav-link" href="{{ path('comment_admin_list') }}">Catégories</a>
                     </li>
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                    <a class="nav-link" href="#">Link</a>
-                </li>
                 {% if app.user and is_granted('ROLE_USER') %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="ressourcesDropdown" role="button"
