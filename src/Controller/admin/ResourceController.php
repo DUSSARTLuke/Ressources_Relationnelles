@@ -53,4 +53,17 @@ class ResourceController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route(path="/admin/delete/{id}", name="resource_admin_delete")
+     */
+    public function deleteRessource(EntityManagerInterface $manager, Resource $resource) : Response
+    {
+        $resource->setStatus('DE');
+        $manager->flush();
+
+        $this->addFlash('success', 'La ressource a bien été supprimée');
+
+        return $this->redirectToRoute('resources_admin');
+    }
+
 }
