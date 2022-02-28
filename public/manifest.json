@@ -1,0 +1,22 @@
+{
+  "name": "Ressources Relationnelles",
+  "short_name": "Res Rel",
+  "start_url": "../index.php",
+  "background_color": "white",
+  "theme_color": "white",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "../images/logo-app.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "../images/logo-app.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "standalone"
+}
