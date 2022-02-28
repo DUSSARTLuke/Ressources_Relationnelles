@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route(path="/utilisateurs", name="user_list")
+     * @Route(path="/admin/utilisateurs", name="user_list")
      */
     public function UserList(UserRepository $userRepository)
     {
@@ -30,7 +30,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route(path="/modifier-role-utilisateur/{id}", name="user_update_role")
+     * @Route(path="/admin/modifier-role-utilisateur/{id}", name="user_update_role")
      */
     public function updateRoleUser(User $user, Request $request, EntityManagerInterface $em)
     {

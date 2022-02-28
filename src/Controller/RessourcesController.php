@@ -74,7 +74,7 @@ class RessourcesController extends AbstractController
     }
 
     /**
-     * @Route (path="delete/{id}", name="deleteRes")
+     * @Route(path="/delete/{id}", name="deleteRes")
      */
     public function deleteRessource(EntityManagerInterface $manager, Resource $resource) : Response
     {

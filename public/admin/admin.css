@@ -1,0 +1,26 @@
+table tr:nth-child(even){
+    background-color: #03989E;
+}
+
+tr.header-table > th {
+    background: #03989E;
+    border-bottom: white!important;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.relationType {
+    background-color: #FC6341;
+    color: white;
+}
+
+.category {
+    background-color: #41AEFC;
+    color: white;
+}
+
+.resourceType {
+    background-color: #FCD341;
+    color: white;
+}

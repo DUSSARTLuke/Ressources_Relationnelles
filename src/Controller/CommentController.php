@@ -82,7 +82,7 @@ class CommentController extends AbstractController
 
             $this->addFlash('success', 'Le commentaire a bien été modifié');
 
-            return $this->redirectToRoute('comment_list');
+            return $this->redirectToRoute('comment_admin_list');
         }
 
         return $this->renderForm('/includes/comment/form/updateCommentForm.html.twig', [
@@ -104,6 +104,6 @@ class CommentController extends AbstractController
         $comment->setStatus('DE');
         $em->flush();
 
-        return $this->redirectToRoute('comment_list');
+        return $this->redirectToRoute('comment_admin_list');
     }
 }

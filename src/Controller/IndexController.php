@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use App\Repository\ResourceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,15 +22,20 @@ class IndexController extends AbstractController
      * )
      * @Rest\Route(path="/", name="home")
      */
-    public function home(ResourceRepository $resourceRepository)
+    public function home(ResourceRepository $resourceRepository, CategoryRepository $categoryRepository)
     {
         $resources = $resourceRepository->findBy([
             'status' => 'PU'
         ]);
 
+        $categories = $categoryRepository->categoriesWithPublishedResources();
+
+//        dd($categories);
+
 
         return $this->render("pages/index/index.html.twig", [
-            'resources' => $resources
+            'resources' => $resources,
+            'categories' => $categories
         ]);
     }
 }

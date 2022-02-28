@@ -1,0 +1,63 @@
+
+        <div data-role="resource" class="card rounded m-3 p-0" style="width: 18rem;">
+            {#         {% for relation in resource.relationType %}#}
+            {% if resource.resourceType == 'Jeu à réaliser / activité' %}
+                <div class="card-title rounded bg-info text-center p-2" style="height: 7rem;">
+                    <h6>{{ resource.name }}</h6>
+                </div>
+            {% elseif resource.resourceType == 'Article' %}
+                <div class="card-title rounded bg-danger text-center p-2" style="height: 7rem;">
+                    <h6>{{ resource.name }}</h6>
+                </div>
+            {% elseif resource.resourceType == 'Carte défi' %}
+                <div class="card-title rounded bg-primary text-center p-2" style="height: 7rem;">
+                    <h6>{{ resource.name }}</h6>
+                </div>
+            {% elseif resource.resourceType == 'Cours au format PDF' %}
+                <div class="card-title rounded bg-success text-center p-2" style="height: 7rem;">
+                    <h6>{{ resource.name }}</h6>
+                </div>
+            {% elseif resource.resourceType == 'Exercice / atelier' %}
+                <div class="card-title rounded bg-success text-center p-2" style="height: 7rem;">
+                    <h6>{{ resource.name }}</h6>
+                </div>
+            {% elseif resource.resourceType == 'Fiche de lecture' %}
+                <div class="card-title rounded text-center p-2" style="height: 7rem; background-color: #1bbf83">
+                    <h6>{{ resource.name }}</h6>
+                </div>
+            {% elseif resource.resourceType == 'Jeu en ligne' %}
+                <div class="card-title rounded text-center p-2" style="height: 7rem; background-color: #9eebcf">
+                    <h6>{{ resource.name }}</h6>
+                </div>
+            {% elseif resource.resourceType == 'Vidéo' %}
+                <div class="card-title rounded text-center p-2" style="height: 7rem; background-color: #f1b157">
+                    <h6>{{ resource.name }}</h6>
+                </div>
+                {#                 {% else %}#}
+                {#                     <div class="card-title rounded bg-primary text-center p-2" style="height: 7rem;">#}
+                {#                         <h6>{{ resource.name }}</h6>#}
+                {#                     </div>#}
+            {% endif %}
+            {#             <h6>{{ resource.name }}</h6>#}
+            {#             </div>#}
+            {#         {% endfor %}#}
+            <div class="card-body">
+                <span class="text-start">Crée par {{ resource.createdBy.username }}</span>
+                <br>
+                <span class="text-start fs-6">Le {{ resource.createdAt }}</span>
+                {# <br> #}
+                <span class="badge bg-light m-1">{{ resource.category.name }}</span>
+                {# <br> #}
+                <span class="badge bg-info m-1">{{ resource.resourceType }}</span>
+                {# <br> #}
+                {% for relation in resource.relationType %}
+                    <span class="badge bg-primary text-dark m-1 ">{{ relation.name }}</span>
+                {% endfor %}
+                <br>
+                <p class="card-text">{{ resource.content | u.truncate(100, '...', false) }}</p>
+
+            </div>
+            <div class="card-footer text-center">
+                <a href="#" class="btn btn-primary text-center">Consulter la ressource</a>
+            </div>
+        </div>

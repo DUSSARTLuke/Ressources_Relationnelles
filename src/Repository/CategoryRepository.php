@@ -19,6 +19,17 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+    public function categoriesWithPublishedResources() {
+        $qb = $this->createQueryBuilder('categories')
+            ->select('category, resource')
+            ->from('App\Entity\Category', 'category')
+            ->leftJoin('category.resources', 'resource')
+            ->where('resource.status = :status')
+            ->setParameter('status', 'PU');
+
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */
