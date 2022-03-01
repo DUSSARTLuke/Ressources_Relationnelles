@@ -16,11 +16,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('comment_admin_list') }}">Modérer les commentaires</a>
                 </li>
-                {% endif %}
-                {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('resources_admin') }}">Modérer les ressources</a>
                     </li>
+                {% endif %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('user_list') }}">Gérer les comptes</a>
                     </li>

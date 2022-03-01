@@ -103,11 +103,13 @@
                             <td>{{ comment.status }}</td>
                             <td>
                                 <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                        data-bs-target="#updateCommentModal-{{ comment.id }}">Modifier
+                                        data-bs-target="#updateCommentModal-{{ comment.id }}"><i class="fa-solid fa-eye"></i>
                                 </button>
+                                {% if comment.status != 'Supprimé' %}
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#deleteCommentModal-{{ comment.id }}">Supprimer
+                                        data-bs-target="#deleteCommentModal-{{ comment.id }}"><i class="fa-solid fa-trash-can"></i>
                                 </button>
+                                {% endif %}
                             </td>
                         </tr>
                         {% set submit_url = path('comment_update', {'id': comment.id}) %}

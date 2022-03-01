@@ -40,7 +40,7 @@ final class ResourceFactory extends ModelFactory
         return [
             'name' => self::faker()->realTextBetween(15, 75, 1),
             'content' => self::faker()->realTextBetween(150, 600),
-            'status' => self::faker()->randomElement(['CR', 'WA', 'PU', 'DE']),
+            'status' => self::faker()->randomElement(['WA', 'PU', 'SU', 'DE']),
             'category' => CategoryFactory::random(),
             'resourceType' => self::faker()->randomElement(['GA', 'AR', 'CH', 'PC', 'WO', 'RS', 'OG', 'VI']),
             'createdBy' => UserFactory::random(),

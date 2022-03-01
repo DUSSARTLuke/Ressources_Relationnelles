@@ -127,11 +127,11 @@
                             </td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                        data-bs-target="#updateResourceModal-{{ resource.id }}">Modifier
+                                        data-bs-target="#updateResourceModal-{{ resource.id }}"><i class="fa-solid fa-eye"></i>
                                 </button>
                                 {% if resource.status != 'Supprimé' %}
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteResourceModal-{{ resource.id }}">Supprimer
+                                            data-bs-target="#deleteResourceModal-{{ resource.id }}"><i class="fa-solid fa-trash-can"></i>
                                     </button>
                                 {% endif %}
                             </td>

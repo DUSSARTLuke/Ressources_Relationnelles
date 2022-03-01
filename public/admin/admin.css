@@ -1,6 +1,6 @@
-table tr:nth-child(even){
-    background-color: #03989E;
-}
+/*table tr:nth-child(even){*/
+/*    background-color: #03989E;*/
+/*}*/
 
 tr.header-table > th {
     background: #03989E;
@@ -23,4 +23,13 @@ tr.header-table > th {
 .resourceType {
     background-color: #FCD341;
     color: white;
+}
+
+.header-modal {
+    background: #03989E;
+    color: white;
+}
+
+.blue-text {
+    color: #03989E;
 }
