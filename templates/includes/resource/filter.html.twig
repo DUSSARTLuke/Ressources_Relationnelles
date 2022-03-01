@@ -1,0 +1,12 @@
+<div class="categories block-action-filter">
+    <div class="filter-title"><span>Catégories : </span></div>
+
+    <div class="filter-buttons">
+        <button class="tag filter-tag" data-target=".filtered-category-card" data-all=".filtered-category-card">Toutes</button>
+        {% for key, category in liste %}
+            <button class="tag filter-tag" data-target=".filtered-category-{{ category.name | slug }}" data-all=".filtered-category-card">
+                {{ category.name }}</button>
+        {% endfor %}
+
+    </div>
+</div>

@@ -50,10 +50,14 @@
     width:fit-content;
     padding: 5px 10px;
     margin: 5px;
+    border: 1px solid $ocre;
   }
 
 }
 
+hr{
+  height:2px;
+}
 .card-res {
   display:flex;
   flex-direction: column;
