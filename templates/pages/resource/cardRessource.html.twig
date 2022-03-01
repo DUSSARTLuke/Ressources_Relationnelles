@@ -15,11 +15,14 @@
             <div class="tag tag-ressource">{{ ressource.resourceType }}</div>
             <div class="tag tag-categories">{{ ressource.category.name }}</div>
         </div>
-{#        {% if ressource.document %}#}
+        {#        {% if ressource.document %} #}
         <a class="card-res-link" href="https://google.com" target="_blank">https://google.com</a>
-{#        {% endif %}#}
+        {#        {% endif %} #}
 
         <span class="card-res-infos">Créé par {{ ressource.createdBy.username }} le {{ ressource.createdAt | date('d/m/Y') }}</span>
 
+        <div class="d-flex justify-content-center mt-2">
+            <a class="btn btn-res" href="{{ path('ressources_edit', {'id': ressource.id}) }}"><i class="fa-solid fa-eye"></i>Consulter</a>
+        </div>
     </div>
 </div>
