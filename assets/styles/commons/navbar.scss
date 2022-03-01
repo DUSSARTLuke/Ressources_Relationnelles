@@ -1,27 +1,18 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  position: sticky;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: white;
-  top: 0;
-
-  > div {
-    padding: 10px;
-  }
-
-  .list-header {
-    list-style:none;
-    display:flex;
-    flex-direction: row;
-
-  }
-
-}
-
-
 .logo {
   height: 40px;
   width: 40px;
+}
+
+.btn-res{
+  background-color: $green_res;
+  color: white;
+  border-color: $green_res;
+  margin-right: 5px;
+  &:hover {
+    color: white;
+  }
+  i {
+    color:white;
+    margin-right: 10px;
+  }
 }

@@ -1,5 +1,8 @@
 @import "bootstrap.min.css";
+@import "variables/color";
+
+
 @import './commons/body';
 @import "commons/navbar";
 
-@import "datatables";
+@import "components/datatables";
