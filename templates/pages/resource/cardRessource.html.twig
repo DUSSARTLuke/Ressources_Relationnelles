@@ -1,0 +1,25 @@
+<div class="card-res">
+    <div class="title">
+        {{ ressource.name }}
+    </div>
+    <div class="content">
+        {{ ressource.content }}
+    </div>
+    <div class="card-res-footer">
+        <div class="card-relation">
+            {% for relation in ressource.relationType %}
+                <div class="tag">{{ relation.name }}</div>
+            {% endfor %}
+        </div>
+        <div class="group">
+            <div class="tag tag-ressource">{{ ressource.resourceType }}</div>
+            <div class="tag tag-categories">{{ ressource.category.name }}</div>
+        </div>
+{#        {% if ressource.document %}#}
+        <a class="card-res-link" href="https://google.com" target="_blank">https://google.com</a>
+{#        {% endif %}#}
+
+        <span class="card-res-infos">Créé par {{ ressource.createdBy.username }} le {{ ressource.createdAt | date('d/m/Y') }}</span>
+
+    </div>
+</div>

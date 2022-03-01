@@ -28,10 +28,8 @@ class IndexController extends AbstractController
             'status' => 'PU'
         ]);
 
+
         $categories = $categoryRepository->categoriesWithPublishedResources();
-
-//        dd($categories);
-
 
         return $this->render("pages/index/index.html.twig", [
             'resources' => $resources,
