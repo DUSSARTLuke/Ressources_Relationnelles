@@ -32,18 +32,33 @@
                         {% endfor %}
                     </div>
                 </div>
-                {#                <div class="mb-3"> #}
-                {#                    {% if ressource.status == 'Créé' %} #}
-                {#                        <span class="badge bg-info">{{ ressources.status }} </span> #}
-                {#                    {% elseif ressources.status == 'En attente de validation' %} #}
-                {#                        <span class="badge bg-warning">{{ ressources.status }} </span> #}
-                {#                    {% elseif ressources.status == 'Publié' %} #}
-                {#                        <span class="badge bg-success">{{ ressources.status }} </span> #}
-                {#                    {% else %} #}
-                {#                        <span class="badge bg-dark">{{ ressources.status }} </span> #}
-                {#                    {% endif %} #}
-                {#                </div> #}
-                <span class="d-flex justify-content-end padding-right-15 mb-2"> Crée le {{ ressource.createdAt }} </span>
+
+                {% if app.user %}
+
+                    {% if app.user.username == ressource.createdBy.username %}
+                        <div class="d-flex justify-content-around mb-2">
+                            <div>
+                                {% if ressource.status == 'Créé' %}
+                                    <span class="badge bg-info">{{ ressource.status }} </span>
+                                {% elseif ressource.status == 'En attente de validation' %}
+                                    <span class="badge bg-warning">{{ ressource.status }} </span>
+                                {% elseif ressource.status == 'Publié' %}
+                                    <span class="badge bg-success">{{ ressource.status }} </span>
+                                {% else %}
+                                    <span class="badge bg-dark">{{ ressource.status }} </span>
+                                {% endif %}
+                            </div>
+                            <span>
+                        Crée le {{ ressource.createdAt }}
+                    </span>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <span class="d-flex justify-content-end padding-right-15 mb-2">
+                        Crée le {{ ressource.createdAt }}
+                        </span>
+                {% endif %}
+
             </div>
         </div>
         {% if app.user %}
