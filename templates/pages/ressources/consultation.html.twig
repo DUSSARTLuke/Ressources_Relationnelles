@@ -7,13 +7,14 @@
             <span> {{ ressource.name }} </span>
         </div>
         <div class="row">
-            <div class="col">
-                <div class="content-ressource mb-3">
+            <div class="col-md pb-4 pb-md-0 ressource-content">
+                <span>Contenu : </span>
+                <div class="contenu-ressource m-3">
                     {{ ressource.content }}
                 </div>
 
             </div>
-            <div class="col consult-infos">
+            <div class="col-md consult-infos">
                 <div class="consult-type-ressource">
                     <span>Type de ressource : </span>
                     <span class="border-span"> {{ ressource.resourceType }}</span>

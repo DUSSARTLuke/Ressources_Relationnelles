@@ -17,7 +17,7 @@
     margin-bottom: 50px;
   }
 
-  .content-ressource {
+  .contenu-ressource {
     display:flex;
     align-items: center;
     text-align: center;
@@ -26,6 +26,20 @@
     border: 1px solid $green_res;
     padding: 20px;
     color: black;
+  }
+  .ressource-content{
+    display:flex;
+    flex-direction: column;
+    span{
+      color: $green_res;
+      font-size: 24px;
+      line-height: 29px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      font-weight: 700;
+    }
   }
 
   .consult-infos {
