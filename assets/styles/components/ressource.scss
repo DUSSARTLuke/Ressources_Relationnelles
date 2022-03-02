@@ -3,6 +3,7 @@
   border-radius: 50px;
   min-height: 500px;
   margin: 25px;
+  padding-bottom: 10px;
 
   .title-ressource {
     display: flex;
@@ -84,4 +85,16 @@
   }
 }
 
+.commentsBox{
+  background: white;
+  border-radius: 10px;
+  padding-top: 15px;
+  margin:25px;
 
+  .comments{
+    margin: 0 15px;
+    background-color: $green_res;
+    color:white;
+    border-radius: 15px;
+  }
+}

@@ -2,6 +2,7 @@
 
 {% block title %} Consulter une Ressource {% endblock %}
 {% block body %}
+    {{ dump(ressource.comments) }}
     <div class="ressource-consult">
         <div class="title-ressource">
             <span> {{ ressource.name }} </span>
@@ -87,15 +88,18 @@
 
 
     </div>
-    <div class="CommentsBox">
+    <div class="commentsBox">
         {% for comment in ressource.comments %}
             {% if comment.status == 'Publié' %}
-                <div class="row">
-                    <span class="infos"> {{ comment.user.username }} - {{ comment.createdAt }}</span>
+                <div class="row comments">
+                    <div class="d-flex flex-row p-2">
+                        <span class="infos"> {{ comment.user.username }} - {{ comment.createdAt }}</span>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <span class="content"> {{ comment.content }} </span>
+                    </div>
                 </div>
-                <div class="row">
-                    <span class="content"> {{ comment.content }} </span>
-                </div>
+
                 <br>
             {% endif %}
         {% endfor %}
