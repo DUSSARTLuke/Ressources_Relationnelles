@@ -2,21 +2,20 @@
 //     navigator.serviceWorker.register("../serviceWorker.js");
 // }
 
-const filter = document.querySelectorAll('.block-action.filter');
+const filter = document.querySelectorAll('.filter-buttons');
 
 if (filter) {
     filter.forEach((menu) => {
-        console.log(menu);
         const buttons = menu.querySelectorAll('.filter-tag');
-        // console.log(buttons);
         buttons.forEach((button) => {
             button.addEventListener('click', (e) => {
                 buttons.forEach((item) => {
-                    item.classList.remove('active');
+                    item.classList.remove('tag-active');
                 });
-                e.target.classList.add('active');
-                console.log('ok');
+                e.target.classList.add('tag-active');
+                console.log(document.querySelectorAll(e.target.dataset.all));
                 document.querySelectorAll(e.target.dataset.all).forEach((item) => {
+                    console.log('test')
                     item.classList.add('d-none');
                 });
 

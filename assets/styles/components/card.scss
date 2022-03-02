@@ -55,6 +55,11 @@
       padding: 5px 10px;
       margin: 5px;
       border: 1px solid $yellow_res;
+
+      &-active {
+        background-color: $green_res;
+        border: 1px solid $green_res;
+      }
     }
 
   }

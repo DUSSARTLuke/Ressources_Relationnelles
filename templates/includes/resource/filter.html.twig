@@ -2,9 +2,12 @@
     <div class="filter-title"><span>Catégories : </span></div>
 
     <div class="filter-buttons">
-        <button class="tag filter-tag" data-target=".filtered-category-card" data-all=".filtered-category-card">Toutes</button>
+        <button class="filter-tag tag tag-active" data-target=".filtered-category-card"
+                data-all=".filtered-category-card">Toutes
+        </button>
         {% for key, category in liste %}
-            <button class="tag filter-tag" data-target=".filtered-category-{{ category.name | slug }}" data-all=".filtered-category-card">
+            <button class="filter-tag tag" data-target=".filtered-category-{{ category.name | slug }}"
+                    data-all=".filtered-category-card">
                 {{ category.name }}</button>
         {% endfor %}
 
