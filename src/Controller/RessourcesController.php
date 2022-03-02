@@ -47,7 +47,7 @@ class RessourcesController extends AbstractController
             return $this->redirectToRoute('ressources_list');
         }
 
-        return $this->render('pages/ressources/Form.html.twig', ['form' => $form->createView(), 'from' => 'create']);
+        return $this->render('pages/ressources/form.html.twig', ['form' => $form->createView(), 'from' => 'create']);
     }
 
     /**
@@ -65,19 +65,19 @@ class RessourcesController extends AbstractController
 
             $this->addFlash('success', " Votre ressource a bien été modifiée !");
 
-            return $this->redirectToRoute('ressources_list');
+            return $this->redirectToRoute('ressources_consult', ['id' => $resource->getId()]);
         }
 
-        return $this->render('pages/ressources/Form.html.twig', ['form' => $form->createView(), 'from' => 'edit']);
+        return $this->render('pages/ressources/form.html.twig', ['form' => $form->createView(), 'from' => 'edit']);
     }
 
     /**
      * @Route("/consult/{id}", name="consult")
      */
-    public function ConsultRessources(EntityManagerInterface $manager, Resource $resource): Response
+    public function ConsultRessources(Resource $resource): Response
     {
-        return $this->render('pages/ressources/Consultation.html.twig', [
-            'ressources' => $resource
+        return $this->render('pages/ressources/consultation.html.twig', [
+            'ressource' => $resource
         ]);
     }
 

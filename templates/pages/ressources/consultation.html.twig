@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Consulter une Ressource {% endblock %}
+{% block body %}
+    <div class="ressource-consult">
+        <div class="title-ressource">
+            <span> {{ ressource.name }} </span>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="content-ressource mb-3">
+                    {{ ressource.content }}
+                </div>
+
+            </div>
+            <div class="col consult-infos">
+                <div class="consult-type-ressource">
+                    <span>Type de ressource : </span>
+                    <span class="border-span"> {{ ressource.resourceType }}</span>
+                </div>
+                <div class="consult-categorie">
+                    <span>Catégorie : </span>
+                    <span class="border-span"> {{ ressource.category.name }}</span>
+                </div>
+                <div class="consult-relation">
+                    <span class="mb-2"> Type de relation : </span>
+                    <div class="d-flex justify-content-center flex-wrap">
+                        {% for relType in ressource.relationType %}
+                            <div class="tag">
+                                {{ relType.name }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {#                <div class="mb-3"> #}
+                {#                    {% if ressource.status == 'Créé' %} #}
+                {#                        <span class="badge bg-info">{{ ressources.status }} </span> #}
+                {#                    {% elseif ressources.status == 'En attente de validation' %} #}
+                {#                        <span class="badge bg-warning">{{ ressources.status }} </span> #}
+                {#                    {% elseif ressources.status == 'Publié' %} #}
+                {#                        <span class="badge bg-success">{{ ressources.status }} </span> #}
+                {#                    {% else %} #}
+                {#                        <span class="badge bg-dark">{{ ressources.status }} </span> #}
+                {#                    {% endif %} #}
+                {#                </div> #}
+                <span class="d-flex justify-content-end padding-right-15 mb-2"> Crée le {{ ressource.createdAt }} </span>
+            </div>
+        </div>
+        {% if app.user %}
+
+            {% if app.user.username == ressource.createdBy.username %}
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex justify-content-center mt-2 mb-2">
+                            <a class='btn btn-success' href="{{ path('ressources_edit', {'id': ressource.id}) }}">
+                                Éditer cette ressource
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-center mt-2 mb-2">
+                            <a class='btn btn-danger'
+                               href="{{ path('ressources_deleteRes', {'id': ressource.id}) }}">
+                                Supprimer cette ressource
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+
+
+    </div>
+    <div class="CommentsBox">
+        {% for comment in ressource.comments %}
+            {% if comment.status == 'Publié' %}
+                <div class="row">
+                    <span class="infos"> {{ comment.user.username }} - {{ comment.createdAt }}</span>
+                </div>
+                <div class="row">
+                    <span class="content"> {{ comment.content }} </span>
+                </div>
+                <br>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
