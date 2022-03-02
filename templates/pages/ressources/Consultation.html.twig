@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Consulter une Ressource {% endblock %}
+{% block body %}
+
+    <div class="container">
+        <div class="RessourcesConsultationBox">
+            <div>
+                <h2> {{ ressources.name }} </h2>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        {{ ressources.content }}
+                    </div>
+                </div>
+                <span class="col">
+                    <span> Catégorie : {{ ressources.category.name }} </span>
+                    <br>
+                    <span> Type de relation : </span>
+                    {% for relType in ressources.relationType %}
+                        <span>
+                            {{ relType.name }}
+                            <br>
+                        </span>
+                    {% endfor %}
+                    <span> Type de ressource : {{ ressources.resourceType }} </span>
+                    <div class="mb-3">
+                        {% if ressources.status == 'Créé' %}
+                            <span class="badge bg-info">{{ ressources.status }} </span>
+                        {% elseif ressources.status == 'En attente de validation' %}
+                            <span class="badge bg-warning">{{ ressources.status }} </span>
+                        {% elseif ressources.status == 'Publié' %}
+                            <span class="badge bg-success">{{ ressources.status }} </span>
+                        {% else %}
+                            <span class="badge bg-dark">{{ ressources.status }} </span>
+                        {% endif %}
+                    </div>
+                    <span> Crée le {{ ressources.createdAt }} </span>
+                    <div class="mt-2 text-center mb-3">
+                        <a class='btn btn-success' href="{{ path('ressources_edit', {'id': ressources.id}) }}">
+                            Éditer cette ressource
+                        </a>
+                        <a class='btn btn-danger'
+                                href="{{ path('ressources_deleteRes', {'id': ressources.id}) }}">
+                            Supprimer cette ressource
+                        </a>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="CommentsBox">
+        {% for comment in ressources.comments %}
+            {% if comment.status == 'Publié' %}
+                <div class="row">
+                    <span class="infos"> {{ comment.user.username }} - {{ comment.createdAt }}</span>
+                </div>
+                <div class="row">
+                    <span class="content"> {{ comment.content }} </span>
+                </div>
+                <br>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
