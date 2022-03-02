@@ -23,25 +23,15 @@
   width: fit-content;
 }
 
-.text_visible {
-  display: flex;
-}
-
-.text_hidden {
-  display: none;
-}
-
-.hover_text:hover {
-  .text_hidden {
-    transition: all 1s;
+@media (max-width: 767.98px) {
+  .dataTables_length, .dataTables_filter, .dataTables_paginate, .dataTables_info {
     display: flex;
-  }
+    justify-content: center;
+    padding-bottom: 10px;
 
-  .text_visible {
-    transition: all 1s;
-    display: none;
   }
 }
+
 
 .btn a {
   color: white;
