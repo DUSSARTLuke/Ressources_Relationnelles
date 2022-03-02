@@ -42,7 +42,7 @@
   justify-content: center;
 
   .tag {
-    background-color: $ocre;
+    background-color: $yellow_res;
     color: white;
     font-size: 9px;
     line-height: 12px;
@@ -50,7 +50,7 @@
     width:fit-content;
     padding: 5px 10px;
     margin: 5px;
-    border: 1px solid $ocre;
+    border: 1px solid $yellow_res;
   }
 
 }
@@ -118,10 +118,10 @@ hr{
       display:flex;
       flex-direction: row;
       .tag-ressource {
-        background-color: #41AEFC;
+        background-color: $blue_res;
       }
       .tag-categories {
-        background-color: #FCD341;
+        background-color: $yellow_res;
       }
     }
 

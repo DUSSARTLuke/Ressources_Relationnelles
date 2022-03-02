@@ -1,6 +1,6 @@
-if("serviceWorker" in navigator){
-    navigator.serviceWorker.register("../serviceWorker.js");
-}
+// if("serviceWorker" in navigator){
+//     navigator.serviceWorker.register("../serviceWorker.js");
+// }
 
 const filter = document.querySelectorAll('.block-action.filter');
 
