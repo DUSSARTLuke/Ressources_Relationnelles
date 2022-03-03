@@ -26,15 +26,16 @@ class IndexController extends AbstractController
     public function home(ResourceRepository $resourceRepository, CategoryRepository $categoryRepository, RelationTypeRepository $relationRepo)
     {
         $resources = $resourceRepository->findBy([
-            'status' => 'PU'
+            'status' => 'PU',
+            'visibility' => 'PUB'
         ]);
 
         $relations = $relationRepo->findAll();
-        $categories = $categoryRepository->categoriesWithPublishedResources();
+        $categories = $categoryRepository->categoriesWithPublishedAndPublicResources();
         $resourceTypes = [
-            'GA' =>'Jeu à réaliser / activité',
-            'AR' => 'Article' ,
-            'CH' =>'Carte défi',
+            'GA' => 'Jeu à réaliser / activité',
+            'AR' => 'Article',
+            'CH' => 'Carte défi',
             'PC' => 'Cours au format PDF',
             'WO' => 'Exercice / atelier',
             'RS' => 'Fiche de lecture',
