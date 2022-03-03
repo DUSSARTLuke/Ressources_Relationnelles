@@ -6,7 +6,6 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,13 +48,15 @@ class CommentController extends AbstractController
     {
         $form = $this->createForm(CommentType::class);
 
+        $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $comment = $form->getData();
 
             $em->persist($comment);
             $em->flush();
 
-            $this->addFlash('success', 'Le commentaire a bien été modifié');
+            $this->addFlash('success', 'Le commentaire a bien été créé');
 
             return $this->redirectToRoute('comment_list');
         }

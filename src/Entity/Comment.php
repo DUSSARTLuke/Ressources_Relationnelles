@@ -60,7 +60,7 @@ class Comment
      *     }
      * )
      */
-    private $status;
+    private $status = 'WA';
 
     /**
      * @ORM\Column(type="datetime")

@@ -26,10 +26,13 @@
                                 <li><a class="dropdown-item" href="{{ path('resources_admin') }}">Valider les
                                         ressources</a></li>
                             {% elseif is_granted('ROLE_ADMIN') %}
-                                <li><a class="dropdown-item" href="{{ path('resources_admin') }}">Modérer les
+                                <li><a class="dropdown-item" href="{{ path('resources_admin') }}">Gérer les
                                         ressources</a></li>
-                                {#                                <li><a class="dropdown-item" href="{{ path('comment_admin_list') }}">Statistiques</a></li> #}
-                                {#                                <li><a class="dropdown-item" href="{{ path('resources_admin') }}">Catégories</a></li> #}
+                                <li><a class="dropdown-item" href="{{ path('user_list') }}">Consulter les comptes
+                                        utilisateurs</a></li>
+                                <li><a class="dropdown-item" href="{{ path('resource_create_admin') }}">Créer une ressource</a>
+                                </li>
+                                {# <li><a class="dropdown-item" href="{{ path('resources_admin') }}">Catégories</a></li> #}
                             {% elseif is_granted('ROLE_SUPER_ADMIN') %}
                                 <li><a class="dropdown-item" href="{{ path('user_list') }}">Gérer les comptes</a></li>
                             {% endif %}
@@ -48,9 +51,9 @@
 
                             <li><a class="dropdown-item" href="{{ path('ressources_list') }}">Voir la liste de mes
                                     ressources</a></li>
-                            {#                            <li> #}
-                            {#                                <hr class="dropdown-divider"> #}
-                            {#                            </li> #}
+                            {# <li> #}
+                            {# <hr class="dropdown-divider"> #}
+                            {# </li> #}
                         </ul>
                     </li>
                 {% endif %}

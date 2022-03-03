@@ -1,0 +1,38 @@
+<tr data-role="user" class="text-center">
+    <td>{{ user.username }}</td>
+    <td>{{ user.createdAt }}</td>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        {% if user.isActive == 1 %}
+            <td>Oui</td>
+        {% else %}
+            <td>Non</td>
+        {% endif %}
+    {% else %}
+        <td>
+            {{ render(controller('App\\Controller\\UserController:updateIsActiveUser',
+                {id: user.id, save: path('user_update_is_active', {id: user.id}) })) }}
+        </td>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <td>
+            {% for role in user.roles %}
+                {% if role == 'ROLE_USER' %}
+                    Utilisateur
+                {% elseif role == 'ROLE_MODERATOR' %}
+                    Modérateur
+                {% elseif role == 'ROLE_ADMIN' %}
+                    Administrateur
+                {% elseif role == 'ROLE_SUPER_ADMIN' %}
+                    Super administrateur
+                {% endif %}
+            {% endfor %}
+        </td>
+
+    {% else %}
+        <td class="mx-auto" data-role="{{ user.roles[0] }}">
+            {{ render(controller('App\\Controller\\UserController:updateRoleUser',
+                {id: user.id, save: path('user_update_role', {id: user.id}) })) }}
+        </td>
+    {% endif %}
+    <td>{{ user.email }}</td>
+</tr>

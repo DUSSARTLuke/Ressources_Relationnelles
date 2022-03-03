@@ -39,6 +39,7 @@
     </script>
 {% endblock %}
 {% block body %}
+    {% set totalUserAdmin = 0 %}
     {% set userAccounts = 0 %}
     {% set moderatorAccounts = 0 %}
     {% set Administrateur = 0 %}
@@ -46,9 +47,11 @@
     {% for user in users %}
         {% for role in user.roles %}
             {% if role == 'ROLE_USER' %}
+                {% set totalUserAdmin = totalUserAdmin + 1 %}
                 {% set userAccounts = userAccounts + 1 %}
             {% elseif role == 'ROLE_MODERATOR' %}
                 {% set moderatorAccounts = moderatorAccounts + 1 %}
+                {% set totalUserAdmin = totalUserAdmin + 1 %}
             {% elseif role == 'ROLE_ADMIN' %}
                 {% set Administrateur = Administrateur + 1 %}
             {% else %}
@@ -58,124 +61,134 @@
     {% endfor %}
     <div class="row">
         <div class="col-2" style="background-color: #03989E">
-            <nav class="pt-5">
-                <ul class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                    <li data-status="tous" style="background-color: #03989E; color: white; border: #03989E"
-                        class="nav-link active" id="created" data-bs-toggle="tab" data-bs-target="#nav-all" role="tab"
-                        aria-controls="nav-all" aria-selected="true">Toutes les ressources <span
-                                class="badge bg-light">{{ users | length }}</span>
-                    </li>
-                    <li data-status="Créé" style="background-color: #03989E; color: white; border: #03989E"
-                        class="nav-link" id="nav-created-tab" data-bs-toggle="tab" data-bs-target="#nav-created"
-                        role="tab" aria-controls="nav-created" aria-selected="false">Utilisateurs <span
-                                class="badge bg-light">
-                            {{ userAccounts }}
+            <div class="nav text-start nav-pills me-3 pt-5 pr-0" id="v-pills-tab" role="tablist"
+                 aria-orientation="vertical">
+                <button style="background-color: #03989E; color: white; border: #03989E"
+                        class="nav-link active text-start pr-0" id="v-pills-all-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all"
+                        aria-selected="true">
+                    Toutes les utilisateurs <span class="badge bg-light">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ totalUserAdmin }}
+                        {% else %}
+                            {{ users | length }}
+                        {% endif %}
                         </span>
-                    </li>
-                    <li data-status="Publié" style="background-color: #03989E; color: white; border: #03989E"
-                        class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
-                        role="tab" aria-controls="nav-validated" aria-selected="false">Modérateurs <span
-                                class="badge bg-light">
-                            {{ moderatorAccounts }}
-                        </span>
-                    </li>
-                    <li data-status="Supprimé" style="background-color: #03989E; color: white; border: #03989E"
-                        class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
-                        role="tab" aria-controls="nav-validated" aria-selected="false">Administrateurs <span
-                                class="badge bg-light">
-                            {{ Administrateur }}
-                        </span>
-                    </li>
-                    <li data-status="Supprimé" style="background-color: #03989E; color: white; border: #03989E"
-                        class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
-                        role="tab" aria-controls="nav-validated" aria-selected="false">Super administrateur <span
-                                class="badge bg-light">
-                            {{ superAdminAccounts }}
-                        </span>
-                    </li>
-                </ul>
-            </nav>
+                </button>
+                <button style="background-color: #03989E; color: white; border: #03989E"
+                        class="nav-link text-start pr-0" id="v-pills-user-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-user" type="button" role="tab" aria-controls="v-pills-user"
+                        aria-selected="false">
+                    Citoyens <span class="badge bg-light">{{ userAccounts }}</span>
+                </button>
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start"
+                        id="v-pills-moderator-tab" data-bs-toggle="pill" data-bs-target="#v-pills-moderator"
+                        type="button" role="tab" aria-controls="v-pills-moderator" aria-selected="false">
+                    Modérateurs <span class="badge bg-light">{{ moderatorAccounts }}</span>
+                </button>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start"
+                            id="v-pills-admin-tab" data-bs-toggle="pill" data-bs-target="#v-pills-suspended"
+                            type="button" role="tab" aria-controls="v-pills-admin" aria-selected="false">
+                        Suspendues <span class="badge bg-light">{{ Administrateur }}</span>
+                    </button>
+                    <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start"
+                            id="v-pills-super-admin-tab" data-bs-toggle="pill" data-bs-target="#v-pills-super-admin"
+                            type="button" role="tab" aria-controls="v-pills-super-admin" aria-selected="false">
+                        Supprimées <span class="badge bg-light">{{ superAdminAccounts }}</span>
+                    </button>
+                {% endif %}
+            </div>
+
+            {# <nav class="pt-5"> #}
+            {# <ul class="nav nav-tabs flex-column" id="nav-tab" role="tablist"> #}
+            {# <li data-status="tous" style="background-color: #03989E; color: white; border: #03989E" #}
+            {# class="nav-link active" id="created" data-bs-toggle="tab" data-bs-target="#nav-all" role="tab" #}
+            {# aria-controls="nav-all" aria-selected="true">Toutes les ressources <span #}
+            {# class="badge bg-light">{{ users | length }}</span> #}
+            {# </li> #}
+            {# <li data-status="Créé" style="background-color: #03989E; color: white; border: #03989E" #}
+            {# class="nav-link" id="nav-created-tab" data-bs-toggle="tab" data-bs-target="#nav-created" #}
+            {# role="tab" aria-controls="nav-created" aria-selected="false">Utilisateurs <span #}
+            {# class="badge bg-light"> #}
+            {# {{ userAccounts }} #}
+            {# </span> #}
+            {# </li> #}
+            {# <li data-status="Publié" style="background-color: #03989E; color: white; border: #03989E" #}
+            {# class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" #}
+            {# role="tab" aria-controls="nav-validated" aria-selected="false">Modérateurs <span #}
+            {# class="badge bg-light"> #}
+            {# {{ moderatorAccounts }} #}
+            {# </span> #}
+            {# </li> #}
+            {# <li data-status="Supprimé" style="background-color: #03989E; color: white; border: #03989E" #}
+            {# class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" #}
+            {# role="tab" aria-controls="nav-validated" aria-selected="false">Administrateurs <span #}
+            {# class="badge bg-light"> #}
+            {# {{ Administrateur }} #}
+            {# </span> #}
+            {# </li> #}
+            {# <li data-status="Supprimé" style="background-color: #03989E; color: white; border: #03989E" #}
+            {# class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" #}
+            {# role="tab" aria-controls="nav-validated" aria-selected="false">Super administrateur <span #}
+            {# class="badge bg-light"> #}
+            {# {{ superAdminAccounts }} #}
+            {# </span> #}
+            {# </li> #}
+            {# </ul> #}
+            {# </nav> #}
         </div>
         <div class="col-10 p-5">
             <h3 class="p-2">Gérer les comptes</h3>
-            <div class="d-flex justify-content-center">
-                <table id="usersList" class="table table-bordered border-light" style="width: 100%!important;">
-                    <thead>
-                    <tr class="header-table">
-                        <th scope="col">Nom d'utilisateur</th>
-                        <th scope="col">Date d'inscription</th>
-                        <th scope="col">Compte actif</th>
-                        <th scope="col">Rôle</th>
-                        <th scope="col">Email</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for user in users %}
-                        <tr data-role="user" class="text-center">
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.createdAt }}</td>
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                {% if user.isActive == 1 %}
-                                    <td>Oui</td>
+            <div class="">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel"
+                         aria-labelledby="v-pills-all-tab">
+                        <table id="ressourcesList" class="table table-bordered border-light">
+                            <thead>
+                            <tr class="header-table">
+                                <th scope="col">Nom d'utilisateur</th>
+                                <th scope="col">Date d'inscription</th>
+                                <th scope="col">Compte actif</th>
+                                <th scope="col">Rôle</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    {% if user.roles[0] != 'ROLE_ADMIN' and user.roles[0] != 'ROLE_SUPER_ADMIN' %}
+                                        {% include 'includes/user/userTable.html.twig' %}
+                                    {% endif %}
                                 {% else %}
-                                    <td>Non</td>
+                                    {% include 'includes/user/userTable.html.twig' %}
                                 {% endif %}
-                            {% else %}
-                                <td>
-                                    {{ render(controller('App\\Controller\\UserController:updateIsActiveUser',
-                                        {id: user.id, save: path('user_update_is_active', {id: user.id}) })) }}
-                                </td>
-                            {% endif %}
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <td>
-                                    {% for role in user.roles %}
-                                        {% if role == 'ROLE_USER' %}
-                                            Utilisateur
-                                        {% elseif role == 'ROLE_MODERATOR' %}
-                                            Modérateur
-                                        {% elseif role == 'ROLE_ADMIN' %}
-                                            Administrateur
-                                        {% elseif role == 'ROLE_SUPER_ADMIN' %}
-                                            Super administrateur
-                                        {% endif %}
-                                    {% endfor %}
-                                </td>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
 
-                            {% else %}
-                                <td class="mx-auto" data-role="{{ user.roles[0] }}">
-                                    {{ render(controller('App\\Controller\\UserController:updateRoleUser',
-                                        {id: user.id, save: path('user_update_role', {id: user.id}) })) }}
-                                </td>
-                            {% endif %}
-                            <td>{{ user.email }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+
+                </div>
+
+
+                {# <table id="usersList" class="table table-bordered border-light" style="width: 100%!important;"> #}
+                {# <thead> #}
+                {# <tr class="header-table"> #}
+                {# <th scope="col">Nom d'utilisateur</th> #}
+                {# <th scope="col">Date d'inscription</th> #}
+                {# <th scope="col">Compte actif</th> #}
+                {# <th scope="col">Rôle</th> #}
+                {# <th scope="col">Email</th> #}
+                {# </tr> #}
+                {# </thead> #}
+                {# <tbody> #}
+                {# {% for user in users %} #}
+
+                {# {% endfor %} #}
+                {# </tbody> #}
+                {# </table> #}
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $('#adminCommentTable').DataTable({
-                ordering: true
-            });
-
-            $('#nav-tab li').on("click", function () {
-                var value = $(this).attr('data-status');
-
-                $('tr[data-role="user"]').filter(function () {
-                    if (value !== 'tous') {
-                        console.log($(this).find('td').attr('data-role'))
-                        $(this).show()
-                        if ($(this).find('td').attr('role')) {
-                            $(this).hide()
-                        }
-                    } else {
-                        $(this).show()
-                    }
-                });
-            });
-        });
-    </script>
 {% endblock %}
