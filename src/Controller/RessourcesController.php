@@ -59,7 +59,6 @@ class RessourcesController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $resource->setUpdatedAt(new \DateTime());
-
             $manager->persist($resource);
             $manager->flush();
 
@@ -84,7 +83,7 @@ class RessourcesController extends AbstractController
     /**
      * @Route(path="/delete/{id}", name="deleteRes")
      */
-    public function deleteRessource(EntityManagerInterface $manager, Resource $resource) : Response
+    public function deleteRessource(EntityManagerInterface $manager, Resource $resource): Response
     {
         $resource->setStatus('DE');
         $manager->flush();

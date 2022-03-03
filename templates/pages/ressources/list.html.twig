@@ -52,6 +52,7 @@
                 <th class="col-2"> Type de Ressource</th>
                 <th class="col-2"> Catégorie</th>
                 <th class="col-2"> Type de Relations</th>
+                <th class="col-2"> Visibilité</th>
                 <th class="col-2"> Status</th>
                 <th class="col-4"> Actions</th>
             </tr>
@@ -69,6 +70,9 @@
                                 <li>{{ relation.name }}</li>
                             {% endfor %}
                         </ul>
+                    </td>
+                    <td class="text-center">
+                        <span>{{ ressource.visibility }}</span>
                     </td>
                     {% if ressource.status == 'Supprimé' %}
                         {% set classBadge = 'danger' %}

@@ -40,6 +40,10 @@
                                 {{ form_label(form.resourceType, 'Type de ressource') }}
                                 {{ form_widget(form.resourceType, {'attr': {'placeholder': 'Veuillez choisir un type de ressource', 'class': 'form-select input-ressource'}}) }}
                             </div>
+                            <div class="mb-3">
+                                {{ form_label(form.visibility, 'Visibilité') }}
+                                {{ form_widget(form.visibility, {'attr': {'placeholder': 'Veuillez choisir la visibilité', 'class': 'form-select input-ressource'}}) }}
+                            </div>
                         </div>
                     </div>
 
