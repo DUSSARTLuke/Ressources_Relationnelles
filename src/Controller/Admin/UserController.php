@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\User;
-
-use App\Form\UserAccountManagementType;
 use App\Repository\UserRepository;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -14,23 +11,26 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route(path="/admin/utilisateurs/", name="user_")
+ */
 class UserController extends AbstractController
 {
     /**
-     * @Route(path="/admin/utilisateurs", name="user_list")
+     * @Route(path="list", name="list")
      */
     public function UserList(UserRepository $userRepository)
     {
 
         $users = $userRepository->findAll();
 
-        return $this->render('/pages/user/userList.html.twig', [
+        return $this->render('/pages/admin/user/userList.html.twig', [
             'users' => $users
         ]);
     }
 
     /**
-     * @Route(path="/admin/modifier-role-utilisateur/{id}", name="user_update_role")
+     * @Route(path="modifier-role-utilisateur/{id}", name="update_role")
      */
     public function updateRoleUser(User $user, Request $request, EntityManagerInterface $em)
     {
@@ -61,14 +61,14 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_list');
         }
 
-        return $this->renderForm('/includes/user/userAccountManagementForm.html.twig', [
+        return $this->renderForm('/includes/admin/user/userAccountManagementForm.html.twig', [
             'form' => $form,
             'id' => $user->getId()
         ]);
     }
 
     /**
-     * @Route(path="/modifier-is-active-utilisateur/{id}", name="user_update_is_active")
+     * @Route(path="modifier-is-active-utilisateur/{id}", name="update_is_active")
      */
     public function updateIsActiveUser(User $user, Request $request, EntityManagerInterface $em)
     {
@@ -89,7 +89,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_list');
         }
 
-        return $this->renderForm('/includes/user/userIsActiveUpdate.html.twig', [
+        return $this->renderForm('/includes/admin/user/userIsActiveUpdate.html.twig', [
             'form' => $form,
             'id' => $user->getId()
         ]);

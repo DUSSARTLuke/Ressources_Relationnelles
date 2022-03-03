@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Comment;
-use App\Form\CommentType;
+use App\Form\admin\CommentType;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route(path="/admin/commentaires/", name="comment_")
+ */
 class CommentController extends AbstractController
 {
     /**
-     * @Route(path="/admin/commentaires", name="comment_admin_list")
+     * @Route(path="list", name="admin_list")
      */
     public function adminCommentList(CommentRepository $commentRepository): Response
     {
@@ -23,27 +25,27 @@ class CommentController extends AbstractController
             ->findCommentsWithAuthor();
         $form = $this->createForm(CommentType::class);
 
-        return $this->renderForm('/pages/comment/commentList.html.twig', [
+        return $this->renderForm('/pages/admin/comment/commentList.html.twig', [
             'comments' => $comments,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route(path="/utilisateur-commentaires", name="comment_user_list")
+     * @Route(path="utilisateur-commentaires", name="user_list")
      */
     public function userCommentList(CommentRepository $commentRepository): Response
     {
         $comments = $commentRepository
             ->findCommentsWithAuthor();
 
-        return $this->renderForm('/includes/comment/commentListIncludes.html.twig', [
+        return $this->renderForm('/includes/admin/comment/commentListIncludes.html.twig', [
             'comments' => $comments
         ]);
     }
 
     /**
-     * @Route(path="/ajouter-un-commentaire", name="comment_create")
+     * @Route(path="ajouter-un-commentaire", name="create")
      */
     public function createComment(Request $request, EntityManagerInterface $em)
     {
@@ -60,13 +62,13 @@ class CommentController extends AbstractController
             return $this->redirectToRoute('comment_list');
         }
 
-        return $this->renderForm('/includes/comment/form/createCommentForm.html.twig', [
+        return $this->renderForm('/includes/admin/comment/form/createCommentForm.html.twig', [
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route(path="/admin/modifier-un-commentaire/{id}", name="comment_update")
+     * @Route(path="modifier-un-commentaire/{id}", name="update")
      */
     public function updateComment(Comment $comment, Request $request, EntityManagerInterface $em)
     {
@@ -85,14 +87,14 @@ class CommentController extends AbstractController
             return $this->redirectToRoute('comment_admin_list');
         }
 
-        return $this->renderForm('/includes/comment/form/updateCommentForm.html.twig', [
+        return $this->renderForm('/includes/admin/comment/form/updateCommentForm.html.twig', [
             'form' => $form,
             'id' => $comment->getId()
         ]);
     }
 
     /**
-     * @Route(path="/admin/supprimer-un-commentaire/{id}", name="comment_delete")
+     * @Route(path="supprimer-un-commentaire/{id}", name="delete")
      */
     public function deleteComment($id, Request $request, CommentRepository $commentRepository, EntityManagerInterface $em): \Symfony\Component\HttpFoundation\RedirectResponse
     {

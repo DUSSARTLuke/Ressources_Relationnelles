@@ -30,14 +30,13 @@
                      </select>
                  </div>
              </div>
-             {% include 'includes/resource/filter.html.twig' with {liste: categories} %}
+             {% include 'includes/ressources/filter.html.twig' with {liste: categories} %}
          </div>
 
          <div class="d-flex justify-content-center mt-5">
              <div class="row justify-content-center">
                  {% for ressource in resources %}
-                     {% include 'pages/resource/cardRessource.html.twig' with {ressource: ressource} %}
-                     {#                             {% include '/pages/resource/resourceTable.home.html.twig' %} #}
+                     {% include 'pages/ressources/cardRessource.html.twig' with {ressource: ressource} %}
                  {% endfor %}
              </div>
          </div>

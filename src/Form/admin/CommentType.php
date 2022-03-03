@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\admin;
 
+use App\DBAL\Types\CommentStatusType;
 use App\Entity\Comment;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -13,7 +14,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\DBAL\Types\CommentStatusType;
 
 class CommentType extends AbstractType
 {

@@ -28,8 +28,6 @@
                             {% elseif is_granted('ROLE_ADMIN') %}
                                 <li><a class="dropdown-item" href="{{ path('resources_admin') }}">Modérer les
                                         ressources</a></li>
-                                {#                                <li><a class="dropdown-item" href="{{ path('comment_admin_list') }}">Statistiques</a></li> #}
-                                {#                                <li><a class="dropdown-item" href="{{ path('resources_admin') }}">Catégories</a></li> #}
                             {% elseif is_granted('ROLE_SUPER_ADMIN') %}
                                 <li><a class="dropdown-item" href="{{ path('user_list') }}">Gérer les comptes</a></li>
                             {% endif %}

@@ -88,13 +88,17 @@
 .commentsBox{
   background: white;
   border-radius: 10px;
-  padding-top: 15px;
+  padding: 15px;
   margin:25px;
 
   .comments{
-    margin: 0 15px;
+    margin: 15px;
     background-color: $green_res;
     color:white;
     border-radius: 15px;
+
+    &-lies {
+      margin-left: 50px;
+    }
   }
 }

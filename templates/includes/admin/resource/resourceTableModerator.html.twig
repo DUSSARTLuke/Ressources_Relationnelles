@@ -24,18 +24,18 @@
                     <button type="button" class="btn btn-info" data-bs-toggle="modal"
                             data-bs-target="#validResourceModal-{{ resource.id }}"><i class="fa-solid fa-check"></i>
                     </button>
-            {{ include('/includes/resource/validResourceModal.moderator.html.twig') }}
+            {{ include('/includes/admin/resource/validResourceModalModerator.html.twig') }}
         {% endif %}
         {% else %}
             <button type="button" class="btn btn-info" data-bs-toggle="modal"
                     data-bs-target="#updateResourceModal-{{ resource.id }}"><i class="fa-solid fa-eye"></i>
             </button>
-            {{ include('/includes/resource/updateResourceModal.admin.html.twig', {url: path('resource_admin_update', {'id': resource.id})}) }}
+            {{ include('/includes/admin/resource/updateResourceModalAdmin.html.twig', {url: path('resource_admin_update', {'id': resource.id})}) }}
             {% if resource.status != 'Supprimé' %}
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#deleteResourceModal-{{ resource.id }}"><i class="fa-solid fa-trash-can"></i>
                 </button>
-                {{ include('/includes/resource/deleteResourceModal.html.twig') }}
+                {{ include('/includes/admin/resource/deleteResourceModal.html.twig') }}
             {% endif %}
         {% endif %}
 

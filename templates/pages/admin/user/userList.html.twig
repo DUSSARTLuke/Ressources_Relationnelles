@@ -1,4 +1,4 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block stylesheets %}
     <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
@@ -57,7 +57,7 @@
         {% endfor %}
     {% endfor %}
     <div class="row">
-        <div class="col-2" style="background-color: #03989E">
+        <div class="col-2 left-bar">
             <nav class="pt-5">
                 <ul class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
                     <li data-status="tous" style="background-color: #03989E; color: white; border: #03989E"
@@ -122,7 +122,7 @@
                                 {% endif %}
                             {% else %}
                                 <td>
-                                    {{ render(controller('App\\Controller\\UserController:updateIsActiveUser',
+                                    {{ render(controller('App\\Controller\\Admin\\UserController:updateIsActiveUser',
                                         {id: user.id, save: path('user_update_is_active', {id: user.id}) })) }}
                                 </td>
                             {% endif %}
@@ -143,7 +143,7 @@
 
                             {% else %}
                                 <td class="mx-auto" data-role="{{ user.roles[0] }}">
-                                    {{ render(controller('App\\Controller\\UserController:updateRoleUser',
+                                    {{ render(controller('App\\Controller\\Admin\\UserController:updateRoleUser',
                                         {id: user.id, save: path('user_update_role', {id: user.id}) })) }}
                                 </td>
                             {% endif %}

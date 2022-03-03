@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\admin;
 
 use App\DBAL\Types\ResourceStatusType;
 use App\DBAL\Types\ResourceType;

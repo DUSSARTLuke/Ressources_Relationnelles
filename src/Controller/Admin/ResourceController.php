@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller\admin;
+namespace App\Controller\Admin;
 
 use App\Entity\Resource;
-use App\Form\ResourceAdminType;
+use App\Form\admin\ResourceAdminType;
 use App\Repository\ResourceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,13 +18,13 @@ class ResourceController extends AbstractController
      */
     public function adminResourceList(ResourceRepository $resourceRepository): Response
     {
-
-        $resources = $resourceRepository
-            ->findAll();
-
-        return $this->render('/pages/resource/resourceList.admin.html.twig', [
+        $resources = $resourceRepository->findAll();
+        return $this->render('/pages/admin/resource/resourceListAdmin.html.twig', [
             'resources' => $resources
         ]);
+//        return $this->render('/pages/ressources/list.html.twig', [
+//            'ressources' => $resources
+//        ]);
     }
 
     /**
@@ -71,7 +71,7 @@ class ResourceController extends AbstractController
             return $this->redirectToRoute('resources_admin');
         }
 
-        return $this->renderForm('/includes/resource/updateResourceForm.admin.html.twig', [
+        return $this->renderForm('/includes/admin/resource/updateResourceFormAdmin.html.twig', [
             'form' => $form,
             'id' => $resource->getId()
         ]);
@@ -80,7 +80,7 @@ class ResourceController extends AbstractController
     /**
      * @Route(path="/admin/delete/{id}", name="resource_admin_delete")
      */
-    public function deleteRessource(EntityManagerInterface $manager, Resource $resource) : Response
+    public function deleteRessource(EntityManagerInterface $manager, Resource $resource): Response
     {
         $resource->setStatus('DE');
         $manager->flush();
@@ -93,7 +93,7 @@ class ResourceController extends AbstractController
     /**
      * @Route(path="/admin/resource/valid/{id}", name="resource_moderator_valid")
      */
-    public function validRessource(EntityManagerInterface $manager, Resource $resource) : Response
+    public function validRessource(EntityManagerInterface $manager, Resource $resource): Response
     {
         $resource->setStatus('PU');
         $manager->flush();

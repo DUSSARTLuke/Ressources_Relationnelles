@@ -1,4 +1,4 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block stylesheets %}
     <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
@@ -58,7 +58,7 @@
         {% endif %}
     {% endfor %}
     <div class="row">
-        <div class="col-2" style="background-color: #03989E">
+        <div class="col-2 left-bar">
             <div class="nav text-start nav-pills me-3 pt-5 pr-0" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link active text-start pr-0" id="v-pills-all-tab" data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">
                     Tous les commentaires <span class="badge bg-light">{{ comments | length }}</span>
@@ -114,7 +114,7 @@
                                 </thead>
                                 <tbody>
                                 {% for comment in comments %}
-                            {% include 'includes/comment/commentTable.admin.html.twig' %}
+                            {% include 'includes/admin/comment/commentTableAdmin.html.twig' %}
                                 {% endfor %}
                                 </tbody>
                             </table>
@@ -134,7 +134,7 @@
                                 <tbody>
                             {% for comment in comments %}
                                 {% if comment.status == 'En attente de validation' %}
-                                    {% include 'includes/comment/commentTable.admin.html.twig' %}
+                                    {% include 'includes/admin/comment/commentTableAdmin.html.twig' %}
                                 {% endif %}
                             {% endfor %}
                                 </tbody>
@@ -155,7 +155,7 @@
                                 <tbody>
                             {% for comment in comments %}
                                 {% if comment.status == 'Publié' %}
-                                    {% include 'includes/comment/commentTable.admin.html.twig' %}
+                                    {% include 'includes/admin/comment/commentTableAdmin.html.twig' %}
                                 {% endif %}
                             {% endfor %}
                                 </tbody>
@@ -176,7 +176,7 @@
                                 <tbody>
                             {% for comment in comments %}
                                 {% if comment.status == 'Supprimé' %}
-                                    {% include 'includes/comment/commentTable.admin.html.twig' %}
+                                    {% include 'includes/admin/comment/commentTableAdmin.html.twig' %}
                                 {% endif %}
                             {% endfor %}
                                 </tbody>
