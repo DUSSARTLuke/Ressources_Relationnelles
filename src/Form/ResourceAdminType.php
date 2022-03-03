@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\DBAL\Types\ResourceStatusType;
 use App\DBAL\Types\ResourceType;
+use App\DBAL\Types\ResourceVisibilityType;
 use App\Entity\Category;
 use App\Entity\RelationType;
 use App\Entity\Resource;
@@ -40,6 +41,13 @@ class ResourceAdminType extends AbstractType
             ->add('status', ChoiceType::class, [
                 'label' => 'Statut',
                 'choices'  => ResourceStatusType::getChoices(),
+                'row_attr' => [
+                    'class' => 'input-group form-control',
+                ],
+            ])
+            ->add('visibility', ChoiceType::class, [
+                'label' => 'Visibilité',
+                'choices'  => ResourceVisibilityType::getChoices(),
                 'row_attr' => [
                     'class' => 'input-group form-control',
                 ],

@@ -1,0 +1,28 @@
+.dataTables_length > label, .dataTables_filter > label {
+  display: flex;
+  white-space: nowrap;
+  padding-bottom: 10px;
+}
+
+.dataTables_length > label > select {
+  width: fit-content;
+}
+
+.dataTables_filter, .dataTables_paginate {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dataTables_filter > label > input {
+  width: fit-content;
+}
+
+@media (max-width: 767.98px) {
+  .dataTables_length, .dataTables_filter, .dataTables_paginate, .dataTables_info {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+
+  }
+}
+

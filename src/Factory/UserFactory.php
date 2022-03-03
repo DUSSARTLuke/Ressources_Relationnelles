@@ -107,6 +107,28 @@ final class UserFactory extends ModelFactory
                 'password' => 'test',
                 'isActive' => 'true',
             ],
+            [
+                'username' => 'testMode',
+                'email' => 'mode@mode.fr',
+                'address1' => "28 rue Jean Jaurès",
+                'postalCode' => '34790',
+                'city' => 'Grabels',
+                'birthday' => new \DateTime('28-10-1999 00:00:00'),
+                'roles' => ['ROLE_MODERATOR'],
+                'password' => 'test',
+                'isActive' => 'true',
+            ],
+            [
+                'username' => 'testSuperAdmin',
+                'email' => 'admin@superadmin.fr',
+                'address1' => "28 rue Jean Jaurès",
+                'postalCode' => '34790',
+                'city' => 'Grabels',
+                'birthday' => new \DateTime('28-10-1999 00:00:00'),
+                'roles' => ['ROLE_SUPER_ADMIN'],
+                'password' => 'test',
+                'isActive' => 'true',
+            ],
         ];
 
         foreach ($users as $user) {

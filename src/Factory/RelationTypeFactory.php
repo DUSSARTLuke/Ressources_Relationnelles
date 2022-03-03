@@ -47,11 +47,11 @@ final class RelationTypeFactory extends ModelFactory
             ],
             [
                 'id' => 3,
-                'name' => 'Famille : enfants / parents / fratrie'
+                'name' => 'Famille'
             ],
             [
                 'id' => 4,
-                'name' => 'Professionnelle : collègues, collaborateurs et managers'
+                'name' => 'Professionnelle'
             ],
             [
                 'id' => 5,

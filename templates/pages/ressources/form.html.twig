@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if from  == 'create' %}
+        Ajouter une Ressource
+    {% else %}
+        Modifier une Ressource
+    {% endif %}
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div>
+            <h2 class="text-center">Remplissez ce formulaire afin
+                de{% if from == 'create' %} créer {% else %} modifier {% endif %}votre ressource !</h2>
+
+            <div class="card-ressource">
+                <div class="form-ressource">
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-md pb-4 pb-md-0">
+                            <div class="form-floating">
+                                {{ form_widget(form.content, {'attr': {'placeholder': 'Veuillez remplir le contenu', 'class': 'form-control input-ressource textArea-ressource'}}) }}
+                                {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'label-ressource'}}) }}
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating res mb-3">
+                                {{ form_widget(form.name, {'attr': {'placeholder': 'Nom', 'class': 'form-control input-ressource'}}) }}
+                                {{ form_label(form.name, 'Nom',{'label_attr': {'class': 'label-ressource'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.category, 'Catégorie') }}
+                                {{ form_widget(form.category, {'attr': {'placeholder': 'Veuillez choisir une catégorie', 'class': 'form-select input-ressource'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.relationType, 'Relations') }}
+                                {{ form_widget(form.relationType, {'attr': {'placeholder': 'Veuillez choisir une ou plusieurs relations', 'class': 'form-select input-ressource', 'style' : 'height:170px'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.resourceType, 'Type de ressource') }}
+                                {{ form_widget(form.resourceType, {'attr': {'placeholder': 'Veuillez choisir un type de ressource', 'class': 'form-select input-ressource'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.visibility, 'Visibilité') }}
+                                {{ form_widget(form.visibility, {'attr': {'placeholder': 'Veuillez choisir la visibilité', 'class': 'form-select input-ressource'}}) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        {% if from == 'create' %}
+                            <button type='submit' class='btn btn-res'><i class="fa-solid fa-plus"></i>Ajouter une ressource</button>
+                        {% else %}
+                            <button type='submit' class='btn btn-res'><i class="fa-solid fa-pen-to-square"></i>Modifier une ressource</button>
+                        {% endif %}
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

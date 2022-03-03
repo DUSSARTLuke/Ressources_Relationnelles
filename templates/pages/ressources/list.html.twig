@@ -43,16 +43,16 @@
 {% block body %}
 
     <h1 class="text-center"> Mes ressources : </h1>
-    <div class="contain-table">
+    <div class="table-responsive">
         <table id="ressourcesList" class="table table-light table-striped">
             <thead>
             <tr>
                 <th class="col-2"></th>
                 <th class="col-2"> Nom</th>
-                <th class="col-4"> Contenu</th>
                 <th class="col-2"> Type de Ressource</th>
                 <th class="col-2"> Catégorie</th>
                 <th class="col-2"> Type de Relations</th>
+                <th class="col-2"> Visibilité</th>
                 <th class="col-2"> Status</th>
                 <th class="col-4"> Actions</th>
             </tr>
@@ -62,17 +62,17 @@
                 <tr>
                     <td>{{ loop.index }}</td>
                     <td>{{ ressource.name }}</td>
-                    <td class="hover_text"><span
-                                class="text_visible">{{ ressource.content|u.truncate(100, '...', false) }}</span>
-                        <span class="text_hidden">{{ ressource.content }}</span></td>
                     <td>{{ ressource.resourceType }}</td>
                     <td>{{ ressource.category.name }}</td>
                     <td>
                         <ul class="table-list">
-                        {% for relation in ressource.relationType %}
-                            <li>{{ relation.name }}</li>
-                        {% endfor %}
+                            {% for relation in ressource.relationType %}
+                                <li>{{ relation.name }}</li>
+                            {% endfor %}
                         </ul>
+                    </td>
+                    <td class="text-center">
+                        <span>{{ ressource.visibility }}</span>
                     </td>
                     {% if ressource.status == 'Supprimé' %}
                         {% set classBadge = 'danger' %}
@@ -92,10 +92,12 @@
                                         class="fa-solid fa-eye fa-2xs"></i></button>
                         {% else %}
                             <div class="d-flex justify-content-around">
-                                <a class="btn btn-success" href="{{ path('ressources_edit', {'id': ressource.id}) }}"><i
-                                                class="fa-solid fa-eye fa-2xs"></i></a>
-                                <a class="btn btn-danger" href="{{ path('ressources_deleteRes', {'id': ressource.id}) }}"><i
-                                                class="fa-solid fa-trash-can fa-2xs"></i></a>
+                                <a class="btn btn-success"
+                                   href="{{ path('ressources_consult', {'id': ressource.id}) }}"><i
+                                            class="fa-solid fa-eye fa-2xs"></i></a>
+                                <a class="btn btn-danger"
+                                   href="{{ path('ressources_deleteRes', {'id': ressource.id}) }}"><i
+                                            class="fa-solid fa-trash-can fa-2xs"></i></a>
                             </div>
                         {% endif %}
                     </td>
