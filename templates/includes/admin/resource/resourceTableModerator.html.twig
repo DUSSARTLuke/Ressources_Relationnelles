@@ -18,7 +18,7 @@
     </td>
     <td class="text-center">
         {% if is_granted('ROLE_MODERATOR') %}
-                    <a class="btn btn-info mb-1" href="{{ path('resource_consult_moderator', {id: resource.id}) }}" role="button"><i
+                    <a class="btn btn-info mb-1" href="{{ path('ressources_admin_consult_moderator', {id: resource.id}) }}" role="button"><i
                                 class="fa-solid fa-eye"></i></a>
         {% if resource.status != 'Publié' %}
                     <button type="button" class="btn btn-info" data-bs-toggle="modal"
@@ -30,7 +30,7 @@
             <button type="button" class="btn btn-info" data-bs-toggle="modal"
                     data-bs-target="#updateResourceModal-{{ resource.id }}"><i class="fa-solid fa-eye"></i>
             </button>
-            {{ include('/includes/admin/resource/updateResourceModalAdmin.html.twig', {url: path('resource_admin_update', {'id': resource.id})}) }}
+            {{ include('/includes/admin/resource/updateResourceModalAdmin.html.twig', {url: path('ressources_admin_update', {'id': resource.id})}) }}
             {% if resource.status != 'Supprimé' %}
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#deleteResourceModal-{{ resource.id }}"><i class="fa-solid fa-trash-can"></i>

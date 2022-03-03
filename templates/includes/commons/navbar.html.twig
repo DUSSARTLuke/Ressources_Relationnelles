@@ -23,16 +23,16 @@
                             {% if is_granted('ROLE_MODERATOR') %}
                                 <li><a class="dropdown-item" href="{{ path('comment_admin_list') }}">Modérer les
                                         commentaires</a></li>
-                                <li><a class="dropdown-item" href="{{ path('resources_admin') }}">Valider les
+                                <li><a class="dropdown-item" href="{{ path('ressources_admin_list') }}">Valider les
                                         ressources</a></li>
                             {% elseif is_granted('ROLE_ADMIN') %}
-                                <li><a class="dropdown-item" href="{{ path('resources_admin') }}">Gérer les
+                                <li><a class="dropdown-item" href="{{ path('ressources_admin_list') }}">Gérer les
                                         ressources</a></li>
                                 <li><a class="dropdown-item" href="{{ path('user_list') }}">Consulter les comptes
                                         utilisateurs</a></li>
-                                <li><a class="dropdown-item" href="{{ path('resource_create_admin') }}">Créer une ressource</a>
+                                <li><a class="dropdown-item" href="{{ path('ressources_admin_create') }}">Créer une ressource</a>
                                 </li>
-                                {# <li><a class="dropdown-item" href="{{ path('resources_admin') }}">Catégories</a></li> #}
+                                {# <li><a class="dropdown-item" href="{{ path('ressources_admin_list') }}">Catégories</a></li> #}
                             {% elseif is_granted('ROLE_SUPER_ADMIN') %}
                                 <li><a class="dropdown-item" href="{{ path('user_list') }}">Gérer les comptes</a></li>
                             {% endif %}

@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <a href="/admin/delete/{{ resource.id }}" type="button" class="btn btn-info">Supprimer</a>
+                <a href="{{ path('ressources_admin_delete', {'id': resource.id}) }}" type="button" class="btn btn-info">Supprimer</a>
             </div>
         </div>
     </div>

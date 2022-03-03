@@ -5,9 +5,17 @@
     <td>{{ comment.resource.name }}</td>
     <td>{{ comment.status }}</td>
     <td>
-        <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                data-bs-target="#updateCommentModal-{{ comment.id }}"><i class="fa-solid fa-eye"></i>
-        </button>
+        {% if comment.status == 'En attente de validation' %}
+            <button type="button" class="btn btn-info mb-1" data-bs-toggle="modal"
+                    data-bs-target="#updateCommentModal-{{ comment.id }}"><i class="fa-solid fa-pencil"></i>
+            </button>
+        {% endif %}
+        {% if comment.status == 'Publié' %}
+            <button type="button" class="btn btn-info mb-1" data-bs-toggle="modal"
+                    data-bs-target="#showCommentModal-{{ comment.id }}"><i class="fa-solid fa-comment-dots"></i>
+            </button>
+            {{ include('/includes/admin/comment/modal/createCommentModal.html.twig', {url: path('comment_update', {id: comment.id})}) }}
+        {% endif %}
         {% if comment.status != 'Supprimé' %}
             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                     data-bs-target="#deleteCommentModal-{{ comment.id }}"><i class="fa-solid fa-trash-can"></i>
@@ -16,8 +24,8 @@
     </td>
 </tr>
 {% set submit_url = path('comment_update', {'id': comment.id}) %}
-{{ include('/includes/admin/comment/modal/updateCommentModal.html.twig', {url: submit_url}) }}
+        {{ include('/includes/admin/comment/modal/updateCommentModal.html.twig', {url: submit_url}) }}
 
-{{ include('/includes/admin/comment/modal/deleteCommentModal.html.twig') }}
+        {{ include('/includes/admin/comment/modal/deleteCommentModal.html.twig') }}
 
 

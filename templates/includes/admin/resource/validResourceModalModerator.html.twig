@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <a href="/admin/resource/valid/{{ resource.id }}" type="button" class="btn btn-info">Valider</a>
+                <a href="{{ path('ressources_admin_moderator_valid', {'id': resource.id}) }}" type="button" class="btn btn-info">Valider</a>
             </div>
         </div>
     </div>

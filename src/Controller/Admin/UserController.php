@@ -30,7 +30,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route(path="modifier-role-utilisateur/{id}", name="update_role")
+     * @Route(path="modifier-role/{id}", name="update_role")
      */
     public function updateRoleUser(User $user, Request $request, EntityManagerInterface $em)
     {
@@ -68,7 +68,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route(path="modifier-is-active-utilisateur/{id}", name="update_is_active")
+     * @Route(path="activate/{id}", name="update_is_active")
      */
     public function updateIsActiveUser(User $user, Request $request, EntityManagerInterface $em)
     {

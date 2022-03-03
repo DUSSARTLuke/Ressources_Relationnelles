@@ -9,7 +9,7 @@
         {% endif %}
     {% else %}
         <td>
-            {{ render(controller('App\\Controller\\UserController:updateIsActiveUser',
+            {{ render(controller('App\\Controller\\Admin\\UserController:updateIsActiveUser',
                 {id: user.id, save: path('user_update_is_active', {id: user.id}) })) }}
         </td>
     {% endif %}
@@ -30,7 +30,7 @@
 
     {% else %}
         <td class="mx-auto" data-role="{{ user.roles[0] }}">
-            {{ render(controller('App\\Controller\\UserController:updateRoleUser',
+            {{ render(controller('App\\Controller\\Admin\\UserController:updateRoleUser',
                 {id: user.id, save: path('user_update_role', {id: user.id}) })) }}
         </td>
     {% endif %}

@@ -60,7 +60,7 @@
         {% endfor %}
     {% endfor %}
     <div class="row">
-        <div class="col-2" style="background-color: #03989E">
+        <div class="col-2 left-bar">
             <div class="nav text-start nav-pills me-3 pt-5 pr-0" id="v-pills-tab" role="tablist"
                  aria-orientation="vertical">
                 <button style="background-color: #03989E; color: white; border: #03989E"
@@ -158,10 +158,10 @@
                             {% for user in users %}
                                 {% if is_granted('ROLE_ADMIN') %}
                                     {% if user.roles[0] != 'ROLE_ADMIN' and user.roles[0] != 'ROLE_SUPER_ADMIN' %}
-                                        {% include 'includes/user/userTable.html.twig' %}
+                                        {% include 'includes/admin/user/userTable.html.twig' %}
                                     {% endif %}
                                 {% else %}
-                                    {% include 'includes/user/userTable.html.twig' %}
+                                    {% include 'includes/admin/user/userTable.html.twig' %}
                                 {% endif %}
                             {% endfor %}
                             </tbody>
