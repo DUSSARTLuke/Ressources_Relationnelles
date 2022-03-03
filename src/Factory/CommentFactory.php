@@ -4,7 +4,9 @@ namespace App\Factory;
 
 use App\DBAL\Types\CommentStatusType;
 use App\Entity\Comment;
+use App\Entity\User;
 use App\Repository\CommentRepository;
+use Doctrine\Persistence\ObjectManager;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -34,13 +36,105 @@ final class CommentFactory extends ModelFactory
         parent::__construct();
     }
 
+    public function createCommentairesParents(ObjectManager $manager)
+    {
+        $comments = [];
+        for($i=0; $i< 25; $i++){
+            $comments[] = $this->getDefaults();
+        }
+
+        foreach ($comments as $comment){
+            $this->createComment($comment, $manager);
+        }
+    }
+
+    public function createCommentairesFils(ObjectManager $manager)
+    {
+        $comments = [
+            [
+                'content' => self::faker()->realText,
+                'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
+                'user' => UserFactory::random()->object(),
+                'resource' => ResourceFactory::random()->object(),
+                'parent' => self::random()->object()
+            ],
+            [
+                'content' => self::faker()->realText,
+                'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
+                'user' => UserFactory::random()->object(),
+                'resource' => ResourceFactory::random()->object(),
+                'parent' => self::random()->object()
+            ],
+            [
+                'content' => self::faker()->realText,
+                'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
+                'user' => UserFactory::random()->object(),
+                'resource' => ResourceFactory::random()->object(),
+                'parent' => self::random()->object()
+            ],
+            [
+                'content' => self::faker()->realText,
+                'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
+                'user' => UserFactory::random()->object(),
+                'resource' => ResourceFactory::random()->object(),
+                'parent' => self::random()->object()
+            ],
+            [
+                'content' => self::faker()->realText,
+                'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
+                'user' => UserFactory::random()->object(),
+                'resource' => ResourceFactory::random()->object(),
+                'parent' => self::random()->object()
+            ],
+            [
+                'content' => self::faker()->realText,
+                'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
+                'user' => UserFactory::random()->object(),
+                'resource' => ResourceFactory::random()->object(),
+                'parent' => self::random()->object()
+            ],
+            [
+                'content' => self::faker()->realText,
+                'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
+                'user' => UserFactory::random()->object(),
+                'resource' => ResourceFactory::random()->object(),
+                'parent' => self::random()->object()
+            ],
+
+        ];
+
+        foreach ($comments as $comment){
+            $this->createComment($comment, $manager);
+        }
+    }
+
+
+    public function createComment(array $comment, ObjectManager $manager)
+    {
+        $commentReturn = new Comment();
+//        dd($comment);
+
+        $commentReturn
+            ->setContent($comment['content'])
+            ->setResource($comment['resource'])
+            ->setUser($comment['user'])
+            ->setStatus($comment['status']);
+
+        if(isset($comment['parent'])){
+            $commentReturn->setParent($comment['parent']);
+        }
+
+        $manager->persist($commentReturn);
+        $manager->flush($commentReturn);
+    }
+
     protected function getDefaults(): array
     {
         return [
             'content' => self::faker()->realText,
             'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
-            'user' => UserFactory::random(),
-            'resource' => ResourceFactory::random()
+            'user' => UserFactory::random()->object(),
+            'resource' => ResourceFactory::random()->object()
         ];
     }
 
