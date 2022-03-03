@@ -12,7 +12,7 @@
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            let table = new DataTable('#ressourcesList', {
+            let table = new DataTable('#adminCommentTable', {
                 language: {
                     processing: "Traitement en cours...",
                     search: "Rechercher&nbsp;:",
@@ -73,32 +73,11 @@
                     Supprimés <span class="badge bg-light">{{ deleteComments }}</span>
                 </button>
             </div>
-{#            <nav class="pt-5">#}
-{#                <ul class="nav nav-tabs flex-column" id="nav-tab" role="tablist">#}
-{#                    <li data-status="tous" style="background-color: #03989E; color: white; border: #03989E"#}
-{#                        class="nav-link active" id="created" data-bs-toggle="tab" data-bs-target="#nav-all" role="tab"#}
-{#                        aria-controls="nav-all" aria-selected="true">Tous les commentaires #}
-{#                    </li>#}
-{#                    <li data-status="WA" style="background-color: #03989E; color: white; border: #03989E"#}
-{#                        class="nav-link" id="nav-created-tab" data-bs-toggle="tab" data-bs-target="#nav-created"#}
-{#                        role="tab" aria-controls="nav-created" aria-selected="false">A valider #}
-{#                    </li>#}
-{#                    <li data-status="PU" style="background-color: #03989E; color: white; border: #03989E"#}
-{#                        class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"#}
-{#                        role="tab" aria-controls="nav-validated" aria-selected="false">Publiés #}
-{#                    </li>#}
-{#                    <li data-status="DE" style="background-color: #03989E; color: white; border: #03989E"#}
-{#                        class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"#}
-{#                        role="tab" aria-controls="nav-validated" aria-selected="false">Supprimés #}
-{#                    </li>#}
-{#                </ul>#}
-{#            </nav>#}
         </div>
         <div class="col-10 p-5">
             <h3 class="p-2">Modérer les commentaires</h3>
             <div class="d-flex justify-content-center">
                 <div class="d-flex align-items-start">
-
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
                             <table id="adminCommentTable" class="table table-bordered border-light">
@@ -186,36 +165,5 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-    <script>
-        $(document).ready(function () {
-            $('#adminCommentTable').DataTable({
-                ordering: true
-            });
-
-            $('#nav-tab li').on("click", function () {
-                var value = $(this).attr('data-status');
-
-                console.log(value);
-
-                $.get($.get( "/admin/commentaires/" + value)
-                    .done(function( data ) {
-                        alert( "Data Loaded: " + data );
-                    }));
-
-                // $('tr[data-role="comment"]').filter(function () {
-                //     if (value !== 'tous') {
-                //         $(this).show()
-                //         if ($(this).find('td').text().indexOf(value) === -1) {
-                //             $(this).hide()
-                //         }
-                //     } else {
-                //         $(this).show()
-                //     }
-                // });
-            });
-        });
-    </script>
 {% endblock %}

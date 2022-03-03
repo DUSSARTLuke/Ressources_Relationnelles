@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Resource;
 use App\Form\admin\ResourceAdminType;
+use App\Form\CreationRessourceType;
+use App\Form\ResourceAdminType;
 use App\Repository\ResourceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -101,6 +103,30 @@ class ResourceController extends AbstractController
         $this->addFlash('success', 'La ressource a bien été validée');
 
         return $this->redirectToRoute('resources_admin');
+    }
+
+    /**
+     * @Route("/crer-une-ressource", name="resource_create_admin")
+     */
+    public function AddResource(Request $request, EntityManagerInterface $manager): Response
+    {
+        $resource = new Resource();
+        $form = $this->createForm(CreationRessourceType::class, $resource);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $resource->setCreatedAt(new \DateTime());
+            $resource->setCreatedBy($this->getUser());
+
+            $manager->persist($resource);
+            $manager->flush();
+
+            $this->addFlash('success', " La demande de création de ressource a bien été prise en compte ! Un modérateur va vérifier les informations 
+                pour valider sa création ! ");
+
+            return $this->redirectToRoute('ressources_list');
+        }
+
+        return $this->render('pages/ressources/form.html.twig', ['form' => $form->createView(), 'from' => 'create']);
     }
 
 }

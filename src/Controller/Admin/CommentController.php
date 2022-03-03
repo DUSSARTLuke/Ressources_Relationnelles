@@ -51,13 +51,15 @@ class CommentController extends AbstractController
     {
         $form = $this->createForm(CommentType::class);
 
+        $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $comment = $form->getData();
 
             $em->persist($comment);
             $em->flush();
 
-            $this->addFlash('success', 'Le commentaire a bien été modifié');
+            $this->addFlash('success', 'Le commentaire a bien été créé');
 
             return $this->redirectToRoute('comment_list');
         }

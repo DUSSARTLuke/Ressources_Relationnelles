@@ -1,0 +1,57 @@
+<div class="modal fade" id="showCommentModal-{{ comment.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header header-modal">
+                <h5 class="modal-title" id="exampleModalLabel">Modifier un commentaire</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% if comment.parent is not null %}
+                    <h6 class="blue-text">Listes des commentaires</h6>
+                    <div class="mb-1">
+                        <div class="card justify-content-center bg-light">
+                            <div class="card-body">
+                                <p>{{ comment.parent.user.username }} - {{ comment.parent.createdAt }}</p>
+                                <p class="mb-0">{{ comment.parent.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="mb-1" style="margin-left: 15px">
+                    <div class="card header-modal ml-1">
+                        <div class="card-body">
+                            <p>{{ comment.user.username }} - {{ comment.createdAt }}</p>
+                            <p class="mb-0">{{ comment.content }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% if comment.comments != null %}
+                    {% for subComment in comment.comments %}
+                        <div class=" mb-1" style="margin-left: 25px">
+                            <div class="card justify-content-center bg-light">
+                                <div class="card-body">
+                                    <p>{{ subComment.user.username }} - {{ subComment.createdAt }}</p>
+                                    <p class="mb-0">{{ subComment.content }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="mt-1">
+                    {# <h6 class="blue-text">Commentaire à valider</h6> #}
+                    {# {% set submit_url = path('comment_admin_list', {id: comment.id}) %} #}
+                    {# {{ render(controller('App\\Controller\\CommentController:updateComment', #}
+                    {# {id: comment.id, save: submit_url })) }} #}
+                </div>
+            </div>
+
+        </div>
+
+        {# <div class="modal-footer"> #}
+        {# <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> #}
+        {# <button type="button" class="btn btn-info">Save changes</button> #}
+        {# </div> #}
+    </div>
+</div>
+</div>
