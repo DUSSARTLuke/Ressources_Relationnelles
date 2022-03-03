@@ -41,84 +41,149 @@
 {% endblock %}
 
 {% block body %}
-
+    {% for subcom in comments[0].comments %}
+    {{ dump(subcom) }}
+    {% endfor %}
     {% set newComments = 0 %}
     {% set publishComments = 0 %}
     {% set deleteComments = 0 %}
     {% for comment in comments %}
-        {% if comment.status == 'Crée' %}
-        {%  set newComment = newComment + 1 %}
+
+        {% if comment.status == 'En attente de validation' %}
+        {%  set newComments = newComments + 1 %}
         {% elseif comment.status == 'Publié' %}
             {% set publishComments = publishComments + 1 %}
         {% else %}
             {% set deleteComments = deleteComments + 1 %}
         {% endif %}
     {% endfor %}
-    {# <div class="container"> #}
     <div class="row">
         <div class="col-2" style="background-color: #03989E">
-            <nav class="pt-5">
-                <ul class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                    <li data-status="tous" style="background-color: #03989E; color: white; border: #03989E"
-                        class="nav-link active" id="created" data-bs-toggle="tab" data-bs-target="#nav-all" role="tab"
-                        aria-controls="nav-all" aria-selected="true">Tous les commentaires <span class="badge bg-light">{{ comments | length }}</span>
-                    </li>
-                    <li data-status="Créé" style="background-color: #03989E; color: white; border: #03989E"
-                        class="nav-link" id="nav-created-tab" data-bs-toggle="tab" data-bs-target="#nav-created"
-                        role="tab" aria-controls="nav-created" aria-selected="false">A valider <span class="badge bg-light">{{ newComments }}</span>
-                    </li>
-                    <li data-status="Publié" style="background-color: #03989E; color: white; border: #03989E"
-                        class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
-                        role="tab" aria-controls="nav-validated" aria-selected="false">Publiés <span class="badge bg-light">{{ publishComments }}</span>
-                    </li>
-                    <li data-status="Supprimé" style="background-color: #03989E; color: white; border: #03989E"
-                        class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
-                        role="tab" aria-controls="nav-validated" aria-selected="false">Supprimés <span class="badge bg-light">{{ deleteComments }}</span>
-                    </li>
-                </ul>
-            </nav>
+            <div class="nav text-start nav-pills me-3 pt-5 pr-0" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link active text-start pr-0" id="v-pills-all-tab" data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">
+                    Tous les commentaires <span class="badge bg-light">{{ comments | length }}</span>
+                </button>
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start pr-0" id="v-pills-created-tab" data-bs-toggle="pill" data-bs-target="#v-pills-created" type="button" role="tab" aria-controls="v-pills-created" aria-selected="false">
+                    En attente de validation <span class="badge bg-light">{{ newComments }}</span>
+                </button>
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start" id="v-pills-published-tab" data-bs-toggle="pill" data-bs-target="#v-pills-published" type="button" role="tab" aria-controls="v-pills-published" aria-selected="false">
+                    Publiés <span class="badge bg-light">{{ publishComments }}</span>
+                </button>
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start" id="v-pills-deleted-tab" data-bs-toggle="pill" data-bs-target="#v-pills-deleted" type="button" role="tab" aria-controls="v-pills-deleted" aria-selected="false">
+                    Supprimés <span class="badge bg-light">{{ deleteComments }}</span>
+                </button>
+            </div>
+{#            <nav class="pt-5">#}
+{#                <ul class="nav nav-tabs flex-column" id="nav-tab" role="tablist">#}
+{#                    <li data-status="tous" style="background-color: #03989E; color: white; border: #03989E"#}
+{#                        class="nav-link active" id="created" data-bs-toggle="tab" data-bs-target="#nav-all" role="tab"#}
+{#                        aria-controls="nav-all" aria-selected="true">Tous les commentaires #}
+{#                    </li>#}
+{#                    <li data-status="WA" style="background-color: #03989E; color: white; border: #03989E"#}
+{#                        class="nav-link" id="nav-created-tab" data-bs-toggle="tab" data-bs-target="#nav-created"#}
+{#                        role="tab" aria-controls="nav-created" aria-selected="false">A valider #}
+{#                    </li>#}
+{#                    <li data-status="PU" style="background-color: #03989E; color: white; border: #03989E"#}
+{#                        class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"#}
+{#                        role="tab" aria-controls="nav-validated" aria-selected="false">Publiés #}
+{#                    </li>#}
+{#                    <li data-status="DE" style="background-color: #03989E; color: white; border: #03989E"#}
+{#                        class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"#}
+{#                        role="tab" aria-controls="nav-validated" aria-selected="false">Supprimés #}
+{#                    </li>#}
+{#                </ul>#}
+{#            </nav>#}
         </div>
         <div class="col-10 p-5">
             <h3 class="p-2">Modérer les commentaires</h3>
             <div class="d-flex justify-content-center">
-                <table id="adminCommentTable" class="table table-bordered border-light">
-                    <thead>
-                    <tr class="header-table">
-                        <th scope="col">Date de création</th>
-                        <th scope="col">Contenu</th>
-                        <th scope="col">Auteur</th>
-                        <th scope="col">Ressource concernée</th>
-                        <th scope="col">Statut</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for comment in comments %}
+                <div class="d-flex align-items-start">
 
-                        <tr data-role="comment">
-                            <td>{{ comment.createdAt }}</td>
-                            <td>{{ comment.content }}</td>
-                            <td>{{ comment.user.username }}</td>
-                            <td>{{ comment.resource.name }}</td>
-                            <td>{{ comment.status }}</td>
-                            <td>
-                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                        data-bs-target="#updateCommentModal-{{ comment.id }}"><i class="fa-solid fa-eye"></i>
-                                </button>
-                                {% if comment.status != 'Supprimé' %}
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#deleteCommentModal-{{ comment.id }}"><i class="fa-solid fa-trash-can"></i>
-                                </button>
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+                            <table id="adminCommentTable" class="table table-bordered border-light">
+                                <thead>
+                                <tr class="header-table">
+                                    <th scope="col">Date de création</th>
+                                    <th scope="col">Contenu</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Ressource concernée</th>
+                                    <th scope="col">Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for comment in comments %}
+                            {% include 'includes/comment/commentTable.admin.html.twig' %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-created" role="tabpanel" aria-labelledby="v-pills-created-tab">
+                            <table id="adminCommentTable" class="table table-bordered border-light">
+                                <thead>
+                                <tr class="header-table">
+                                    <th scope="col">Date de création</th>
+                                    <th scope="col">Contenu</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Ressource concernée</th>
+                                    <th scope="col">Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            {% for comment in comments %}
+                                {% if comment.status == 'En attente de validation' %}
+                                    {% include 'includes/comment/commentTable.admin.html.twig' %}
                                 {% endif %}
-                            </td>
-                        </tr>
-                        {% set submit_url = path('comment_update', {'id': comment.id}) %}
-                        {{ include('/includes/comment/modal/updateCommentModal.html.twig', {url: submit_url}) }}
-
-                        {{ include('/includes/comment/modal/deleteCommentModal.html.twig') }}
-                    {% endfor %}
-                    </tbody>
-                </table>
+                            {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-published" role="tabpanel" aria-labelledby="v-pills-published-tab">
+                            <table id="adminCommentTable" class="table table-bordered border-light">
+                                <thead>
+                                <tr class="header-table">
+                                    <th scope="col">Date de création</th>
+                                    <th scope="col">Contenu</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Ressource concernée</th>
+                                    <th scope="col">Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            {% for comment in comments %}
+                                {% if comment.status == 'Publié' %}
+                                    {% include 'includes/comment/commentTable.admin.html.twig' %}
+                                {% endif %}
+                            {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-deleted" role="tabpanel" aria-labelledby="v-pills-deleted-tab">
+                            <table id="adminCommentTable" class="table table-bordered border-light">
+                                <thead>
+                                <tr class="header-table">
+                                    <th scope="col">Date de création</th>
+                                    <th scope="col">Contenu</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Ressource concernée</th>
+                                    <th scope="col">Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            {% for comment in comments %}
+                                {% if comment.status == 'Supprimé' %}
+                                    {% include 'includes/comment/commentTable.admin.html.twig' %}
+                                {% endif %}
+                            {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -133,16 +198,23 @@
             $('#nav-tab li').on("click", function () {
                 var value = $(this).attr('data-status');
 
-                $('tr[data-role="comment"]').filter(function () {
-                    if (value !== 'tous') {
-                        $(this).show()
-                        if ($(this).find('td').text().indexOf(value) === -1) {
-                            $(this).hide()
-                        }
-                    } else {
-                        $(this).show()
-                    }
-                });
+                console.log(value);
+
+                $.get($.get( "/admin/commentaires/" + value)
+                    .done(function( data ) {
+                        alert( "Data Loaded: " + data );
+                    }));
+
+                // $('tr[data-role="comment"]').filter(function () {
+                //     if (value !== 'tous') {
+                //         $(this).show()
+                //         if ($(this).find('td').text().indexOf(value) === -1) {
+                //             $(this).hide()
+                //         }
+                //     } else {
+                //         $(this).show()
+                //     }
+                // });
             });
         });
     </script>

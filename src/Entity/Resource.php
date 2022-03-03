@@ -70,7 +70,7 @@ class Resource
      *     }
      * )
      */
-    private $status = ResourceStatusType::CREATED;
+    private $status = ResourceStatusType::WAITING_VALIDATION;
 
     /**
      * @ORM\Column(name="visibility", type="ResourceVisibilityType", nullable=false)

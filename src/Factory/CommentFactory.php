@@ -40,8 +40,7 @@ final class CommentFactory extends ModelFactory
             'content' => self::faker()->realText,
             'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
             'user' => UserFactory::random(),
-            'resource' => ResourceFactory::random(),
-            'parent' => CommentFactory::random()
+            'resource' => ResourceFactory::random()
         ];
     }
 

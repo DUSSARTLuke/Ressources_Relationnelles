@@ -18,6 +18,6 @@ final class CommentStatusType extends AbstractEnumType
 
     public static function getDefaultValue(): ?string
     {
-        return self::CREATED; // This value will be used as default in DDL statement
+        return self::WAITING_VALIDATION; // This value will be used as default in DDL statement
     }
 }

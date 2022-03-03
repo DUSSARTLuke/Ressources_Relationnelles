@@ -128,7 +128,7 @@
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
                                 <td>
-                                    {% for role in user.role %}
+                                    {% for role in user.roles %}
                                         {% if role == 'ROLE_USER' %}
                                             Utilisateur
                                         {% elseif role == 'ROLE_MODERATOR' %}

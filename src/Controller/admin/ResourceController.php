@@ -28,6 +28,30 @@ class ResourceController extends AbstractController
     }
 
     /**
+     * @Route("/admin/consult/{id}", name="resource_consult_moderator")
+     */
+    public function ConsultRessources(Resource $resource): Response
+    {
+        return $this->render('pages/ressources/consultation.html.twig', [
+            'ressource' => $resource
+        ]);
+    }
+
+    /**
+     * @Route(path="/admin/ressources/valider", name="resources_validation_admin")
+     */
+    public function adminResourceValidationList(ResourceRepository $resourceRepository): Response
+    {
+
+        $resources = $resourceRepository
+            ->findAll();
+
+        return $this->render('resources_admin', [
+            'resources' => $resources
+        ]);
+    }
+
+    /**
      * @Route(path="/admin/modifier-une-ressource/{id}", name="resource_admin_update")
      */
     public function updateResourceAdmin(Resource $resource, Request $request, EntityManagerInterface $em)
@@ -62,6 +86,19 @@ class ResourceController extends AbstractController
         $manager->flush();
 
         $this->addFlash('success', 'La ressource a bien été supprimée');
+
+        return $this->redirectToRoute('resources_admin');
+    }
+
+    /**
+     * @Route(path="/admin/resource/valid/{id}", name="resource_moderator_valid")
+     */
+    public function validRessource(EntityManagerInterface $manager, Resource $resource) : Response
+    {
+        $resource->setStatus('PU');
+        $manager->flush();
+
+        $this->addFlash('success', 'La ressource a bien été validée');
 
         return $this->redirectToRoute('resources_admin');
     }
