@@ -9,6 +9,8 @@
             <button type="button" class="btn btn-info mb-1" data-bs-toggle="modal"
                     data-bs-target="#updateCommentModal-{{ comment.id }}"><i class="fa-solid fa-pencil"></i>
             </button>
+            {% set submit_url = path('comment_update', {'id': comment.id}) %}
+            {{ include('/includes/admin/comment/modal/updateCommentModal.html.twig', {url: submit_url}) }}
         {% endif %}
         {% if comment.status == 'Publié' %}
             <button type="button" class="btn btn-info mb-1" data-bs-toggle="modal"
@@ -20,12 +22,12 @@
             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                     data-bs-target="#deleteCommentModal-{{ comment.id }}"><i class="fa-solid fa-trash-can"></i>
             </button>
+            {{ include('/includes/admin/comment/modal/deleteCommentModal.html.twig') }}
         {% endif %}
     </td>
 </tr>
-{% set submit_url = path('comment_update', {'id': comment.id}) %}
-        {{ include('/includes/admin/comment/modal/updateCommentModal.html.twig', {url: submit_url}) }}
 
-        {{ include('/includes/admin/comment/modal/deleteCommentModal.html.twig') }}
+
+
 
 
