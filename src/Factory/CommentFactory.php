@@ -55,49 +55,42 @@ final class CommentFactory extends ModelFactory
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
                 'user' => UserFactory::random()->object(),
-                'resource' => ResourceFactory::random()->object(),
                 'parent' => self::random()->object()
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
                 'user' => UserFactory::random()->object(),
-                'resource' => ResourceFactory::random()->object(),
                 'parent' => self::random()->object()
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
                 'user' => UserFactory::random()->object(),
-                'resource' => ResourceFactory::random()->object(),
                 'parent' => self::random()->object()
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
                 'user' => UserFactory::random()->object(),
-                'resource' => ResourceFactory::random()->object(),
                 'parent' => self::random()->object()
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
                 'user' => UserFactory::random()->object(),
-                'resource' => ResourceFactory::random()->object(),
                 'parent' => self::random()->object()
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
                 'user' => UserFactory::random()->object(),
-                'resource' => ResourceFactory::random()->object(),
                 'parent' => self::random()->object()
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
                 'user' => UserFactory::random()->object(),
-                'resource' => ResourceFactory::random()->object(),
                 'parent' => self::random()->object()
             ],
 
@@ -112,16 +105,17 @@ final class CommentFactory extends ModelFactory
     public function createComment(array $comment, ObjectManager $manager)
     {
         $commentReturn = new Comment();
-//        dd($comment);
 
         $commentReturn
             ->setContent($comment['content'])
-            ->setResource($comment['resource'])
             ->setUser($comment['user'])
             ->setStatus($comment['status']);
 
         if(isset($comment['parent'])){
             $commentReturn->setParent($comment['parent']);
+        }
+        if(isset($comment['resource'])){
+            $commentReturn->setResource($comment['resource']);
         }
 
         $manager->persist($commentReturn);

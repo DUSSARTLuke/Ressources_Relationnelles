@@ -101,7 +101,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=Resource::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"comment:read", "comment:post", "user:read"})
      */
     private $resource;
