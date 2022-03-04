@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% include 'base.html.twig' %}
 
 {% block stylesheets %}
     <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
@@ -41,24 +41,24 @@
 {% endblock %}
 
 {% block body %}
-        {% set newResources = 0 %}
-        {% set publishResources = 0 %}
-        {% set suspendedResources = 0 %}
-        {% set deleteResources = 0 %}
+    {% set newResources = 0 %}
+    {% set publishResources = 0 %}
+    {% set suspendedResources = 0 %}
+    {% set deleteResources = 0 %}
 
-        {% for resource in resources %}
-            {% if resource.status == 'En attente de validation' %}
-                {% set newResources = newResources + 1 %}
-            {% elseif resource.status == 'Publié' %}
-                {% set publishResources = publishResources + 1 %}
-            {% elseif resource.status == 'Suspendue' %}
-                {% set suspendedResources = suspendedResources + 1 %}
-            {% else %}
-                {% set deleteResources = deleteResources + 1 %}
-            {% endif %}
-        {% endfor %}
+    {% for resource in resources %}
+        {% if resource.status == 'En attente de validation' %}
+            {% set newResources = newResources + 1 %}
+        {% elseif resource.status == 'Publié' %}
+            {% set publishResources = publishResources + 1 %}
+        {% elseif resource.status == 'Suspendue' %}
+            {% set suspendedResources = suspendedResources + 1 %}
+        {% else %}
+            {% set deleteResources = deleteResources + 1 %}
+        {% endif %}
+    {% endfor %}
     <div class="row">
-        <div class="col-2 left-bar">
+        <div class="col-2" style="background-color: #03989E">
             <div class="nav text-start nav-pills me-3 pt-5 pr-0" id="v-pills-tab" role="tablist"
                  aria-orientation="vertical">
                 <button style="background-color: #03989E; color: white; border: #03989E"
@@ -73,149 +73,143 @@
                         aria-selected="false">
                     En attente de validation <span class="badge bg-light">{{ newResources }}</span>
                 </button>
-                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start"
-                        id="v-pills-published-tab" data-bs-toggle="pill" data-bs-target="#v-pills-published"
-                        type="button" role="tab" aria-controls="v-pills-published" aria-selected="false">
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start" id="v-pills-published-tab" data-bs-toggle="pill" data-bs-target="#v-pills-published" type="button" role="tab" aria-controls="v-pills-published" aria-selected="false">
                     Publiées <span class="badge bg-light">{{ publishResources }}</span>
                 </button>
-                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start"
-                        id="v-pills-suspended-tab" data-bs-toggle="pill" data-bs-target="#v-pills-suspended"
-                        type="button" role="tab" aria-controls="v-pills-suspended" aria-selected="false">
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start" id="v-pills-suspended-tab" data-bs-toggle="pill" data-bs-target="#v-pills-suspended" type="button" role="tab" aria-controls="v-pills-suspended" aria-selected="false">
                     Suspendues <span class="badge bg-light">{{ deleteResources }}</span>
                 </button>
-                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start"
-                        id="v-pills-deleted-tab" data-bs-toggle="pill" data-bs-target="#v-pills-deleted" type="button"
-                        role="tab" aria-controls="v-pills-deleted" aria-selected="false">
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start" id="v-pills-deleted-tab" data-bs-toggle="pill" data-bs-target="#v-pills-deleted" type="button" role="tab" aria-controls="v-pills-deleted" aria-selected="false">
                     Supprimées <span class="badge bg-light">{{ suspendedResources }}</span>
                 </button>
             </div>
         </div>
-            <div class="col-10 p-5">
-                <h3 class="p-2">Valider les ressources</h3>
-                <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel"
-                         aria-labelledby="v-pills-all-tab">
-                        <table id="ressourcesList" class="table table-bordered border-light">
-                            <thead>
-                            <tr class="header-table">
-                                <th scope="col">Titre</th>
-                                <th scope="col">Date de création</th>
-                                <th scope="col">Auteur</th>
-                                <th scope="col">Catégorie(s)</th>
-                                <th scope="col">Type de resource</th>
-                                <th scope="col">Types de relation</th>
-                                <th scope="col">Nombre de commentaires</th>
-                                <th scope="col">Statut</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for resource in resources %}
-                                {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-{#                    <div class="tab-pane fade" id="v-pills-created" role="tabpanel" aria-labelledby="v-pills-created-tab">#}
-{#                        <table id="ressourcesList" class="table table-bordered border-light">#}
-{#                            <thead>#}
-{#                            <tr class="header-table">#}
-{#                                <th scope="col">Titre</th>#}
-{#                                <th scope="col">Date de création</th>#}
-{#                                <th scope="col">Auteur</th>#}
-{#                                <th scope="col">Catégorie(s)</th>#}
-{#                                <th scope="col">Type de resource</th>#}
-{#                                <th scope="col">Types de relation</th>#}
-{#                                <th scope="col">Nombre de commentaires</th>#}
-{#                                <th scope="col">Statut</th>#}
-{#                                <th>Actions</th>#}
-{#                            </tr>#}
-{#                            </thead>#}
-{#                            <tbody>#}
-{#                            {% for resource in resources %}#}
-{#                                {% if resource.status == 'En attente de validation' %}#}
-{#                                    {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}#}
-{#                                {% endif %}#}
-{#                            {% endfor %}#}
-{#                            </tbody>#}
-{#                        </table>#}
-{#                    </div>#}
+        <div class="col-10 p-5">
+            <h3 class="p-2">Valider les ressources</h3>
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <table id="ressourcesList" class="table table-bordered border-light">
+                        <thead>
+                        <tr class="header-table">
+                            <th scope="col">Titre</th>
+                            <th scope="col">Date de création</th>
+                            <th scope="col">Auteur</th>
+                            <th scope="col">Catégorie(s)</th>
+                            <th scope="col">Type de resource</th>
+                            <th scope="col">Types de relation</th>
+                            <th scope="col">Nombre de commentaires</th>
+                            <th scope="col">Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for resource in resources %}
+                            {% include 'includes/resource/resourceTable.moderator.html.twig' %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="v-pills-created" role="tabpanel" aria-labelledby="v-pills-created-tab">
+                    <table id="ressourcesList" class="table table-bordered border-light">
+                        <thead>
+                        <tr class="header-table">
+                            <th scope="col">Titre</th>
+                            <th scope="col">Date de création</th>
+                            <th scope="col">Auteur</th>
+                            <th scope="col">Catégorie(s)</th>
+                            <th scope="col">Type de resource</th>
+                            <th scope="col">Types de relation</th>
+                            <th scope="col">Nombre de commentaires</th>
+                            <th scope="col">Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for resource in resources %}
+                            {% if resource.status == 'En attente de validation' %}
+                                {% include 'includes/resource/resourceTable.moderator.html.twig' %}
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-{#                    <div class="tab-pane fade" id="v-pills-published" role="tabpanel"#}
-{#                         aria-labelledby="v-pills-published-tab">#}
-{#                        <table id="ressourcesList" class="table table-bordered border-light">#}
-{#                            <thead>#}
-{#                            <tr class="header-table">#}
-{#                                <th scope="col">Titre</th>#}
-{#                                <th scope="col">Date de création</th>#}
-{#                                <th scope="col">Auteur</th>#}
-{#                                <th scope="col">Catégorie(s)</th>#}
-{#                                <th scope="col">Type de resource</th>#}
-{#                                <th scope="col">Types de relation</th>#}
-{#                                <th scope="col">Nombre de commentaires</th>#}
-{#                                <th scope="col">Statut</th>#}
-{#                                <th>Actions</th>#}
-{#                            </tr>#}
-{#                            </thead>#}
-{#                            <tbody>#}
-{#                            {% for resource in resources %}#}
-{#                                {% if resource.status == 'Publié' %}#}
-{#                                    {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}#}
-{#                                {% endif %}#}
-{#                            {% endfor %}#}
-{#                            </tbody>#}
-{#                        </table>#}
-{#                    </div>#}
-{#                    <div class="tab-pane fade" id="v-pills-suspended" role="tabpanel"#}
-{#                         aria-labelledby="v-pills-suspended-tab">#}
-{#                        <table id="ressourcesList" class="table table-bordered border-light">#}
-{#                            <thead>#}
-{#                            <tr class="header-table">#}
-{#                                <th scope="col">Titre</th>#}
-{#                                <th scope="col">Date de création</th>#}
-{#                                <th scope="col">Auteur</th>#}
-{#                                <th scope="col">Catégorie(s)</th>#}
-{#                                <th scope="col">Type de resource</th>#}
-{#                                <th scope="col">Types de relation</th>#}
-{#                                <th scope="col">Nombre de commentaires</th>#}
-{#                                <th scope="col">Statut</th>#}
-{#                                <th>Actions</th>#}
-{#                            </tr>#}
-{#                            </thead>#}
-{#                            <tbody>#}
-{#                            {% for resource in resources %}#}
-{#                                {% if resource.status == 'Suspendue' %}#}
-{#                                    {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}#}
-{#                                {% endif %}#}
-{#                            {% endfor %}#}
-{#                            </tbody>#}
-{#                        </table>#}
-{#                    </div>#}
-{#                    <div class="tab-pane fade" id="v-pills-deleted" role="tabpanel" aria-labelledby="v-pills-deleted-tab">#}
-{#                        <table id="ressourcesList" class="table table-bordered border-light">#}
-{#                            <thead>#}
-{#                            <tr class="header-table">#}
-{#                                <th scope="col">Titre</th>#}
-{#                                <th scope="col">Date de création</th>#}
-{#                                <th scope="col">Auteur</th>#}
-{#                                <th scope="col">Catégorie(s)</th>#}
-{#                                <th scope="col">Type de resource</th>#}
-{#                                <th scope="col">Types de relation</th>#}
-{#                                <th scope="col">Nombre de commentaires</th>#}
-{#                                <th scope="col">Statut</th>#}
-{#                                <th>Actions</th>#}
-{#                            </tr>#}
-{#                            </thead>#}
-{#                            <tbody>#}
-{#                            {% for resource in resources %}#}
-{#                                {% if resource.status == 'Supprimé' %}#}
-{#                                    {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}#}
-{#                                {% endif %}#}
-{#                            {% endfor %}#}
-{#                            </tbody>#}
-{#                        </table>#}
-{#                    </div>#}
+                <div class="tab-pane fade" id="v-pills-published" role="tabpanel"
+                     aria-labelledby="v-pills-published-tab">
+                    <table id="ressourcesList" class="table table-bordered border-light">
+                        <thead>
+                        <tr class="header-table">
+                            <th scope="col">Titre</th>
+                            <th scope="col">Date de création</th>
+                            <th scope="col">Auteur</th>
+                            <th scope="col">Catégorie(s)</th>
+                            <th scope="col">Type de resource</th>
+                            <th scope="col">Types de relation</th>
+                            <th scope="col">Nombre de commentaires</th>
+                            <th scope="col">Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for resource in resources %}
+                            {% if resource.status == 'Publié' %}
+                                {% include 'includes/resource/resourceTable.moderator.html.twig' %}
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="v-pills-suspended" role="tabpanel"
+                     aria-labelledby="v-pills-suspended-tab">
+                    <table id="ressourcesList" class="table table-bordered border-light">
+                        <thead>
+                        <tr class="header-table">
+                            <th scope="col">Titre</th>
+                            <th scope="col">Date de création</th>
+                            <th scope="col">Auteur</th>
+                            <th scope="col">Catégorie(s)</th>
+                            <th scope="col">Type de resource</th>
+                            <th scope="col">Types de relation</th>
+                            <th scope="col">Nombre de commentaires</th>
+                            <th scope="col">Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for resource in resources %}
+                            {% if resource.status == 'Suspendue' %}
+                                {% include 'includes/resource/resourceTable.moderator.html.twig' %}
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="v-pills-deleted" role="tabpanel" aria-labelledby="v-pills-deleted-tab">
+                    <table id="ressourcesList" class="table table-bordered border-light">
+                        <thead>
+                        <tr class="header-table">
+                            <th scope="col">Titre</th>
+                            <th scope="col">Date de création</th>
+                            <th scope="col">Auteur</th>
+                            <th scope="col">Catégorie(s)</th>
+                            <th scope="col">Type de resource</th>
+                            <th scope="col">Types de relation</th>
+                            <th scope="col">Nombre de commentaires</th>
+                            <th scope="col">Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for resource in resources %}
+                            {% if resource.status == 'Supprimé' %}
+                                {% include 'includes/resource/resourceTable.moderator.html.twig' %}
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
 {% endblock %}
