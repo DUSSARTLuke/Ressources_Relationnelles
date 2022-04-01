@@ -1,0 +1,46 @@
+<tr data-role="resource">
+    <td>{{ resource.name }}</td>
+    <td class="text-center">{{ resource.createdAt }}</td>
+    <td>{{ resource.createdBy.username }}</td>
+    <td class="text-center">
+        <span class="badge category mb-2 ">{{ resource.category.name }}</span>
+    </td>
+    <td class="text-center">
+        <span class="badge resourceType mb-2 ">{{ resource.resourceType }}</span></td>
+    <td class="text-center">
+        {% for relation in resource.relationType %}
+            <span class="badge relationType mb-2 ">{{ relation.name }}</span>
+        {% endfor %}
+    </td>
+    <td class="text-center">{{ resource.comments | length }}</td>
+    <td class="text-center">
+        {{ resource.status }}
+    </td>
+    <td class="text-center">
+        {% if is_granted('ROLE_MODERATOR') %}
+                    <a class="btn btn-info mb-1" href="{{ path('ressources_admin_consult_moderator', {id: resource.id}) }}" role="button"><i
+                                class="fa-solid fa-eye"></i></a>
+        {% if resource.status != 'Publié' %}
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                            data-bs-target="#validResourceModal-{{ resource.id }}"><i class="fa-solid fa-check"></i>
+                    </button>
+            {{ include('/includes/admin/resource/validResourceModalModerator.html.twig') }}
+        {% endif %}
+        {% else %}
+            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                    data-bs-target="#updateResourceModal-{{ resource.id }}"><i class="fa-solid fa-eye"></i>
+            </button>
+            {{ include('/includes/admin/resource/updateResourceModalAdmin.html.twig', {url: path('ressources_admin_update', {'id': resource.id})}) }}
+            {% if resource.status != 'Supprimé' %}
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#deleteResourceModal-{{ resource.id }}"><i class="fa-solid fa-trash-can"></i>
+                </button>
+                {{ include('/includes/admin/resource/deleteResourceModal.html.twig') }}
+            {% endif %}
+        {% endif %}
+
+    </td>
+</tr>
+
+
+

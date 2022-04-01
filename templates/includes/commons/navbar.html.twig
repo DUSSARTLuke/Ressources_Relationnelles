@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ path('home') }}"><img class="logo-navbar"
+                                                               src="{{ asset('images/logo-app.png') }}"
+                                                               alt="Logo de l'application"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
+                </li>
+                {% if is_granted('ROLE_MODERATOR') or  is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="moderationDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Administration
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="moderationDropdown">
+                            {% if is_granted('ROLE_MODERATOR') %}
+                                <li><a class="dropdown-item" href="{{ path('comment_admin_list') }}">Modérer les
+                                        commentaires</a></li>
+                                <li><a class="dropdown-item" href="{{ path('ressources_admin_list') }}">Valider les
+                                        ressources</a></li>
+                            {% elseif is_granted('ROLE_ADMIN') %}
+                                <li><a class="dropdown-item" href="{{ path('ressources_admin_list') }}">Gérer les
+                                        ressources</a></li>
+                                <li><a class="dropdown-item" href="{{ path('user_list') }}">Consulter les comptes
+                                        utilisateurs</a></li>
+                                <li><a class="dropdown-item" href="{{ path('ressources_admin_create') }}">Créer une ressource</a>
+                                </li>
+                                {# <li><a class="dropdown-item" href="{{ path('ressources_admin_list') }}">Catégories</a></li> #}
+                            {% elseif is_granted('ROLE_SUPER_ADMIN') %}
+                                <li><a class="dropdown-item" href="{{ path('user_list') }}">Gérer les comptes</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if app.user and is_granted('ROLE_USER') %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ressourcesDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Ressources
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="ressourcesDropdown">
+                            <li><a class="dropdown-item" href="{{ path('ressources_create') }}">Créer une ressource</a>
+                            </li>
+
+                            <li><a class="dropdown-item" href="{{ path('ressources_list') }}">Voir la liste de mes
+                                    ressources</a></li>
+                            {# <li> #}
+                            {# <hr class="dropdown-divider"> #}
+                            {# </li> #}
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+            <div class="d-flex">
+                {% if app.user %}
+                    <a class="btn btn-res" href="{{ path('app_logout') }}">
+                        <i class="fa-solid fa-user-xmark"></i>Déconnexion
+                    </a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="btn btn-res">
+                        <i class="fa-solid fa-user-check"></i>Se connecter</a>
+                    <a href="{{ path('creation_compte') }}" class="btn btn-res">
+                        <i class="fa-solid fa-user-plus"></i>S'inscrire</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

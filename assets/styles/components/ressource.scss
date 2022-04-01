@@ -1,0 +1,104 @@
+.ressource-consult, .card-ressource {
+  background-color: white;
+  border-radius: 50px;
+  min-height: 500px;
+  margin: 25px;
+  padding-bottom: 10px;
+
+  .title-ressource {
+    display: flex;
+    justify-content: center;
+    background-color: $green_res;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding: 15px;
+    color: white;
+    font-size: 24px;
+    line-height: 48px;
+    margin-bottom: 50px;
+  }
+
+  .contenu-ressource {
+    display:flex;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
+    margin-left: 20px;
+    border: 1px solid $green_res;
+    padding: 20px;
+    color: black;
+  }
+  .ressource-content{
+    display:flex;
+    flex-direction: column;
+    span{
+      color: $green_res;
+      font-size: 24px;
+      line-height: 29px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+  }
+
+  .consult-infos {
+    display:flex;
+    flex-direction: column;
+
+    .consult-type-ressource, .consult-categorie, .consult-relation  {
+      display:flex;
+      flex-direction: column;
+      span{
+        color: $green_res;
+        font-size: 24px;
+        line-height: 29px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+      .border-span{
+        color:black;
+        margin: 15px;
+        border-radius: 15px;
+        padding: 5px 15px;
+        border: 1px solid $green_res;
+        justify-content: center;
+        font-weight: 400;
+      }
+
+      .tag {
+        background-color: $ocre;
+        color: white;
+        font-size: 12px;
+        line-height: 16px;
+        border-radius: 15px;
+        width:fit-content;
+        padding: 5px 10px;
+        margin: 5px;
+        border: 1px solid $ocre;
+      }
+    }
+  }
+}
+
+.commentsBox{
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin:25px;
+
+  .comments{
+    margin: 15px;
+    background-color: $green_res;
+    color:white;
+    border-radius: 15px;
+
+    &-lies {
+      margin-left: 50px;
+    }
+  }
+}

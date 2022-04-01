@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\DBAL\Types\ResourceVisibilityType;
 use App\Entity\Category;
 use App\Entity\Resource;
 use App\Entity\RelationType;
@@ -31,6 +32,11 @@ class CreationRessourceType extends AbstractType
                     return $relationType->getName();
                 },
                 'multiple' => true,
+            ])
+
+            ->add('visibility', ChoiceType::class, [
+                'label' => 'Visibilité',
+                'choices'  => ResourceVisibilityType::getChoices(),
             ])
             ->add('resourceType', ChoiceType::class, [
                 'choices' => [

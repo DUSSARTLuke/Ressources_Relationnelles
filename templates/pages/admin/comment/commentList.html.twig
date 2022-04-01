@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('/admin/admin.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let table = new DataTable('#adminCommentTable', {
+                language: {
+                    processing: "Traitement en cours...",
+                    search: "Rechercher&nbsp;:",
+                    lengthMenu: "Afficher les _MENU_ premiers",
+                    info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix: "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable: "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first: "Premier",
+                        previous: "Pr&eacute;c&eacute;dent",
+                        next: "Suivant",
+                        last: "Dernier"
+                    },
+                    aria: {
+                        sortAscending: ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    {% for subcom in comments[0].comments %}
+    {{ dump(subcom) }}
+    {% endfor %}
+    {% set newComments = 0 %}
+    {% set publishComments = 0 %}
+    {% set deleteComments = 0 %}
+    {% for comment in comments %}
+
+        {% if comment.status == 'En attente de validation' %}
+        {%  set newComments = newComments + 1 %}
+        {% elseif comment.status == 'Publié' %}
+            {% set publishComments = publishComments + 1 %}
+        {% else %}
+            {% set deleteComments = deleteComments + 1 %}
+        {% endif %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-2 left-bar">
+            <div class="nav text-start nav-pills me-3 pt-5 pr-0" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link active text-start pr-0" id="v-pills-all-tab" data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">
+                    Tous les commentaires <span class="badge bg-light">{{ comments | length }}</span>
+                </button>
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start pr-0" id="v-pills-created-tab" data-bs-toggle="pill" data-bs-target="#v-pills-created" type="button" role="tab" aria-controls="v-pills-created" aria-selected="false">
+                    En attente de validation <span class="badge bg-light">{{ newComments }}</span>
+                </button>
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start" id="v-pills-published-tab" data-bs-toggle="pill" data-bs-target="#v-pills-published" type="button" role="tab" aria-controls="v-pills-published" aria-selected="false">
+                    Publiés <span class="badge bg-light">{{ publishComments }}</span>
+                </button>
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start" id="v-pills-deleted-tab" data-bs-toggle="pill" data-bs-target="#v-pills-deleted" type="button" role="tab" aria-controls="v-pills-deleted" aria-selected="false">
+                    Supprimés <span class="badge bg-light">{{ deleteComments }}</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-10 p-5">
+            <h3 class="p-2">Modérer les commentaires</h3>
+            <div class="d-flex justify-content-center">
+                <div class="d-flex align-items-start">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+                            <table id="adminCommentTable" class="table table-bordered border-light">
+                                <thead>
+                                <tr class="header-table">
+                                    <th scope="col">Date de création</th>
+                                    <th scope="col">Contenu</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Ressource concernée</th>
+                                    <th scope="col">Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for comment in comments %}
+                            {% include 'includes/admin/comment/commentTableAdmin.html.twig' %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-created" role="tabpanel" aria-labelledby="v-pills-created-tab">
+                            <table id="adminCommentTable" class="table table-bordered border-light">
+                                <thead>
+                                <tr class="header-table">
+                                    <th scope="col">Date de création</th>
+                                    <th scope="col">Contenu</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Ressource concernée</th>
+                                    <th scope="col">Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            {% for comment in comments %}
+                                {% if comment.status == 'En attente de validation' %}
+                                    {% include 'includes/admin/comment/commentTableAdmin.html.twig' %}
+                                {% endif %}
+                            {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-published" role="tabpanel" aria-labelledby="v-pills-published-tab">
+                            <table id="adminCommentTable" class="table table-bordered border-light">
+                                <thead>
+                                <tr class="header-table">
+                                    <th scope="col">Date de création</th>
+                                    <th scope="col">Contenu</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Ressource concernée</th>
+                                    <th scope="col">Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            {% for comment in comments %}
+                                {% if comment.status == 'Publié' %}
+                                    {% include 'includes/admin/comment/commentTableAdmin.html.twig' %}
+                                {% endif %}
+                            {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-deleted" role="tabpanel" aria-labelledby="v-pills-deleted-tab">
+                            <table id="adminCommentTable" class="table table-bordered border-light">
+                                <thead>
+                                <tr class="header-table">
+                                    <th scope="col">Date de création</th>
+                                    <th scope="col">Contenu</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Ressource concernée</th>
+                                    <th scope="col">Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            {% for comment in comments %}
+                                {% if comment.status == 'Supprimé' %}
+                                    {% include 'includes/admin/comment/commentTableAdmin.html.twig' %}
+                                {% endif %}
+                            {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

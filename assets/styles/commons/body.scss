@@ -1,5 +1,7 @@
 body {
   background-color: lightgray;
+  height:100%;
+  margin:0;
 }
 
 .marge-bottom {
@@ -11,11 +13,11 @@ body {
   align-content: center;
 }
 
-.footer{
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #f5f5f5;
-  display:flex;
-  justify-content: center;
+.padding-right-15 {
+  padding-right: 15px;
+}
+
+.left-bar {
+  background-color: $green_res;
+  margin-bottom:-100px;
 }

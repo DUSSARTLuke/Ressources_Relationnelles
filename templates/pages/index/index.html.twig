@@ -1,61 +1,44 @@
 {% extends 'base.html.twig' %}
 
- {% block title %} <h1> Bienvenue sur Ressources Relationnelles</h1> {% endblock %}
+ {% block title %}Ressources Relationnelles - Page Accueil{% endblock %}
 
  {% block body %}
      <div class="col m-3">
-         <div class="text-center  mx-auto row col-8">
-             <div class="justify-content-center card rounded border-1 bg-info p-3">
-                 <div class="card-title">Rechercher une ressource</div>
-                 <div class="content">
-                     <input id="searchbox" type="text">
+         <div class="search-card">
+             <div class="d-flex search-group">
+                 <div class="search-input">
+                     <label for="searchBox">Rechercher</label>
+                     <input id="searchBox" type="text" class="input-search" placeholder="Rechercher">
                  </div>
-             </div>
-         </div>
-         <div class="d-flex col-10 justify-around mx-auto">
-             <div class="nav flex-column d-none d-md-block nav-pills m-3 col-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                 <button class="nav-link active" id="v-pills-all-tab" data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">Toutes les catégories<span class="badge bg-info">{{ resources | length }}</span></button>
-                 {% for category in categories %}
-                     <button class="nav-link" id="v-pills-{{ category.id }}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ category.id }}" type="button" role="tab" aria-controls="v-pills-all" aria-selected="true">{{ category.name }}
-                         <span class="badge bg-info rounded-pill">{{ category.resources | length }}</span></button>
-                 {% endfor %}
-             </div>
-             <div class="tab-content col-10 mx-10" id="v-pills-tabContent">
-                 <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
-                     <div class="row">
-                         {% for resource in resources %}
-                             {% include '/pages/resource/resourceTable.home.html.twig' %}
+                 <div class="relation-select">
+                     <label for="searchBox">Relations</label>
+                     <select name="relation" id="relation-select" class="select-res">
+                         <option value="">Tout</option>
+                         {% for relation in relations %}
+                         <option value="{{ relation.id }}">{{ relation.name }}</option>
                          {% endfor %}
-                     </div>
+                     </select>
+
                  </div>
-                 {% for category in categories %}
-                     <div class="tab-pane fade" id="v-pills-{{ category.id }}" role="tabpanel" aria-labelledby="v-pills-{{ category.id }}-tab">
-                         <div class="row">
-                             {% for resource in resources %}
-                                 {% if resource.category.id == category.id %}
-                                     {% include '/pages/resource/resourceTable.home.html.twig' %}
-                                 {% endif %}
-                             {% endfor %}
-                         </div>
-                     </div>
+                 <div class="type-select">
+                     <label for="searchBox">Type de ressources</label>
+                     <select name="resourceType" id="resourceType-select" class="select-res">
+                         <option value="">Tout</option>
+                        {%  for key,type in resourceTypes %}
+                         <option value="{{ key }}">{{ type }}</option>
+                         {% endfor %}
+                     </select>
+                 </div>
+             </div>
+             {% include 'includes/ressources/filter.html.twig' with {liste: categories} %}
+         </div>
+
+         <div class="d-flex justify-content-center mt-5">
+             <div class="row justify-content-center">
+                 {% for ressource in resources %}
+                     {% include 'pages/ressources/cardRessource.html.twig' with {ressource: ressource} %}
                  {% endfor %}
              </div>
          </div>
-
-         <script>
-             $(document).ready(function() {
-                 $("#searchbox").on("keyup", function() {
-                     var value = $(this).val().toLowerCase();
-                     console.log(value)
-                     $('div[data-role="resource"]').filter(function() {
-                         $(this).toggle($(this).find('h6').text().toLowerCase().indexOf(value) > -1)
-                     });
-                 });
-             });
-         </script>
      </div>
-
-
-
-
  {% endblock %}
