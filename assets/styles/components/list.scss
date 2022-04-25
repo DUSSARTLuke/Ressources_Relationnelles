@@ -1,0 +1,25 @@
+.btn a {
+  color: white;
+}
+
+.td-button{
+  .btn{
+    a, i{
+      line-height: 7px;
+      text-decoration: none;
+    }
+    display:flex;
+    justify-content:center;
+    height:24px;
+    width:24px;
+  }
+}
+
+.table-list {
+  list-style: none;
+}
+
+.table-responsive{
+  width:98%;
+  margin:auto;
+}

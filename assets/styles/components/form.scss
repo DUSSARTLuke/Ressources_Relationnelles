@@ -1,0 +1,36 @@
+.form-ressource {
+  padding: 25px;
+}
+
+.form-floating > .res {
+  color: white;
+}
+
+
+.input-ressource {
+  background-color: $green_res;
+  color: white;
+
+  &:focus, &:focus-visible, &:focus-within {
+    background-color: $green_res;
+    color: white;
+  }
+}
+
+.label-ressource {
+  color: white;
+}
+
+.textArea-ressource {
+  min-height: 550px !important;
+}
+
+@media (max-width: 767.98px) {
+  .row {
+    flex-direction: column;
+  }
+  .textArea-ressource {
+    min-height: 250px !important;
+    padding-bottom: 25px;
+  }
+}

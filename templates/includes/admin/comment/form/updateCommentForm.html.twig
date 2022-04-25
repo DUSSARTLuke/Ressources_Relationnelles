@@ -1,0 +1,16 @@
+{{ form_start(form, {'action': path('comment_update', {id: id})}) }}
+<div class="mb-2 row">
+    {{ form_row(form.user) }}
+</div>
+<div class="row">
+    <label for="">Commentaire</label>
+    {{ form_widget(form.content,{ 'attr': {'rows': '4'} }) }}
+</div>
+<br>
+<div class="mb-2 row">
+    {{ form_row(form.status) }}
+</div>
+<div class="row">
+    {{ form_row(form.save) }}
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,22 @@
+.footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f5f5f5;
+  display:flex;
+  justify-content: space-between;
+}
+
+.logo-footer {
+  height: 50px;
+}
+
+.mentions_legales{
+  display:flex;
+  flex-direction: column;
+  span {
+    line-height: 14px;
+    font-size: 10px;
+    text-align: center;
+  }
+}

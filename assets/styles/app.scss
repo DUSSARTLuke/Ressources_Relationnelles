@@ -1,5 +1,13 @@
 @import "bootstrap.min.css";
+@import "variables/color";
+
+
 @import './commons/body';
 @import "commons/navbar";
+@import "commons/footer";
 
-@import "datatables";
+@import "components/datatables";
+@import "components/card";
+@import "components/ressource";
+@import "components/form";
+@import "components/list";

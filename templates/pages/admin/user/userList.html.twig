@@ -1,0 +1,194 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('/admin/admin.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let table = new DataTable('#usersList', {
+                language: {
+                    processing: "Traitement en cours...",
+                    search: "Rechercher&nbsp;:",
+                    lengthMenu: "Afficher les  _MENU_ premiers",
+                    info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix: "",
+                    loadingRecords: "Chargement en cours...",
+                    zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable: "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first: "Premier",
+                        previous: "Pr&eacute;c&eacute;dent",
+                        next: "Suivant",
+                        last: "Dernier"
+                    },
+                    aria: {
+                        sortAscending: ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block body %}
+    {% set totalUserAdmin = 0 %}
+    {% set userAccounts = 0 %}
+    {% set moderatorAccounts = 0 %}
+    {% set Administrateur = 0 %}
+    {% set superAdminAccounts = 0 %}
+    {% for user in users %}
+        {% for role in user.roles %}
+            {% if role == 'ROLE_USER' %}
+                {% set totalUserAdmin = totalUserAdmin + 1 %}
+                {% set userAccounts = userAccounts + 1 %}
+            {% elseif role == 'ROLE_MODERATOR' %}
+                {% set moderatorAccounts = moderatorAccounts + 1 %}
+                {% set totalUserAdmin = totalUserAdmin + 1 %}
+            {% elseif role == 'ROLE_ADMIN' %}
+                {% set Administrateur = Administrateur + 1 %}
+            {% else %}
+                {% set superAdminAccounts = superAdminAccounts + 1 %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-2 left-bar">
+            <div class="nav text-start nav-pills me-3 pt-5 pr-0" id="v-pills-tab" role="tablist"
+                 aria-orientation="vertical">
+                <button style="background-color: #03989E; color: white; border: #03989E"
+                        class="nav-link active text-start pr-0" id="v-pills-all-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all"
+                        aria-selected="true">
+                    Toutes les utilisateurs <span class="badge bg-light">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {{ totalUserAdmin }}
+                        {% else %}
+                            {{ users | length }}
+                        {% endif %}
+                        </span>
+                </button>
+                <button style="background-color: #03989E; color: white; border: #03989E"
+                        class="nav-link text-start pr-0" id="v-pills-user-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-user" type="button" role="tab" aria-controls="v-pills-user"
+                        aria-selected="false">
+                    Citoyens <span class="badge bg-light">{{ userAccounts }}</span>
+                </button>
+                <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start"
+                        id="v-pills-moderator-tab" data-bs-toggle="pill" data-bs-target="#v-pills-moderator"
+                        type="button" role="tab" aria-controls="v-pills-moderator" aria-selected="false">
+                    Modérateurs <span class="badge bg-light">{{ moderatorAccounts }}</span>
+                </button>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start"
+                            id="v-pills-admin-tab" data-bs-toggle="pill" data-bs-target="#v-pills-suspended"
+                            type="button" role="tab" aria-controls="v-pills-admin" aria-selected="false">
+                        Suspendues <span class="badge bg-light">{{ Administrateur }}</span>
+                    </button>
+                    <button style="background-color: #03989E; color: white; border: #03989E" class="nav-link text-start"
+                            id="v-pills-super-admin-tab" data-bs-toggle="pill" data-bs-target="#v-pills-super-admin"
+                            type="button" role="tab" aria-controls="v-pills-super-admin" aria-selected="false">
+                        Supprimées <span class="badge bg-light">{{ superAdminAccounts }}</span>
+                    </button>
+                {% endif %}
+            </div>
+
+            {# <nav class="pt-5"> #}
+            {# <ul class="nav nav-tabs flex-column" id="nav-tab" role="tablist"> #}
+            {# <li data-status="tous" style="background-color: #03989E; color: white; border: #03989E" #}
+            {# class="nav-link active" id="created" data-bs-toggle="tab" data-bs-target="#nav-all" role="tab" #}
+            {# aria-controls="nav-all" aria-selected="true">Toutes les ressources <span #}
+            {# class="badge bg-light">{{ users | length }}</span> #}
+            {# </li> #}
+            {# <li data-status="Créé" style="background-color: #03989E; color: white; border: #03989E" #}
+            {# class="nav-link" id="nav-created-tab" data-bs-toggle="tab" data-bs-target="#nav-created" #}
+            {# role="tab" aria-controls="nav-created" aria-selected="false">Utilisateurs <span #}
+            {# class="badge bg-light"> #}
+            {# {{ userAccounts }} #}
+            {# </span> #}
+            {# </li> #}
+            {# <li data-status="Publié" style="background-color: #03989E; color: white; border: #03989E" #}
+            {# class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" #}
+            {# role="tab" aria-controls="nav-validated" aria-selected="false">Modérateurs <span #}
+            {# class="badge bg-light"> #}
+            {# {{ moderatorAccounts }} #}
+            {# </span> #}
+            {# </li> #}
+            {# <li data-status="Supprimé" style="background-color: #03989E; color: white; border: #03989E" #}
+            {# class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" #}
+            {# role="tab" aria-controls="nav-validated" aria-selected="false">Administrateurs <span #}
+            {# class="badge bg-light"> #}
+            {# {{ Administrateur }} #}
+            {# </span> #}
+            {# </li> #}
+            {# <li data-status="Supprimé" style="background-color: #03989E; color: white; border: #03989E" #}
+            {# class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" #}
+            {# role="tab" aria-controls="nav-validated" aria-selected="false">Super administrateur <span #}
+            {# class="badge bg-light"> #}
+            {# {{ superAdminAccounts }} #}
+            {# </span> #}
+            {# </li> #}
+            {# </ul> #}
+            {# </nav> #}
+        </div>
+        <div class="col-10 p-5">
+            <h3 class="p-2">Gérer les comptes</h3>
+            <div class="">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel"
+                         aria-labelledby="v-pills-all-tab">
+                        <table id="ressourcesList" class="table table-bordered border-light">
+                            <thead>
+                            <tr class="header-table">
+                                <th scope="col">Nom d'utilisateur</th>
+                                <th scope="col">Date d'inscription</th>
+                                <th scope="col">Compte actif</th>
+                                <th scope="col">Rôle</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    {% if user.roles[0] != 'ROLE_ADMIN' and user.roles[0] != 'ROLE_SUPER_ADMIN' %}
+                                        {% include 'includes/admin/user/userTable.html.twig' %}
+                                    {% endif %}
+                                {% else %}
+                                    {% include 'includes/admin/user/userTable.html.twig' %}
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+
+
+                {# <table id="usersList" class="table table-bordered border-light" style="width: 100%!important;"> #}
+                {# <thead> #}
+                {# <tr class="header-table"> #}
+                {# <th scope="col">Nom d'utilisateur</th> #}
+                {# <th scope="col">Date d'inscription</th> #}
+                {# <th scope="col">Compte actif</th> #}
+                {# <th scope="col">Rôle</th> #}
+                {# <th scope="col">Email</th> #}
+                {# </tr> #}
+                {# </thead> #}
+                {# <tbody> #}
+                {# {% for user in users %} #}
+
+                {# {% endfor %} #}
+                {# </tbody> #}
+                {# </table> #}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\DBAL\Types\ResourceType;
+use App\DBAL\Types\ResourceVisibilityType;
 use App\Repository\ResourceRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -69,7 +70,23 @@ class Resource
      *     }
      * )
      */
-    private $status = ResourceStatusType::CREATED;
+    private $status = ResourceStatusType::WAITING_VALIDATION;
+
+    /**
+     * @ORM\Column(name="visibility", type="ResourceVisibilityType", nullable=false)
+     * @DoctrineAssert\Enum(entity="App\DBAL\Types\ResourceVisibilityType")
+     * @Groups({"resource:read", "resource:collection:read", "resource:put",})
+     *
+     * @ApiProperty(
+     *     attributes={
+     *         "openapi_context"={
+     *             "example"="publique"
+     *         }
+     *     }
+     * )
+     */
+    private $visibility = ResourceVisibilityType::PUBLIC;
+
 
     /**
      * @ORM\Column(name="resource_type", type="ResourceType", nullable=false)
@@ -191,7 +208,7 @@ class Resource
 
     public function getResourceType(): ?string
     {
-        if($this->resourceType != null){
+        if ($this->resourceType != null) {
             return ResourceType::getReadableValue($this->resourceType);
         } else {
             return '';
@@ -205,9 +222,9 @@ class Resource
         return $this;
     }
 
-    public function getCreatedAt(): ?string
+    public function getCreatedAt(): ?\DateTime
     {
-        return $this->createdAt->format('d/m/Y H:i:s');
+        return $this->createdAt;
     }
 
     public function setCreatedAt(DateTimeInterface $createdAt): self
@@ -305,5 +322,23 @@ class Resource
         $this->createdBy = $createdBy;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVisibility(): string
+    {
+        return ResourceVisibilityType::getReadableValue($this->visibility);
+    }
+
+    /**
+     * @param string $visibility
+     */
+    public function setVisibility(string $visibility): self
+    {
+        $this->visibility = $visibility;
+        return $this;
+
     }
 }
