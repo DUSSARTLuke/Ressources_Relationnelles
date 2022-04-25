@@ -222,9 +222,9 @@ class Resource
         return $this;
     }
 
-    public function getCreatedAt(): ?string
+    public function getCreatedAt(): ?\DateTime
     {
-        return $this->createdAt->format('d/m/Y H:i:s');
+        return $this->createdAt;
     }
 
     public function setCreatedAt(DateTimeInterface $createdAt): self
