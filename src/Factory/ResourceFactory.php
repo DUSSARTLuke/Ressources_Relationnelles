@@ -670,6 +670,1875 @@ final class ResourceFactory extends ModelFactory
         }
     }
 
+    public function createRessourcesWA(ObjectManager $manager): void
+    {
+        $ressources = [
+            // attente validation
+            //catégorie 1
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 1,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 1,
+                'resourceType' => 'PC',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 1,
+                'resourceType' => 'AR',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 1,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez compliqué.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 1,
+                'resourceType' => 'OG',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            //catégorie 2
+            [
+                'name' => 'Test vidéo',
+                'content' => "Je suis ici pour vous parler d'une vidéo assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 2,
+                'resourceType' => 'VI',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 2,
+                'resourceType' => 'PC',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 2,
+                'resourceType' => 'AR',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 2,
+                'resourceType' => 'WO',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez compliqué.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 2,
+                'resourceType' => 'RS',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 3
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 3,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 3,
+                'resourceType' => 'CH',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 3,
+                'resourceType' => 'CH',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 3,
+                'resourceType' => 'AR',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 3,
+                'resourceType' => 'PC',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 4
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 4,
+                'resourceType' => 'WO',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 4,
+                'resourceType' => 'VI',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 4,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 4,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 4,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 5
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 5,
+                'resourceType' => 'VI',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 5,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 5,
+                'resourceType' => 'WO',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 5,
+                'resourceType' => 'AR',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 5,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 6
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 7
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 8
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 9
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 10
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégori 11
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 12
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'WA',
+                'visibility' => 'SH',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PRI',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'WA',
+                'visibility' => 'PUB',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+        ];
+
+        foreach ($ressources as $ressource) {
+            $this->createRessource($ressource, $manager);
+        }
+    }
+
+    public function createRessourcesSU(ObjectManager $manager): void
+    {
+        $ressources = [
+            // publique
+            //catégorie 1
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 1,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 1,
+                'resourceType' => 'PC',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 1,
+                'resourceType' => 'AR',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 1,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez compliqué.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 1,
+                'resourceType' => 'OG',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            //catégorie 2
+            [
+                'name' => 'Test vidéo',
+                'content' => "Je suis ici pour vous parler d'une vidéo assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 2,
+                'resourceType' => 'VI',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 2,
+                'resourceType' => 'PC',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 2,
+                'resourceType' => 'AR',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 2,
+                'resourceType' => 'WO',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez compliqué.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 2,
+                'resourceType' => 'RS',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 3
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 3,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 3,
+                'resourceType' => 'CH',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 3,
+                'resourceType' => 'CH',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 3,
+                'resourceType' => 'AR',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 3,
+                'resourceType' => 'PC',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 4
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 4,
+                'resourceType' => 'WO',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 4,
+                'resourceType' => 'VI',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 4,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 4,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 4,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 5
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 5,
+                'resourceType' => 'VI',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 5,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 5,
+                'resourceType' => 'WO',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 5,
+                'resourceType' => 'AR',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 5,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 6
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 7
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 8
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 9
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 10
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégori 11
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 12
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'SU',
+                'visibility' => 'SH',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PRI',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'SU',
+                'visibility' => 'PUB',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+        ];
+
+        foreach ($ressources as $ressource) {
+            $this->createRessource($ressource, $manager);
+        }
+    }
+
+    public function createRessourcesDE(ObjectManager $manager): void
+    {
+        $ressources = [
+            // publique
+            //catégorie 1
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 1,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 1,
+                'resourceType' => 'PC',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 1,
+                'resourceType' => 'AR',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 1,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez compliqué.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 1,
+                'resourceType' => 'OG',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            //catégorie 2
+            [
+                'name' => 'Test vidéo',
+                'content' => "Je suis ici pour vous parler d'une vidéo assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 2,
+                'resourceType' => 'VI',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 2,
+                'resourceType' => 'PC',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 2,
+                'resourceType' => 'AR',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 2,
+                'resourceType' => 'WO',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez compliqué.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 2,
+                'resourceType' => 'RS',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 3
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 3,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 3,
+                'resourceType' => 'CH',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 3,
+                'resourceType' => 'CH',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 3,
+                'resourceType' => 'AR',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 3,
+                'resourceType' => 'PC',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 4
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 4,
+                'resourceType' => 'WO',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 4,
+                'resourceType' => 'VI',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 4,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 4,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 4,
+                'resourceType' => 'CH',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 5
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 5,
+                'resourceType' => 'VI',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 5,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 5,
+                'resourceType' => 'WO',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 5,
+                'resourceType' => 'AR',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 5,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 6
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 6,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 7
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 7,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 8
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 8,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 9
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 9,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 10
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 10,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégori 11
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 11,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+            // catégorie 12
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test fichier',
+                'content' => "Je suis ici pour vous parler d'un fichier qui est upload.",
+                'status' => 'DE',
+                'visibility' => 'SH',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 2,
+                'relationType' => [1,2,3,5,6]
+            ],
+            [
+                'name' => 'Test activité',
+                'content' => "Je suis ici pour vous parler d'une activité assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PRI',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 3,
+                'relationType' => [1,2,6]
+            ],
+            [
+                'name' => 'Nouveauté',
+                'content' => "Je suis ici pour vous parler d'une chose assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [3,5,6]
+            ],
+            [
+                'name' => 'Test jeu',
+                'content' => "Je suis ici pour vous parler d'un jeu assez simple.",
+                'status' => 'DE',
+                'visibility' => 'PUB',
+                'category' => 12,
+                'resourceType' => 'GA',
+                'createdBy' => 1,
+                'relationType' => [5,6]
+            ],
+        ];
+
+        foreach ($ressources as $ressource) {
+            $this->createRessource($ressource, $manager);
+        }
+    }
+
     private function createRessource(array $ressource, ObjectManager $manager): void
     {
         $ressourceReturn = new Resource();
