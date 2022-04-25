@@ -13,15 +13,15 @@ describe('Test de la page d\'accueil', () => {
 
     context('Test affichage card', () => {
         it('Toutes les cards', () => {
-            cy.get('.card-res').should('have.length', 6)
+            cy.get('.card-res').should('have.length', 33)
         })
         it('filtrage Tag card', () => {
             cy.get('.tag').eq(1).click()
             cy.get('.card-res').eq(2).should('have.class', 'd-none')
         })
         it('filtrage Texte card', () => {
-            cy.get('.input-search').type('res')
-            cy.get('.card-res').eq(5).should('have.class', 'd-none')
+            cy.get('.input-search').type('jeu as')
+            cy.get('.card-res').eq(0).should('have.class', 'd-none')
         })
         it('filtrage Type Relation card', () => {
             // cy.get('.card-res').eq(2).should('have.class', 'd-none')
