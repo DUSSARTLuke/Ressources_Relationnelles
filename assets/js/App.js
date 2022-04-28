@@ -19,13 +19,10 @@ if(location.pathname === '/'){
                     document.querySelectorAll(e.target.dataset.all).forEach((item) => {
                         item.classList.add('d-none');
                         item.classList.remove('card-affiche');
-
                     });
-
                     document.querySelectorAll(e.target.dataset.target).forEach((item) => {
                         item.classList.remove('d-none');
                         item.classList.add('card-affiche');
-
                     })
                 })
             })
@@ -42,9 +39,7 @@ if(location.pathname === '/'){
                     card.classList.add('d-none');
                 } else {
                     card.classList.remove('d-none');
-
                 }
-
             }
         })
     })

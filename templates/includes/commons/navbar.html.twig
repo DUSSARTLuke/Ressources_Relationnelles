@@ -63,6 +63,9 @@
                     <a class="btn btn-res" href="{{ path('app_logout') }}">
                         <i class="fa-solid fa-user-xmark"></i>Déconnexion
                     </a>
+                    <a class="btn btn-res-transparent" href="{{ path('profil_edit', {'id': app.user.id}) }}">
+                       <i class="fa-solid fa-user"></i>{{ app.user.username }}
+                    </a>
                 {% else %}
                     <a href="{{ path('app_login') }}" class="btn btn-res">
                         <i class="fa-solid fa-user-check"></i>Se connecter</a>
