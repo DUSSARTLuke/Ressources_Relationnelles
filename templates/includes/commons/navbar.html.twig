@@ -30,7 +30,8 @@
                                         ressources</a></li>
                                 <li><a class="dropdown-item" href="{{ path('user_list') }}">Consulter les comptes
                                         utilisateurs</a></li>
-                                <li><a class="dropdown-item" href="{{ path('ressources_admin_create') }}">Créer une ressource</a>
+                                <li><a class="dropdown-item" href="{{ path('ressources_admin_create') }}">Créer une
+                                        ressource</a>
                                 </li>
                                 {# <li><a class="dropdown-item" href="{{ path('ressources_admin_list') }}">Catégories</a></li> #}
                             {% elseif is_granted('ROLE_SUPER_ADMIN') %}
@@ -51,21 +52,29 @@
 
                             <li><a class="dropdown-item" href="{{ path('ressources_list') }}">Voir la liste de mes
                                     ressources</a></li>
-                            {# <li> #}
-                            {# <hr class="dropdown-divider"> #}
-                            {# </li> #}
                         </ul>
                     </li>
                 {% endif %}
             </ul>
             <div class="d-flex">
                 {% if app.user %}
-                    <a class="btn btn-res" href="{{ path('app_logout') }}">
-                        <i class="fa-solid fa-user-xmark"></i>Déconnexion
-                    </a>
-                    <a class="btn btn-res-transparent" href="{{ path('profil_edit', {'id': app.user.id}) }}">
-                       <i class="fa-solid fa-user"></i>{{ app.user.username }}
-                    </a>
+                    <div class="btn-group dropstart">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            <i class="fa-solid fa-user"></i> Profil
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('profil_edit', {'id': app.user.id}) }}">Modifier
+                                    le profil</a></li>
+                            <li><a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                        </ul>
+                    </div>
+                    {#                    <a class="btn btn-res" href="{{ path('app_logout') }}"> #}
+                    {#                        <i class="fa-solid fa-user-xmark"></i>Déconnexion #}
+                    {#                    </a> #}
+                    {#                    <a class="btn btn-res-transparent" href="{{ path('profil_edit', {'id': app.user.id}) }}"> #}
+                    {#                        <i class="fa-solid fa-user"></i>{{ app.user.username }} #}
+                    {#                    </a> #}
                 {% else %}
                     <a href="{{ path('app_login') }}" class="btn btn-res">
                         <i class="fa-solid fa-user-check"></i>Se connecter</a>
