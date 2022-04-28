@@ -105,7 +105,7 @@ class ResourceController extends AbstractController
     }
 
     /**
-     * @Route("/crer", name="create")
+     * @Route("creer", name="create")
      */
     public function AddResource(Request $request, EntityManagerInterface $manager): Response
     {

@@ -55,6 +55,11 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator implements Authe
             return new RedirectResponse($targetPath);
         }
 
+//        dd($token->getUser()->getRoles());
+        if (in_array("ROLE_ADMIN", $token->getUser()->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('admin_dashboard'));
+        }
+
         return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 

@@ -22,12 +22,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get"={"normalization_context"={"groups"="resource:collection:read"}},
  *          "post"={
  *             "denormalization_context"={"groups"={"resource:post"}}
- *         }
+ *         },
  *     },
  *     itemOperations={
  *         "get", "put"={
  *             "denormalization_context"={"groups"={"resource:put"}}
  *         },
+ *          "patch",
+ *          "put",
  *          "delete"
  *     },
  *     normalizationContext={"groups"={"resource:read"}},
@@ -47,20 +49,20 @@ class Resource
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:post", "resource:put", "user:read", "resource:collection:read", "comment:read", "favorite:read"})
+     * @Groups({"resource:read", "resource:write", "resource:post", "resource:put", "user:read", "resource:collection:read", "comment:read", "favorite:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"resource:read", "resource:post", "resource:put", "resource:write"})
+     * @Groups({"resource:read", "resource:write", "resource:collection:read", "resource:post", "resource:put", "resource:write"})
      */
     private $content;
 
     /**
      * @ORM\Column(name="status", type="ResourceStatusType", nullable=false)
      * @DoctrineAssert\Enum(entity="App\DBAL\Types\ResourceStatusType")
-     * @Groups({"resource:read", "resource:collection:read", "resource:put",})
+     * @Groups({"resource:read", "resource:write", "resource:collection:read", "resource:put",})
      *
      * @ApiProperty(
      *     attributes={
@@ -75,7 +77,7 @@ class Resource
     /**
      * @ORM\Column(name="visibility", type="ResourceVisibilityType", nullable=false)
      * @DoctrineAssert\Enum(entity="App\DBAL\Types\ResourceVisibilityType")
-     * @Groups({"resource:read", "resource:collection:read", "resource:put",})
+     * @Groups({"resource:read", "resource:write", "resource:collection:read", "resource:put",})
      *
      * @ApiProperty(
      *     attributes={
@@ -91,7 +93,7 @@ class Resource
     /**
      * @ORM\Column(name="resource_type", type="ResourceType", nullable=false)
      * @DoctrineAssert\Enum(entity="App\DBAL\Types\ResourceType")
-     * @Groups({"resource:read", "resource:post", "resource:put", "resource:collection:read"})
+     * @Groups({"resource:read", "resource:write", "resource:post", "resource:put", "resource:collection:read"})
      *
      * @ApiProperty(
      *     attributes={
@@ -136,19 +138,19 @@ class Resource
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="resources")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "resource:post", "resource:put", "resource:collection:read"})
+     * @Groups({"resource:read", "resource:write", "resource:post", "resource:put", "resource:collection:read"})
      */
     private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity=RelationType::class, inversedBy="resources")
-     * @Groups({"resource:read", "resource:post", "resource:put", "resource:collection:read"})
+     * @Groups({"resource:read", "resource:write", "resource:post", "resource:put", "resource:collection:read"})
      */
     private $relationType;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="resource")
-     * @Groups({"resource:read"})
+     * @Groups({"resource:read", "resource:collection:read", "resource:post"})
      */
     private $comments;
 

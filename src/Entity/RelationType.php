@@ -28,7 +28,7 @@ class RelationType
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"relationType:read"})
+     * @Groups({"relationType:read", "resource:read"})
      */
     private $id;
 

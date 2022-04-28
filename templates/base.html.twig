@@ -14,9 +14,10 @@
 
     {% block stylesheets %}
     {% endblock %}
-    {{ encore_entry_link_tags('app') }}
+
 
     {% block javascripts %}
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/logo-app.png') }}">
