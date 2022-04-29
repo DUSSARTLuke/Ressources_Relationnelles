@@ -45,3 +45,11 @@ if(location.pathname === '/'){
     })
 }
 
+const messageFlash = document.getElementById('alertMessage')
+const body = document.body;
+console.log(messageFlash);
+if(messageFlash !== undefined){
+    setTimeout( function() {
+        body.removeChild(messageFlash);
+    }, 5000)
+}

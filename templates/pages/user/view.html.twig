@@ -47,16 +47,20 @@
         <div class="profil">
             <h3 class="text-center"> Mon profil</h3>
             <ul>
-                <li>{{ user.username }}</li>
-                <li>{{ user.address1 }}</li>
+                <li><i class="fa-solid fa-user-graduate"></i> {{ user.username }}</li>
+                <li><i class="fa-solid fa-location-dot"></i> {{ user.address1 }}</li>
                 {% if(user.address2 !='') %}
-                    <li>{{ user.address2 }}</li>
+                    <li><i class="fa-solid fa-location-dot"></i> {{ user.address2 }}</li>
                 {% endif %}
-                <li>{{ user.postalCode }}</li>
-                <li>{{ user.city }}</li>
-                <li>{{ user.birthday | date('d/m/Y')}}</li>
-                <li>{{ user.socialSituation }}</li>
+                <li><i class="fa-solid fa-map-location"></i> {{ user.postalCode }}</li>
+                <li><i class="fa-solid fa-city"></i> {{ user.city }}</li>
+                <li><i class="fa-solid fa-cake-candles"></i> {{ user.birthday | date('d/m/Y') }}</li>
+                <li><i class="fa-solid fa-user-tie"></i> {{ user.socialSituation }}</li>
+                <li><a class="btn btn-res" href="{{ path('profil_edit', {'id': app.user.id}) }}">
+                        <i class="fa-solid fa-user-pen"></i> Modifier vos informations
+                    </a></li>
             </ul>
+
         </div>
         <div>
             <h3 class="text-center"> Mes ressources : </h3>

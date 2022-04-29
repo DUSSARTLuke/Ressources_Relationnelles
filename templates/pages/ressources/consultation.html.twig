@@ -50,13 +50,13 @@
                                 {% endif %}
                             </div>
                             <span>
-                        Crée le {{ ressource.createdAt }}
+                        Crée le {{ ressource.createdAt | date('d/m/Y')}}
                     </span>
                         </div>
                     {% endif %}
                 {% else %}
                     <span class="d-flex justify-content-end padding-right-15 mb-2">
-                        Crée le {{ ressource.createdAt }}
+                        Crée le {{ ressource.createdAt | date('d/m/Y') }}
                         </span>
                 {% endif %}
 

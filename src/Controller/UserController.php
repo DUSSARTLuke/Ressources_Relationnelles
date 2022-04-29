@@ -57,7 +57,11 @@ class UserController extends AbstractController
 
             $this->addFlash('success', " Votre profil a bien été modifié !");
 
-            return $this->redirectToRoute('app_logout');
+            if($pwdAncien === $user->getPassword()){
+                return $this->redirectToRoute('profil_view', ['id' => $user->getId()]);
+            } else {
+                return $this->redirectToRoute('app_logout');
+            }
         }
 
         return $this->render('pages/user/form.html.twig', ['form' => $form->createView(), 'from' => 'edit']);
