@@ -143,25 +143,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isActive = 0;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user", orphanRemoval=true)
      * @Groups({"user:read"})
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="user", orphanRemoval=true)
      * @Groups({"user:read"})
      */
     private $favorites;
 
     /**
-     * @ORM\OneToMany(targetEntity=Progress::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Progress::class, mappedBy="user", orphanRemoval=true)
      * @Groups({"user:read"})
      */
     private $progress;
 
     /**
-     * @ORM\OneToMany(targetEntity=Resource::class, mappedBy="createdBy")
+     * @ORM\OneToMany(targetEntity=Resource::class, mappedBy="createdBy", orphanRemoval=true)
      * @Groups({"user:read"})
      */
     private $createdResources;

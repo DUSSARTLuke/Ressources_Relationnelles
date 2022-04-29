@@ -7,6 +7,7 @@ use App\Form\CreationRessourceType;
 use App\Form\UserType;
 use App\Repository\ResourceRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,13 +23,23 @@ class UserController extends AbstractController
     /**
      * @Route("view/{id}/", name="view")
      */
-    public function voirProfil(EntityManagerInterface $manager, User $user, ResourceRepository $repo): Response
+    public function voirProfil(User $user, ResourceRepository $repo): Response
     {
         $ressources = $repo->findBy(['createdBy' => $this->getUser()->getId()]);
 
         return $this->render('pages/user/view.html.twig', ["user" => $user, "ressources" => $ressources]);
     }
 
+    /**
+     * @Route("delete/{id}", name="delete")
+     */
+    public function deleteProfil(EntityManagerInterface $manager, User $user): Response {
+
+        $this->redirectToRoute('app_logout');
+        $manager->remove($user);
+        $manager->flush();
+        return $this->redirectToRoute('home');
+    }
 
     /**
      * @Route("edit/{id}/", name="edit")

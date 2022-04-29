@@ -94,25 +94,26 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      * @Groups({"comment:read", "comment:post", "resource:read"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Resource::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      * @Groups({"comment:read", "comment:post", "user:read"})
      */
     private $resource;
 
     /**
      * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent", orphanRemoval=true)
      */
     private $comments;
 

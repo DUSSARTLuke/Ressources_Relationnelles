@@ -135,7 +135,7 @@ class Resource
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="resources")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      * @Groups({"resource:read", "resource:post", "resource:put", "resource:collection:read"})
      */
     private $category;
@@ -147,14 +147,14 @@ class Resource
     private $relationType;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="resource")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="resource", orphanRemoval=true)
      * @Groups({"resource:read"})
      */
     private $comments;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="createdResources")
-     * @ORM\JoinColumn(name="created_by", nullable=false)
+     * @ORM\JoinColumn(name="created_by", nullable=false, onDelete="cascade")
      * @Groups({"resource:read", "resource:post", "resource:collection:read"})
      */
     private $createdBy;

@@ -51,14 +51,14 @@ class Favorite
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="favorites")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      * @Groups({"favorite:read", "favorite:write"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Resource::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      * @Groups({"favorite:read", "favorite:write", "user:read"})
      */
     private $resource;

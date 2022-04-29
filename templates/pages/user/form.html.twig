@@ -74,9 +74,12 @@
             </div>
         </div>
 
-        <div class="mt-5 text-center">
+        <div class="container text-center justify-content-around mt-5">
             <button type='submit' class='btn btn-res'><i class="fa-solid fa-pen-to-square"></i>Modifier votre profil
             </button>
+            <a class='btn btn-danger' href="{{ path('profil_delete', {'id': app.user.id}) }}"><i
+                        class="fa-solid fa-user-slash"></i>Supprimer votre profil
+            </a>
         </div>
         {{ form_end(form) }}
     </div>

@@ -85,14 +85,14 @@ class Progress
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="progress")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      * @Groups({"progress:read", "progress:write"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Resource::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      * @Groups({"progress:read", "progress:write", "user:read"})
      */
     private $resource;
