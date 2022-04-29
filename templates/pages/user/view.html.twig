@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Votre profil
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div>
+            <h2 class="text-center">Vous pouvez modifier votre profil ici</h2>
+
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="form-floating mb-3 col-6">
+                    {{ form_widget(form.username, {'attr': {'placeholder': 'Votre username', 'class': 'form-control'}}) }}
+                    {{ form_label(form.username, 'Username') }}
+                </div>
+                <div class="form-floating mb-3 col-6">
+                    {{ form_widget(form.email, {'attr': {'placeholder': 'Votre adresse mail', 'class': 'form-control'}}) }}
+                    {{ form_label(form.email, 'Adresse mail') }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating mb-3 col-6">
+                    {{ form_widget(form.address1, {'attr': {'placeholder': 'votre adresse 1', 'class': 'form-control'}}) }}
+                    {{ form_label(form.address1, 'Votre addresse 1') }}
+
+                </div>
+                <div class="form-floating mb-3 col-6">
+                    {{ form_widget(form.address2, {'attr': {'placeholder': 'Votre adresse 2', 'class': 'form-control'}}) }}
+                    {{ form_label(form.address2, 'Votre addresse 2') }}
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-floating mb-3 col-6">
+                    {{ form_widget(form.postalCode, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_label(form.postalCode, 'Votre code postal') }}
+                </div>
+
+                <div class="form-floating mb-3 col-6">
+                    {{ form_widget(form.city, {'attr': {'placeholder': 'Votre ville', 'class': 'form-control'}}) }}
+                    {{ form_label(form.city, 'Votre ville') }}
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-floating mb-3 col-6">
+                    {{ form_widget(form.socialSituation, {'attr': {'placeholder': 'Votre catégorie socio-professionnelle', 'class': 'form-select'}}) }}
+                    {{ form_label(form.socialSituation, 'Votre catégorie socio-professionnelle') }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating mb-3 col-6">
+                    {{ form_widget(form.password, {'attr': {'placeholder': 'Votre mot de passe', 'class': 'form-control'}}) }}
+                    {{ form_label(form.password, 'Votre mot de passe') }}
+                </div>
+                <div class="form-floating mb-3 col-6">
+                    {{ form_widget(form.confPassword, {'attr': {'placeholder': 'Veuillez confirmer votre mot de passe', 'class': 'form-control'}}) }}
+                    {{ form_label(form.confPassword, 'Veuillez confirmer votre mot de passe', {'label_attr' : {'class': 'form-check-label'}}) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-6">
+                    {{ form_label(form.birthday, "Date d'anniversaire") }}
+                    {{ form_widget(form.birthday, { 'attr' :{ 'class': "form-control"}}) }}
+                </div>
+                <div class="form-floating mb-3 col-6">
+                    {{ form_widget(form.isRGPD, {'attr': {'placeholder': 'Veuillez choisir une catégorie', 'class': 'form-check-input'}}) }}
+                    {{ form_label(form.isRGPD, 'Catégorie', {'label_attr' : {'class': 'form-check-label'}}) }}
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mt-5 text-center">
+            <button type='submit' class='btn btn-res'><i class="fa-solid fa-pen-to-square"></i>Modifier votre profil
+            </button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+
