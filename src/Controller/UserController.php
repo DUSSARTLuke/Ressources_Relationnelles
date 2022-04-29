@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\CreationRessourceType;
 use App\Form\UserType;
+use App\Repository\ResourceRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,17 +22,22 @@ class UserController extends AbstractController
     /**
      * @Route("view/{id}/", name="view")
      */
-    public function voirProfil(EntityManagerInterface $manager, User $user): Response
+    public function voirProfil(EntityManagerInterface $manager, User $user, ResourceRepository $repo): Response
     {
-        return $this->render('pages/user/view.html.twig', ["user" => $user]);
+        $ressources = $repo->findBy(['createdBy' => $this->getUser()->getId()]);
+
+        return $this->render('pages/user/view.html.twig', ["user" => $user, "ressources" => $ressources]);
     }
 
 
     /**
      * @Route("edit/{id}/", name="edit")
      */
-    public function editProfil(Request $request, EntityManagerInterface $manager, User $user, UserPasswordEncoderInterface $passwordEncoder,): Response
+    public function editProfil(Request $request, UserRepository $uRepo, EntityManagerInterface $manager, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+//        dd($user);
+        $pwdAncien = $user->getPassword();
+        $confAncien = $user->getConfPassword();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -38,17 +45,19 @@ class UserController extends AbstractController
             $pwd = $form->getData()->getPassword();
             $confPwd = $form->getData()->getConfPassword();
             if (($pwd !== '' and $confPwd !== '') and ($pwd === $confPwd)) {
+//                dd($pwd);
                 $user->setPassword($passwordEncoder->encodePassword($user, $pwd));
                 $user->setconfPassword($passwordEncoder->encodePassword($user, $confPwd));
             } else {
-                $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
-                $user->setconfPassword($passwordEncoder->encodePassword($user, $user->getConfPassword()));
+                $user->setPassword($pwdAncien);
+                $user->setconfPassword($confAncien);
             }
             $manager->persist($user);
             $manager->flush();
 
             $this->addFlash('success', " Votre profil a bien été modifié !");
 
+            return $this->redirectToRoute('app_logout');
         }
 
         return $this->render('pages/user/form.html.twig', ['form' => $form->createView(), 'from' => 'edit']);

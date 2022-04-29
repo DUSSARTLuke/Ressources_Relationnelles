@@ -64,8 +64,10 @@
                             <i class="fa-solid fa-user"></i> Profil
                         </button>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('profil_view', {'id': app.user.id}) }}">Voir
+                                    votre profil</a></li>
                             <li><a class="dropdown-item" href="{{ path('profil_edit', {'id': app.user.id}) }}">Modifier
-                                    le profil</a></li>
+                                    votre profil</a></li>
                             <li><a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a></li>
                         </ul>
                     </div>
