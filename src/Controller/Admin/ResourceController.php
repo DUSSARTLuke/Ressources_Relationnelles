@@ -43,11 +43,9 @@ class ResourceController extends AbstractController
      */
     public function adminResourceValidationList(ResourceRepository $resourceRepository): Response
     {
+        $resources = $resourceRepository->findAll();
 
-        $resources = $resourceRepository
-            ->findAll();
-
-        return $this->render('ressources_admin_list', [
+        return $this->render('/pages/admin/resource/resourceListAdmin.html.twig', [
             'resources' => $resources
         ]);
     }

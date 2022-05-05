@@ -5,7 +5,7 @@ namespace App\Factory;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -33,7 +33,7 @@ final class UserFactory extends ModelFactory
 
     private $userPasswordEncoder;
 
-    public function __construct(UserPasswordEncoderInterface $userPasswordEncoder)
+    public function __construct(UserPasswordHasherInterface $userPasswordEncoder)
     {
         parent::__construct();
         $this->userPasswordEncoder = $userPasswordEncoder;
@@ -97,6 +97,17 @@ final class UserFactory extends ModelFactory
     {
         $users = [
             [
+                'username' => 'testUser',
+                'email' => 'admin@admin.fr',
+                'address1' => "28 rue Jean Jaurès",
+                'postalCode' => '34790',
+                'city' => 'Grabels',
+                'birthday' => new \DateTime('28-10-1999 00:00:00'),
+                'roles' => ['ROLE_USER'],
+                'password' => 'test',
+                'isActive' => 'true',
+            ],
+            [
                 'username' => 'testAdmin',
                 'email' => 'admin@admin.fr',
                 'address1' => "28 rue Jean Jaurès",
@@ -148,8 +159,8 @@ final class UserFactory extends ModelFactory
             ->setCity($user['city'])
             ->setBirthday($user['birthday'])
             ->setRoles($user['roles'])
-            ->setPassword($this->userPasswordEncoder->encodePassword($userReturn, $user['password']))
-            ->setConfPassword($this->userPasswordEncoder->encodePassword($userReturn, $user['password']))
+            ->setPassword($this->userPasswordEncoder->hashPassword($userReturn, $user['password']))
+            ->setConfPassword($this->userPasswordEncoder->hashPassword($userReturn, $user['password']))
             ->setIsActive($user['isActive'])
             ->setIsRGPD(true);
 

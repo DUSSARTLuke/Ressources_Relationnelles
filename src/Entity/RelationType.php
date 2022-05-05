@@ -11,15 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(
- *     collectionOperations={
- *          "get"
- *     },
- *     itemOperations={
- *         "get"
- *     },
- *     normalizationContext={"groups"={"relationType:read"}}
- * )
  * @ORM\Entity(repositoryClass=RelationTypeRepository::class)
  */
 class RelationType
@@ -28,19 +19,16 @@ class RelationType
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"relationType:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=80)
-     * @Groups({"relationType:read", "resource:read", "resource:collection:read"})
      */
     private $name;
 
     /**
      * @ORM\ManyToMany(targetEntity=Resource::class, mappedBy="relationType")
-     * @ApiSubresource
      */
     private $resources;
 

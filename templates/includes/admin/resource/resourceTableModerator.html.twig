@@ -1,6 +1,6 @@
 <tr data-role="resource">
     <td>{{ resource.name }}</td>
-    <td class="text-center">{{ resource.createdAt }}</td>
+    <td class="text-center">{{ resource.createdAt |date('d-m-Y') }}</td>
     <td>{{ resource.createdBy.username }}</td>
     <td class="text-center">
         <span class="badge category mb-2 ">{{ resource.category.name }}</span>
