@@ -10,7 +10,7 @@ final class CommentStatusType extends AbstractEnumType
     public const PUBLISHED = 'PU';
     public const DELETED = 'DE';
 
-    protected static $choices = [
+    protected static array $choices = [
         self::WAITING_VALIDATION => 'En attente de validation',
         self::PUBLISHED => 'Publié',
         self::DELETED => 'Supprimé'
