@@ -11,19 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(
- *     collectionOperations={
- *          "get"={"normalization_context"={"groups"="category:collection:read"}},
- *          "post"
- *     },
- *     itemOperations={
- *          "get",
- *          "put",
- *          "delete"
- *     },
- *     normalizationContext={"groups"={"category:read"}},
- *     denormalizationContext={"groups"={"category:write"}}
- * )
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
  */
 class Category
@@ -32,19 +19,16 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"category:collection:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=75)
-     * @Groups({"category:collection:read", "category:write", "resource:read", "resource:collection:read"})
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Resource::class, mappedBy="category")
-     * @ApiSubresource
      */
     private $resources;
 

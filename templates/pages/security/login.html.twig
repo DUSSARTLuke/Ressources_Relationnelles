@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <form method="post">
+    <form class="login-form" method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
@@ -40,7 +40,7 @@
             >
 
             <div class="d-flex justify-content-around mt-5">
-                <button class="btn btn-primary" style="margin: 0 10px" type="submit">Connexion</button>
+                <button class="btn btn-primary login-btn" style="margin: 0 10px" type="submit">Connexion</button>
                 <a class="btn btn-primary" style="margin: 0 10px; text-decoration:none;color:white;" type="submit"
                    href="{{ path('creation_compte') }}">Inscrivez-vous</a>
             </div>
