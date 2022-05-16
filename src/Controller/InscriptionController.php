@@ -52,11 +52,11 @@ class InscriptionController extends AbstractController
 //
 //                    $token = $compte->getActivationToken();
 
-//                    $url = $this->generateUrl('creation_activation', ['token' => $token]);
-//                    $url = 'm2l-2.fr' . $url;
-//                    GestionContact::send($form->get('Email')->getData(), 'Vous', 'Activation de votre compte', '<p> Bonjour, </p>
-//                    <p>Vous vous êtes inscrit sur notre site, veuillez cliquer sur le lien ci-dessou pour l\'activer : </p>
-//                    <a href=' . $url . '> Activer votre compte </a>' , 'text/html');
+                    $url = $this->generateUrl('home');
+                    $url = 'https://localhost:8000' . $url;
+                    GestionContact::send($compte->getEmail(), $compte->getUsername(), 'Activation de votre compte', '<p> Bonjour, </p>
+                    <p>Vous vous êtes inscrit sur notre site, veuillez cliquer sur le lien ci-dessous pour l\'activer : </p>
+                    <a href=' . $url . '> Activer votre compte </a>' , 'text/html');
 
                     $manager->persist($compte);
                     $manager->flush();

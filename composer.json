@@ -16,6 +16,7 @@
         "fresh/doctrine-enum-bundle": "~7.3",
         "friendsofsymfony/rest-bundle": "^3.2",
         "lexik/jwt-authentication-bundle": "^2.14",
+        "mailjet/mailjet-apiv3-php": "^1.5",
         "nelmio/cors-bundle": "^2.1",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^6.1",
