@@ -14,11 +14,7 @@
         <ini name="xdebug.mode" value="coverage" />
         <env name="XDEBUG_MODE" value="coverage" />
         <server name="APP_ENV" value="test" force="true" />
-<<<<<<< HEAD
         <server name="SHELL_VERBOSITY" value="2" />
-=======
-        <server name="SHELL_VERBOSITY" value="1" />
->>>>>>> WIP: tests controller
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
         <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
     </php>
@@ -43,15 +39,4 @@
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
-<<<<<<< HEAD
-=======
-
-    <!-- Run `composer require symfony/panther` before enabling this extension -->
-
-<!--    <extensions>-->
-<!--        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>-->
-<!--&lt;!&ndash;        <extension class="Symfony\Component\Panther\ServerExtension" />&ndash;&gt;-->
-<!--    </extensions>-->
-
->>>>>>> WIP: tests controller
 </phpunit>

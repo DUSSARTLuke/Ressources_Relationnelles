@@ -11,7 +11,7 @@ final class ResourceStatusType extends AbstractEnumType
     public const PUBLISHED = 'PU';
     public const DELETED = 'DE';
 
-    protected static array $choices = [
+    protected static $choices = [
         self::WAITING_VALIDATION => 'En attente de validation',
         self::PUBLISHED => 'Publié',
         self::SUSPENDED => 'Suspendue',
