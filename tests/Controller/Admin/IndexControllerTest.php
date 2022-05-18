@@ -13,7 +13,6 @@ class IndexControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
 
-        // est ce que j'ai un form, est-ce que j'ai un champ
     }
 
 }

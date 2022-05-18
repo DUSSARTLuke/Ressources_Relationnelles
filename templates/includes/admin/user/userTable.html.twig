@@ -9,7 +9,7 @@
         {% endif %}
     {% else %}
         <td>
-            {{ render(controller('App\\Controller\\Admin\\UserController:updateIsActiveUser',
+            {{ render(controller('App\\Controller\\Admin\\UserController::updateIsActiveUser',
                 {id: user.id, save: path('user_update_is_active', {id: user.id}) })) }}
         </td>
     {% endif %}

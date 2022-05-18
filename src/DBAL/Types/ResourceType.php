@@ -15,7 +15,7 @@ final class ResourceType  extends AbstractEnumType
     public const ONLINE_GAME = 'OG';
     public const VIDEO = 'VI';
 
-    protected static array $choices = [
+    protected static $choices = [
         self::GAME => 'Jeu à réaliser / activité',
         self::ARTICLE => 'Article',
         self::CHALLENGE => 'Carte défi',
@@ -25,5 +25,10 @@ final class ResourceType  extends AbstractEnumType
         self::ONLINE_GAME => 'Jeu en ligne',
         self::VIDEO => 'Vidéo'
     ];
+
+    public static function getDefaultValue(): ?string
+    {
+        return self::GAME; // This value will be used as default in DDL statement
+    }
 
 }
