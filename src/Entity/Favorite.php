@@ -11,17 +11,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(
- *     collectionOperations={
- *          "post"
- *     },
- *     itemOperations={
- *         "get",
- *         "delete"
- *     },
- *     normalizationContext={"groups"={"favorite:read"}},
- *     denormalizationContext={"groups"={"favorite:write"}}
- * )
  * @ORM\Entity(repositoryClass=FavoriteRepository::class)
  */
 class Favorite
@@ -30,36 +19,24 @@ class Favorite
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"favorite:read", "favorite:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
-     * @Groups({"favorite:read", "user:read"})
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "openapi_context"={
-     *             "example"="18/11/2021 15:00:00"
-     *         }
-     *     }
-     * )
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="favorites")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"favorite:read", "favorite:write"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Resource::class)
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"favorite:read", "favorite:write", "user:read"})
      */
     private $resource;
 

@@ -4,13 +4,10 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -83,7 +80,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/reset-pass/{token}", name="app_reset_password")
      */
-    public function resetPassword($token, Request $request, UserPasswordEncoderInterface $passwordEncoder, UserRepository $usersRepo)
+    public function resetPassword($token, Request $request, UserPasswordHasherInterface $passwordEncoder, UserRepository $usersRepo)
     {
         $user = $usersRepo->findOneByToken($token);
         if (!$user) {
