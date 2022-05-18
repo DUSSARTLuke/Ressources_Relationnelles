@@ -6,39 +6,7 @@
     <link rel="stylesheet" href="{{ asset('/admin/admin.css') }}">
 {% endblock %}
 
-{% block javascripts %}
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let table = new DataTable('#ressourcesList', {
-                language: {
-                    processing: "Traitement en cours...",
-                    search: "Rechercher&nbsp;:",
-                    lengthMenu: "Afficher les  _MENU_ premiers",
-                    info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                    infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-                    infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                    infoPostFix: "",
-                    loadingRecords: "Chargement en cours...",
-                    zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                    emptyTable: "Aucune donnée disponible dans le tableau",
-                    paginate: {
-                        first: "Premier",
-                        previous: "Pr&eacute;c&eacute;dent",
-                        next: "Suivant",
-                        last: "Dernier"
-                    },
-                    aria: {
-                        sortAscending: ": activer pour trier la colonne par ordre croissant",
-                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
-                    }
-                }
-            });
-        });
-    </script>
-{% endblock %}
+
 
 {% block body %}
     {% set newResources = 0 %}
@@ -58,8 +26,10 @@
         {% endif %}
     {% endfor %}
     <div class="row">
+            <!-- ... -->
+        </div>
         <div class="col-2" style="background-color: #03989E">
-            <div class="nav text-start nav-pills me-3 pt-5 pr-0" id="v-pills-tab" role="tablist"
+            <div data-resources="{{ resources | json_encode|e('html_attr') }}" class="datas nav text-start nav-pills me-3 pt-5 pr-0" id="v-pills-tab" role="tablist"
                  aria-orientation="vertical">
                 <button style="background-color: #03989E; color: white; border: #03989E"
                         class="nav-link active text-start pr-0" id="v-pills-all-tab" data-bs-toggle="pill"
@@ -105,111 +75,229 @@
                         </thead>
                         <tbody>
                         {% for resource in resources %}
-                            {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="v-pills-created" role="tabpanel" aria-labelledby="v-pills-created-tab">
-                    <table id="ressourcesList" class="table table-bordered border-light">
-                        <thead>
-                        <tr class="header-table">
-                            <th scope="col">Titre</th>
-                            <th scope="col">Date de création</th>
-                            <th scope="col">Auteur</th>
-                            <th scope="col">Catégorie(s)</th>
-                            <th scope="col">Type de resource</th>
-                            <th scope="col">Types de relation</th>
-                            <th scope="col">Nombre de commentaires</th>
-                            <th scope="col">Statut</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for resource in resources %}
-                            {% if resource.status == 'En attente de validation' %}
-                                {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}
-                            {% endif %}
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                        <tr data-role="resource">
+                            <td>{{ resource.name }}</td>
+                            <td class="text-center">{{ resource.createdAt |date('d-m-Y') }}</td>
+                            <td>{{ resource.createdBy.username }}</td>
+                            <td class="text-center">
+                                <span class="badge category mb-2 ">{{ resource.category.name }}</span>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge resourceType mb-2 ">{{ resource.resourceType }}</span></td>
+                            <td class="text-center">
+                                {% for relation in resource.relationType %}
+                                    <span class="badge relationType mb-2 ">{{ relation.name }}</span>
+                                {% endfor %}
+                            </td>
+                            <td class="text-center">{{ resource.comments | length }}</td>
+                            <td class="text-center">
+                                {{ resource.status }}
+                            </td>
+                            <td class="text-center">
+                                {% if is_granted('ROLE_MODERATOR') %}
+                                    <a class="btn btn-info mb-1" href="{{ path('ressources_admin_consult_moderator', {id: resource.id}) }}" role="button"><i
+                                                class="fa-solid fa-eye"></i></a>
+                                    {% if resource.status != 'Publié' %}
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#validResourceModal-{{ resource.id }}"><i class="fa-solid fa-check"></i>
+                                        </button>
+                                        {{ include('/includes/admin/resource/validResourceModalModerator.html.twig') }}
+                                    {% endif %}
+                                {% else %}
+                                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                            data-bs-target="#updateResourceModal-{{ resource.id }}"><i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    {{ include('/includes/admin/resource/updateResourceModalAdmin.html.twig', {url: path('ressources_admin_update', {'id': resource.id})}) }}
+                                    {% if resource.status != 'Supprimé' %}
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteResourceModal-{{ resource.id }}"><i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                        {{ include('/includes/admin/resource/deleteResourceModal.html.twig') }}
+                                    {% endif %}
+                                {% endif %}
 
-                <div class="tab-pane fade" id="v-pills-published" role="tabpanel"
-                     aria-labelledby="v-pills-published-tab">
-                    <table id="ressourcesList" class="table table-bordered border-light">
-                        <thead>
-                        <tr class="header-table">
-                            <th scope="col">Titre</th>
-                            <th scope="col">Date de création</th>
-                            <th scope="col">Auteur</th>
-                            <th scope="col">Catégorie(s)</th>
-                            <th scope="col">Type de resource</th>
-                            <th scope="col">Types de relation</th>
-                            <th scope="col">Nombre de commentaires</th>
-                            <th scope="col">Statut</th>
-                            <th>Actions</th>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {% for resource in resources %}
-                            {% if resource.status == 'Publié' %}
-                                {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}
-                            {% endif %}
                         {% endfor %}
+{#                        {% for resource in resources %}#}
+{#                            {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}#}
+{#                        {% endfor %}#}
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="v-pills-suspended" role="tabpanel"
-                     aria-labelledby="v-pills-suspended-tab">
-                    <table id="ressourcesList" class="table table-bordered border-light">
-                        <thead>
-                        <tr class="header-table">
-                            <th scope="col">Titre</th>
-                            <th scope="col">Date de création</th>
-                            <th scope="col">Auteur</th>
-                            <th scope="col">Catégorie(s)</th>
-                            <th scope="col">Type de resource</th>
-                            <th scope="col">Types de relation</th>
-                            <th scope="col">Nombre de commentaires</th>
-                            <th scope="col">Statut</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for resource in resources %}
-                            {% if resource.status == 'Suspendue' %}
-                                {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}
-                            {% endif %}
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="tab-pane fade" id="v-pills-deleted" role="tabpanel" aria-labelledby="v-pills-deleted-tab">
-                    <table id="ressourcesList" class="table table-bordered border-light">
-                        <thead>
-                        <tr class="header-table">
-                            <th scope="col">Titre</th>
-                            <th scope="col">Date de création</th>
-                            <th scope="col">Auteur</th>
-                            <th scope="col">Catégorie(s)</th>
-                            <th scope="col">Type de resource</th>
-                            <th scope="col">Types de relation</th>
-                            <th scope="col">Nombre de commentaires</th>
-                            <th scope="col">Statut</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for resource in resources %}
-                            {% if resource.status == 'Supprimé' %}
-                                {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}
-                            {% endif %}
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+{#                <div class="tab-pane fade" id="v-pills-created" role="tabpanel" aria-labelledby="v-pills-created-tab">#}
+{#                    <table id="ressourcesList" class="table table-bordered border-light">#}
+{#                        <thead>#}
+{#                        <tr class="header-table">#}
+{#                            <th scope="col">Titre</th>#}
+{#                            <th scope="col">Date de création</th>#}
+{#                            <th scope="col">Auteur</th>#}
+{#                            <th scope="col">Catégorie(s)</th>#}
+{#                            <th scope="col">Type de resource</th>#}
+{#                            <th scope="col">Types de relation</th>#}
+{#                            <th scope="col">Nombre de commentaires</th>#}
+{#                            <th scope="col">Statut</th>#}
+{#                            <th>Actions</th>#}
+{#                        </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+{#                        {% for resource in resources %}#}
+{#                            {% if resource.status == 'En attente de validation' %}#}
+{#                                {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#                        </tbody>#}
+{#                    </table>#}
+{#                </div>#}
+
+{#                <div class="tab-pane fade" id="v-pills-published" role="tabpanel"#}
+{#                     aria-labelledby="v-pills-published-tab">#}
+{#                    <table id="ressourcesList" class="table table-bordered border-light">#}
+{#                        <thead>#}
+{#                        <tr class="header-table">#}
+{#                            <th scope="col">Titre</th>#}
+{#                            <th scope="col">Date de création</th>#}
+{#                            <th scope="col">Auteur</th>#}
+{#                            <th scope="col">Catégorie(s)</th>#}
+{#                            <th scope="col">Type de resource</th>#}
+{#                            <th scope="col">Types de relation</th>#}
+{#                            <th scope="col">Nombre de commentaires</th>#}
+{#                            <th scope="col">Statut</th>#}
+{#                            <th>Actions</th>#}
+{#                        </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+{#                        {% for resource in resources %}#}
+{#                            {% if resource.status == 'Publié' %}#}
+{#                                {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#                        </tbody>#}
+{#                    </table>#}
+{#                </div>#}
+{#                <div class="tab-pane fade" id="v-pills-suspended" role="tabpanel"#}
+{#                     aria-labelledby="v-pills-suspended-tab">#}
+{#                    <table id="ressourcesList" class="table table-bordered border-light">#}
+{#                        <thead>#}
+{#                        <tr class="header-table">#}
+{#                            <th scope="col">Titre</th>#}
+{#                            <th scope="col">Date de création</th>#}
+{#                            <th scope="col">Auteur</th>#}
+{#                            <th scope="col">Catégorie(s)</th>#}
+{#                            <th scope="col">Type de resource</th>#}
+{#                            <th scope="col">Types de relation</th>#}
+{#                            <th scope="col">Nombre de commentaires</th>#}
+{#                            <th scope="col">Statut</th>#}
+{#                            <th>Actions</th>#}
+{#                        </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+{#                        {% for resource in resources %}#}
+{#                            {% if resource.status == 'Suspendue' %}#}
+{#                                {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#                        </tbody>#}
+{#                    </table>#}
+{#                </div>#}
+{#                <div class="tab-pane fade" id="v-pills-deleted" role="tabpanel" aria-labelledby="v-pills-deleted-tab">#}
+{#                    <table id="ressourcesList" class="table table-bordered border-light">#}
+{#                        <thead>#}
+{#                        <tr class="header-table">#}
+{#                            <th scope="col">Titre</th>#}
+{#                            <th scope="col">Date de création</th>#}
+{#                            <th scope="col">Auteur</th>#}
+{#                            <th scope="col">Catégorie(s)</th>#}
+{#                            <th scope="col">Type de resource</th>#}
+{#                            <th scope="col">Types de relation</th>#}
+{#                            <th scope="col">Nombre de commentaires</th>#}
+{#                            <th scope="col">Statut</th>#}
+{#                            <th>Actions</th>#}
+{#                        </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+{#                        {% for resource in resources %}#}
+{#                            {% if resource.status == 'Supprimé' %}#}
+{#                                {% include 'includes/admin/resource/resourceTableModerator.html.twig' %}#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#                        </tbody>#}
+{#                    </table>#}
+{#                </div>#}
             </div>
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+{#    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>#}
+{#    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>#}
+{#    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>#}
+    <script>
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     let table = new DataTable('#ressourcesList', {
+        //         language: {
+        //             processing: "Traitement en cours...",
+        //             search: "Rechercher&nbsp;:",
+        //             lengthMenu: "Afficher les  _MENU_ premiers",
+        //             info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        //             infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+        //             infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        //             infoPostFix: "",
+        //             loadingRecords: "Chargement en cours...",
+        //             zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+        //             emptyTable: "Aucune donnée disponible dans le tableau",
+        //             paginate: {
+        //                 first: "Premier",
+        //                 previous: "Pr&eacute;c&eacute;dent",
+        //                 next: "Suivant",
+        //                 last: "Dernier"
+        //             },
+        //             aria: {
+        //                 sortAscending: ": activer pour trier la colonne par ordre croissant",
+        //                 sortDescending: ": activer pour trier la colonne par ordre décroissant"
+        //             }
+        //         }
+        //     });
+        // });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var resources = document.querySelector('.datas');
+            console.log(resources)
+            var isAuthenticated = JSON.parse(resources.dataset.resources);
+            // console.log(isAuthenticated)
+
+            for (let i = 0; i < isAuthenticated.length; i++) {
+                console.log(isAuthenticated[i])
+            }
+        });
+
+        const pills = document.querySelectorAll('button[data-bs-toggle="pill"]');
+
+        for (let i = 0; i < pills.length; i++) {
+            pills[i].addEventListener("click", function (e) {
+                const tab = e.target.attributes.id.value
+                switch (tab) {
+                    case 'v-pills-all':
+                        break;
+                    case 'v-pills-created-tab':
+                        break;
+                    case 'v-pills-published-tab':
+                        break;
+                    case 'v-pills-suspended-tab':
+                        break;
+                    case 'v-pills-deleted-tab':
+                        break;
+                }
+                console.log()
+            });
+        }
+
+
+    </script>
+{% endblock %}
+
+{#{% block javascripts %}#}
+{#    {{ parent() }}#}
+{#    #}
+{#{% endblock %}#}

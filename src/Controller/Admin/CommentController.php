@@ -17,12 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends AbstractController
 {
     /**
-     * @Route(path="list", name="admin_list")
+     * @Route(path="list", name="admin_list", methods={"GET"})
      */
     public function adminCommentList(CommentRepository $commentRepository): Response
     {
         $comments = $commentRepository
-            ->findCommentsWithAuthor();
+            ->findAll();
         $form = $this->createForm(CommentType::class);
 
         return $this->renderForm('/pages/admin/comment/commentList.html.twig', [
@@ -32,7 +32,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route(path="utilisateur-commentaires", name="user_list")
+     * @Route(path="utilisateur-commentaires", name="user_list", methods={"GET"})
      */
     public function userCommentList(CommentRepository $commentRepository): Response
     {
@@ -45,7 +45,7 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route(path="ajouter-un-commentaire", name="create")
+     * @Route(path="ajouter-un-commentaire", name="create", methods={"GET","POST"})
      */
     public function createComment(Request $request, EntityManagerInterface $em)
     {
@@ -72,7 +72,7 @@ class CommentController extends AbstractController
     /**
      * @Route(path="modifier-un-commentaire/{id}", name="update")
      */
-    public function updateComment(Comment $comment, Request $request, EntityManagerInterface $em)
+    public function updateComment(Comment $comment, Request $request, EntityManagerInterface $em): \Symfony\Component\HttpFoundation\RedirectResponse|Response
     {
         $form = $this->createForm(CommentType::class, $comment);
 

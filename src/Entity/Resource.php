@@ -17,22 +17,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(
- *     collectionOperations={
- *          "get"={"normalization_context"={"groups"="resource:collection:read"}},
- *          "post"={
- *             "denormalization_context"={"groups"={"resource:post"}}
- *         }
- *     },
- *     itemOperations={
- *         "get", "put"={
- *             "denormalization_context"={"groups"={"resource:put"}}
- *         },
- *          "delete"
- *     },
- *     normalizationContext={"groups"={"resource:read"}},
- *     denormalizationContext={"groups"={"resource:write"}}
- * )
  * @ORM\Entity(repositoryClass=ResourceRepository::class)
  */
 class Resource
@@ -41,49 +25,28 @@ class Resource
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"resource:read", "resource:collection:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"resource:read", "resource:post", "resource:put", "user:read", "resource:collection:read", "comment:read", "favorite:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"resource:read", "resource:post", "resource:put", "resource:write"})
      */
     private $content;
 
     /**
      * @ORM\Column(name="status", type="ResourceStatusType", nullable=false)
      * @DoctrineAssert\Enum(entity="App\DBAL\Types\ResourceStatusType")
-     * @Groups({"resource:read", "resource:collection:read", "resource:put",})
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "openapi_context"={
-     *             "example"="créée"
-     *         }
-     *     }
-     * )
      */
     private $status = ResourceStatusType::WAITING_VALIDATION;
 
     /**
      * @ORM\Column(name="visibility", type="ResourceVisibilityType", nullable=false)
      * @DoctrineAssert\Enum(entity="App\DBAL\Types\ResourceVisibilityType")
-     * @Groups({"resource:read", "resource:collection:read", "resource:put",})
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "openapi_context"={
-     *             "example"="publique"
-     *         }
-     *     }
-     * )
      */
     private $visibility = ResourceVisibilityType::PUBLIC;
 
@@ -91,71 +54,40 @@ class Resource
     /**
      * @ORM\Column(name="resource_type", type="ResourceType", nullable=false)
      * @DoctrineAssert\Enum(entity="App\DBAL\Types\ResourceType")
-     * @Groups({"resource:read", "resource:post", "resource:put", "resource:collection:read"})
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "openapi_context"={
-     *             "example"="Jeu en ligne"
-     *         }
-     *     }
-     * )
      */
     private $resourceType;
 
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
-     * @Groups({"resource:read", "resource:collection:read"})
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "openapi_context"={
-     *             "example"="18/11/2021 15:00:00"
-     *         }
-     *     }
-     * )
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="update")
-     * @Groups({"resource:read", "resource:collection:read"})
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "openapi_context"={
-     *             "example"="18/11/2021 15:00:00"
-     *         }
-     *     }
-     * )
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="resources")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"resource:read", "resource:post", "resource:put", "resource:collection:read"})
      */
     private $category;
 
     /**
      * @ORM\ManyToMany(targetEntity=RelationType::class, inversedBy="resources")
-     * @Groups({"resource:read", "resource:post", "resource:put", "resource:collection:read"})
      */
     private $relationType;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="resource")
-     * @Groups({"resource:read"})
      */
     private $comments;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="createdResources")
      * @ORM\JoinColumn(name="created_by", nullable=false)
-     * @Groups({"resource:read", "resource:post", "resource:collection:read"})
      */
     private $createdBy;
 

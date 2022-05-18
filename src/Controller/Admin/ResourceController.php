@@ -43,11 +43,9 @@ class ResourceController extends AbstractController
      */
     public function adminResourceValidationList(ResourceRepository $resourceRepository): Response
     {
+        $resources = $resourceRepository->findAll();
 
-        $resources = $resourceRepository
-            ->findAll();
-
-        return $this->render('ressources_admin_list', [
+        return $this->render('/pages/admin/resource/resourceListAdmin.html.twig', [
             'resources' => $resources
         ]);
     }
@@ -105,12 +103,12 @@ class ResourceController extends AbstractController
     }
 
     /**
-     * @Route("/crer", name="create")
+     * @Route("creer", name="create")
      */
     public function AddResource(Request $request, EntityManagerInterface $manager): Response
     {
         $resource = new Resource();
-        $form = $this->createForm(CreationRessourceType::class, $resource);
+        $form = $this->createForm(CreationRessourceType::class, $resource, ['csrf_protection' => false]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $resource->setCreatedAt(new \DateTime());
@@ -122,7 +120,7 @@ class ResourceController extends AbstractController
             $this->addFlash('success', " La demande de création de ressource a bien été prise en compte ! Un modérateur va vérifier les informations 
                 pour valider sa création ! ");
 
-            return $this->redirectToRoute('ressources_list');
+            return $this->redirectToRoute('ressources_admin_list');
         }
 
         return $this->render('pages/ressources/form.html.twig', ['form' => $form->createView(), 'from' => 'create']);

@@ -41,9 +41,7 @@
 {% endblock %}
 
 {% block body %}
-    {% for subcom in comments[0].comments %}
-    {{ dump(subcom) }}
-    {% endfor %}
+
     {% set newComments = 0 %}
     {% set publishComments = 0 %}
     {% set deleteComments = 0 %}

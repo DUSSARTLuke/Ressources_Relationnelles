@@ -26,4 +26,9 @@ final class ResourceType  extends AbstractEnumType
         self::VIDEO => 'Vidéo'
     ];
 
+    public static function getDefaultValue(): ?string
+    {
+        return self::GAME; // This value will be used as default in DDL statement
+    }
+
 }

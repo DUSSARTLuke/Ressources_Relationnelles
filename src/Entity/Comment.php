@@ -14,21 +14,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(
- *     collectionOperations={
- *          "post"={
- *             "denormalization_context"={"groups"={"comment:post"}}
- *         }
- *     },
- *     itemOperations={
- *         "get", "put"={
- *             "denormalization_context"={"groups"={"comment:put"}}
- *         },
- *          "delete"
- *     },
- *     normalizationContext={"groups"={"comment:read"}},
- *     denormalizationContext={"groups"={"comment:write"}}
- * )
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
 class Comment
@@ -37,72 +22,41 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"comment:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"comment:read", "comment:post", "comment:put", "user:read", "resource:read"})
      */
     private $content;
 
     /**
      * @ORM\Column(name="status", type="CommentStatusType", nullable=false)
      * @DoctrineAssert\Enum(entity="App\DBAL\Types\CommentStatusType")
-     * @Groups({"comment:read", "comment:put", "user:read", "resource:read"})
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "openapi_context"={
-     *             "example"="Créé"
-     *         }
-     *     }
-     * )
      */
     private $status = 'WA';
 
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
-     * @Groups({"comment:read", "user:read", "resource:read"})
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "openapi_context"={
-     *             "example"="18/11/2021 15:00:00"
-     *         }
-     *     }
-     * )
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="update")
-     * @Groups({"comment:read", "user:read", "resource:read"})
-     *
-     * @ApiProperty(
-     *     attributes={
-     *         "openapi_context"={
-     *             "example"="18/11/2021 15:00:00"
-     *         }
-     *     }
-     * )
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"comment:read", "comment:post", "resource:read"})
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Resource::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=true)
-     * @Groups({"comment:read", "comment:post", "user:read"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $resource;
 
