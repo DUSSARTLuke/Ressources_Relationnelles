@@ -10,7 +10,7 @@ class ResourceVisibilityType extends AbstractEnumType
     public const PRIVATE = 'PRI';
     public const SHARED = 'SH';
 
-    protected static array $choices = [
+    protected static $choices = [
         self::PUBLIC => 'Publique',
         self::PRIVATE => 'Privées',
         self::SHARED => 'Partagées',

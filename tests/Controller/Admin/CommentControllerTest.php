@@ -3,6 +3,8 @@
 namespace App\Tests\Controller;
 
 
+use App\Entity\Comment;
+use App\Repository\ResourceRepository;
 use App\Repository\UserRepository;
 use App\Tests\LoggedUser;
 
@@ -45,35 +47,38 @@ class CommentControllerTest extends LoggedUser
         $this->assertResponseIsSuccessful();
     }
 
-    // TODO celle là n'est pas comptée dans le codecoverage
-    public function testCreateComment() {
-        $client = static::createClient();
-
-        $client->request('POST', '/admin/commentaires/ajouter-un-commentaire');
-        $this->assertResponseStatusCodeSame(302);
-        $this->assertResponseRedirects();
-        $this->assertResponseRedirects('/login');
-
-        $this->logAdmin($client);
-        $crawler = $client->request('POST', '/admin/commentaires/ajouter-un-commentaire');
-        $this->assertResponseIsSuccessful();
-
+//    // TODO celle là n'est pas comptée dans le codecoverage
+//    public function testCreateComment() {
+//        $client = static::createClient();
+//
+//        $client->request('POST', '/admin/commentaires/ajouter-un-commentaire');
+//        $this->assertResponseStatusCodeSame(302);
+//        $this->assertResponseRedirects();
+//        $this->assertResponseRedirects('/login');
+//
+//        $this->logAdmin($client);
+//        $crawler = $client->request('POST', '/admin/commentaires/ajouter-un-commentaire');
+//        $this->assertResponseIsSuccessful();
+//
 //        $buttonCrawlerNode = $crawler->selectButton('comment[save]');
 //        $form = $buttonCrawlerNode->form();
-//        $form['comment[content]'] = 'Fabien';
-//        $form['comment[resource]'] = 1;
-
+//        $form['comment[content]']->setValue('Fabien');
+//
 //        $userRepository = static::getContainer()->get(UserRepository::class);
 //        $testUser = $userRepository->findOneBy([
 //            'username' => "testUser"
 //        ]);
 //
-//        $form['comment[user]'] = '5';
+//        $form['comment[user]']->setValue('2');
+//
+////        $form['comment[resource]']->setValue('10');
+//
+//
 //        $client->submit($form);
 //        $this->assertResponseIsSuccessful();
 //        $this->assertResponseRedirects('/login');
-
-    }
+//
+//    }
 
     public function testUpdateComment() {
         $client = static::createClient();
