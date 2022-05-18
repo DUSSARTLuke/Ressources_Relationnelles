@@ -15,7 +15,7 @@ final class ResourceType  extends AbstractEnumType
     public const ONLINE_GAME = 'OG';
     public const VIDEO = 'VI';
 
-    protected static array $choices = [
+    protected static $choices = [
         self::GAME => 'Jeu à réaliser / activité',
         self::ARTICLE => 'Article',
         self::CHALLENGE => 'Carte défi',

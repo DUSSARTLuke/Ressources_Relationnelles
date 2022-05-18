@@ -10,7 +10,7 @@ class ProgressStatusType extends AbstractEnumType
     public const IN_PROGRESS = 'IP';
     public const FINISHED = 'FI';
 
-    protected static array $choices = [
+    protected static $choices = [
         self::NOT_STARTED => 'Non commencée',
         self::IN_PROGRESS => 'En cours',
         self::FINISHED => 'Finie'
