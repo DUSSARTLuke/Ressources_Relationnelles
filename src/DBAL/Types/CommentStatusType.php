@@ -16,8 +16,8 @@ final class CommentStatusType extends AbstractEnumType
         self::DELETED => 'Supprimé'
     ];
 
-    public static function getDefaultValue(): ?string
-    {
-        return self::WAITING_VALIDATION; // This value will be used as default in DDL statement
-    }
+//    public static function getDefaultValue(): ?string
+//    {
+//        return self::WAITING_VALIDATION; // This value will be used as default in DDL statement
+//    }
 }

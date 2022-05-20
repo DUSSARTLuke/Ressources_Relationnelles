@@ -34,7 +34,8 @@ class ResourceController extends AbstractController
     public function ConsultRessources(Resource $resource): Response
     {
         return $this->render('pages/ressources/consultation.html.twig', [
-            'ressource' => $resource
+            'ressource' => $resource,
+            'favRes' => []
         ]);
     }
 

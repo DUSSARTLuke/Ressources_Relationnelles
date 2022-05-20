@@ -3,7 +3,9 @@
 namespace App\Tests\Controller;
 
 
+use App\DBAL\Types\CommentStatusType;
 use App\Entity\Comment;
+use App\Form\admin\CommentType;
 use App\Repository\ResourceRepository;
 use App\Repository\UserRepository;
 use App\Tests\LoggedUser;
@@ -94,7 +96,7 @@ class CommentControllerTest extends LoggedUser
 
         $buttonCrawlerNode = $crawler->selectButton('comment[save]');
         $form = $buttonCrawlerNode->form();
-        $form['comment[status]'] = 'PU';
+        $form['comment[status]'] = CommentStatusType::PUBLISHED;
         $client->submit($form);
         $this->assertResponseRedirects('/admin/commentaires/list');
     }

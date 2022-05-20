@@ -54,7 +54,7 @@ class RessourcesController extends AbstractController
     public function AddRessources(Request $request, EntityManagerInterface $manager): Response
     {
         $resource = new Resource();
-        $form = $this->createForm(CreationRessourceType::class, $resource);
+        $form = $this->createForm(CreationRessourceType::class, $resource, ['csrf_protection' => false]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $resource->setCreatedAt(new \DateTime());

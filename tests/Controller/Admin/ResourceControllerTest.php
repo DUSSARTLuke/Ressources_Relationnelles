@@ -69,8 +69,8 @@ class ResourceControllerTest extends LoggedUser
 
         $buttonCrawlerNode = $crawler->selectButton('resource_admin[Valider]');
         $form = $buttonCrawlerNode->form();
-        $form['resource_admin[status]'] = 'PU';
-        $form['resource_admin[visibility]'] = 'PUB';
+        $form['resource_admin[status]'] = ResourceStatusType::PUBLISHED;
+        $form['resource_admin[visibility]'] = ResourceVisibilityType::PUBLIC;
         $client->submit($form);
         $this->assertResponseRedirects('/admin/ressources/list');
 
