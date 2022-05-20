@@ -91,10 +91,19 @@ class Resource
      */
     private $createdBy;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="favorites")
+     * @ORM\JoinTable(name="favorites")
+     * @ORM\JoinColumn(name="resource_id", nullable=false, onDelete="CASCADE")
+     * @Groups({"resource:read", "resource:post", "resource:collection:read"})
+     */
+    private $Favorite;
+
     public function __construct()
     {
         $this->relationType = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->Favorite = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -272,5 +281,29 @@ class Resource
         $this->visibility = $visibility;
         return $this;
 
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getFavorite(): Collection
+    {
+        return $this->Favorite;
+    }
+
+    public function addFavorite(User $favorite): self
+    {
+        if (!$this->Favorite->contains($favorite)) {
+            $this->Favorite[] = $favorite;
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(User $favorite): self
+    {
+        $this->Favorite->removeElement($favorite);
+
+        return $this;
     }
 }

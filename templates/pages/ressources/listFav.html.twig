@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes ressources {% endblock %}
+{% block title %}Mes ressources favorites {% endblock %}
 
 {% block stylesheets %}
     <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
@@ -42,7 +42,7 @@
 {% endblock %}
 {% block body %}
 
-    <h1 class="text-center"> Mes ressources : </h1>
+    <h1 class="text-center"> Mes ressources favorites : </h1>
     <div class="table-responsive">
         <table id="ressourcesList" class="table table-light table-striped">
             <thead>
@@ -92,17 +92,9 @@
                                         class="fa-solid fa-eye fa-2xs"></i></button>
                         {% else %}
                             <div class="d-flex justify-content-around">
-
-                                {% if app.user.id != favRes[loop.index - 1].user_id %}
-                                    <a class="btn btn-info" id="btnFavorite"
-                                       href="{{ path('ressources_favorite', {'id': ressource.id}) }}">
-                                        <i class="fa-regular fa-star fa-2xs"></i></a>
-                                {% else %}
-                                    <a class="btn btn-info" id="btnFavorite"
-                                       href="{{ path('ressources_unfavorite', {'id': ressource.id}) }}">
-                                        <i class="fa-solid fa-star fa-2xs"></i></a>
-                                {% endif %}
-
+                                <a class="btn btn-info"
+                                   href="{{ path('ressources_unfavoriteFav', {'id': ressource.id}) }}"><i
+                                           class="fa-solid fa-star fa-2xs"></i></a>
                                 <a class="btn btn-success"
                                    href="{{ path('ressources_consult', {'id': ressource.id}) }}"><i
                                             class="fa-solid fa-eye fa-2xs"></i></a>

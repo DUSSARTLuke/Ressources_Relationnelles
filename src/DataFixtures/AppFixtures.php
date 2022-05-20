@@ -28,8 +28,6 @@ class AppFixtures extends Fixture
 //        ResourceFactory::new()->createMany(70, ['relationType' => RelationTypeFactory::randomRange(1, 5)]);
         CommentFactory::new()->createCommentairesParents($manager);
         CommentFactory::new()->createCommentairesFils($manager);
-
-        FavoriteFactory::new()->createMany(15);
         ProgressFactory::new()->createMany(25);
 
         UserFactory::new()->createUsersAdmin($manager);
