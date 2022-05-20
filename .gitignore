@@ -16,6 +16,10 @@
 ###< symfony/phpunit-bridge ###
 
 .idea
+composer.lock
+package-lock.json
+yarn.lock
+.env
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/

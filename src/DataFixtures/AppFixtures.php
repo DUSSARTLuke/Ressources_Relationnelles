@@ -27,7 +27,6 @@ class AppFixtures extends Fixture
         ResourceFactory::new()->createRessourcesDE($manager);
         CommentFactory::new()->createCommentairesParents($manager);
         $manager->flush();
-        FavoriteFactory::new()->createMany(15);
         ProgressFactory::new()->createMany(25);
 
         UserFactory::new()->createUsersAdmin($manager);
