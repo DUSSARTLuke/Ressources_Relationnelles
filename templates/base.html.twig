@@ -29,14 +29,10 @@
     {% include 'includes/commons/navbar.html.twig' %}
 </header>
 {% for message in app.flashes('warning') %}
-    <div class="alert alert-danger" style="margin: 0 !important" role="alert">
-        {{ message }}
-    </div>
+    <div class="alert alert-danger" style="margin: 0 !important" role="alert">{{ message }}</div>
 {% endfor %}
 {% for message in app.flashes('success') %}
-    <div class="alert alert-success" style="margin: 0 !important" role="alert">
-        {{ message }}
-    </div>
+    <div class="alert alert-success" style="margin: 0 !important" role="alert">{{ message }}</div>
 {% endfor %}
 <body>
 <div class="marge-bottom">

@@ -10,8 +10,7 @@ use App\Form\CreationCompteType;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\LicencieRepository;
-use App\Service\GestionContact;
+
 
 /**
  * @Route("/inscription/", name="creation_")
@@ -30,7 +29,6 @@ class InscriptionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $username = $form->get('username')->getData();
             if ($uRepo->isUsernameExist($username) === 'ok') {
-//                dd('ok');
                 $this->addFlash('warning', 'Un compte est déjà créé avec ce pseudo');
             }
             else if ($uRepo->isMailExist($form->get('email')->getData()) === 'ok') {
@@ -41,7 +39,7 @@ class InscriptionController extends AbstractController
                 $mdp = $form->get('password')->getData();
                 $vmdp = $form->get('confPassword')->getData();
                 if ($mdp === $vmdp) {
-                    $encoder = $encoder->encodePassword($compte, $mdp);
+                    $encoder = $encoder->hashPassword($compte, $mdp);
                     $compte->setPassword($encoder);
                     $compte->setconfPassword($encoder);
                     $compte->setBirthday(new \DateTime($_POST['birthday']));
@@ -64,11 +62,11 @@ class InscriptionController extends AbstractController
 
 
 
-                    $this->addFlash('success', " Votre demande a bien été prise en compte ! Veuillez la valider par mail ! ");
+                    $this->addFlash('success', "Votre demande a bien été prise en compte ! Veuillez la valider par mail !");
                     return $this->redirectToRoute('home');
 
                 } else {
-                    $this->addFlash('warning', " Les mots de passes doivent êtres identiques !");
+                    $this->addFlash('warning', "Les mots de passes doivent êtres identiques !");
                 };
             }
         }
