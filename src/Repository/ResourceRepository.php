@@ -21,7 +21,6 @@ class ResourceRepository extends ServiceEntityRepository
         parent::__construct($registry, Resource::class);
     }
 
-
     public function recupFavoriteUser(int $user)
     {
         // $dql = "SELECT  FROM favorites f JOIN resource r ON f.resource_id = r.id JOIN user u ON u.id = f.user_id where f.user_id = :user";
@@ -32,6 +31,18 @@ class ResourceRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findParentRessource(int $id)
+    {
+
+        $qb = $this->createQueryBuilder('r')
+            ->join('App\Entity\Comment', 'c', 'with c.resource_id = r.id')
+            ->where('c.id = :id')
+            ->setParameter('id', $id);
+
+        dd($qb->getQuery());
+    }
+
     // /**
     //  * @return Resource[] Returns an array of Resource objects
     //  */

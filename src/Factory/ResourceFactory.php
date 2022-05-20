@@ -2552,7 +2552,6 @@ final class ResourceFactory extends ModelFactory
             ->setResourceType($ressource['resourceType'])
             ->setCreatedBy($this->uRepo->find($ressource['createdBy']));
 
-
         foreach ($ressource['relationType'] as $rel) {
             $ressourceReturn->addRelationType($this->relRepo->find($rel));
         }
