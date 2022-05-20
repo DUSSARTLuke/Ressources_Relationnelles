@@ -14,7 +14,7 @@
         <ini name="xdebug.mode" value="coverage" />
         <env name="XDEBUG_MODE" value="coverage" />
         <server name="APP_ENV" value="test" force="true" />
-        <server name="SHELL_VERBOSITY" value="2" />
+        <server name="SHELL_VERBOSITY" value="1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
         <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
     </php>
@@ -31,8 +31,21 @@
         </include>
         <exclude>
             <file>../ext_emconf.php</file>
+            <file>src/Controller/SecurityController.php</file>
+            <file>src/Controller/RessourcesController.php</file>
+            <file>src/Controller/InscriptionController.php</file>
+            <file>src/DBAL/Types/ProgressStatusType.php</file>
+            <file>src/DBAL/Types/ResourceStatusType.php</file>
+            <file>src/DataFixtures/AppFixtures.php</file>
+            <file>src/Form/CreationCompteType.php</file>
+            <file>src/Repository/FavoriteRepository.php</file>
+            <file>src/Repository/ResourceRepository.php</file>
+            <file>src/Repository/ProgressRepository.php</file>
+            <file>src/Repository/UserRepository.php</file>
+            <file>src/Kernel.php</file>
             <directory suffix=".php">../tests</directory>
             <directory suffix=".php">src/Factory</directory>
+            <directory suffix=".php">src/Entity</directory>
         </exclude>
     </coverage>
 
