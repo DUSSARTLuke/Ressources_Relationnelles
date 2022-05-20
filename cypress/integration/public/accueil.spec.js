@@ -20,7 +20,7 @@ describe('Test de la page d\'accueil', () => {
             cy.get('.card-res').eq(2).should('have.class', 'd-none')
         })
         it('filtrage Texte card', () => {
-            cy.get('.input-search').type('jeu as')
+            cy.get('.input-search').type('comp')
             cy.get('.card-res').eq(0).should('have.class', 'd-none')
         })
         it('filtrage Type Relation card', () => {
