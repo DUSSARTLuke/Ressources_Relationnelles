@@ -14,6 +14,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get"={"normalization_context"={"groups"="user:collection:read"}},
+ *          "post"
+ *     },
+ *     itemOperations={
+ *         "get","put", "delete"
+ *     },
+ *     normalizationContext={"groups"={"user:read"}},
+ *     denormalizationContext={"groups"={"user:write"}}
+ * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
@@ -23,46 +34,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"user:read", "user:collection:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"user:read", "user:write", "user:collection:read", "resource:read", "resource:collection:read", "comment:read", "favorite:read"})
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=45)
+     * @Groups({"user:read", "user:write", "user:collection:read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Groups({"user:read", "user:write", "user:collection:read"})
      */
     private $address1 = null;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Groups({"user:read", "user:write", "user:collection:read"})
      */
     private $address2 = null;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
+     * @Groups({"user:read", "user:write", "user:collection:read"})
      */
     private $postalCode = null;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups({"user:read", "user:write", "user:collection:read"})
      */
     private $city = null;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"user:read", "user:write", "user:collection:read"})
+     *
+     * @ApiProperty(
+     *     attributes={
+     *         "openapi_context"={
+     *             "example"="18/11/2021"
+     *         }
+     *     }
+     * )
      */
     private $birthday;
 
     /**
      * @ORM\Column(type="string", length=45, nullable=true)
+     * @Groups({"user:read", "user:write", "user:collection:read"})
      */
     private $socialSituation = null;
 
@@ -74,57 +102,92 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"user:read", "user:write"})
      */
     private $password;
 
     /**
      * @var string The hashed confirmation of password
      * @ORM\Column(type="string")
+     * @Groups({"user:read", "user:write"})
      */
     private $confPassword;
 
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
+     * @Groups({"user:read", "user:collection:read"})
+     *
+     * @ApiProperty(
+     *     attributes={
+     *         "openapi_context"={
+     *             "example"="18/11/2021 15:00:00"
+     *         }
+     *     }
+     * )
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"user:read", "user:write", "user:collection:read"})
+     *
+     * @ApiProperty(
+     *     attributes={
+     *         "openapi_context"={
+     *             "example"= false
+     *         }
+     *     }
+     * )
      */
     private $isActive = 0;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     * @Groups({"user:read"})
      */
     private $comments;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="user")
-     */
-    private $favorites;
 
     /**
      * @ORM\OneToMany(targetEntity=Progress::class, mappedBy="user")
+     * @Groups({"user:read"})
      */
     private $progress;
 
     /**
      * @ORM\OneToMany(targetEntity=Resource::class, mappedBy="createdBy")
+     * @Groups({"user:read"})
      */
     private $createdResources;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+     * @Groups({"user:read", "user:write", "user:collection:read"})
+     *
+     * @ApiProperty(
+     *     attributes={
+     *         "openapi_context"={
+     *             "example"= false
+     *         }
+     *     }
+     * )
      */
     private $isRGPD;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Resource::class, mappedBy="Favorite")
+     * @ORM\JoinColumn(name="user_id", nullable=false, onDelete="CASCADE")
+     * @Groups({"user:read", "user:write", "user:collection:read"})
+     */
+    private $favorites;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-        $this->favorites = new ArrayCollection();
         $this->progress = new ArrayCollection();
         $this->createdResources = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -338,35 +401,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Favorite[]
-     */
-    public function getFavorites(): Collection
-    {
-        return $this->favorites;
-    }
-
-    public function addFavorite(Favorite $favorite): self
-    {
-        if (!$this->favorites->contains($favorite)) {
-            $this->favorites[] = $favorite;
-            $favorite->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFavorite(Favorite $favorite): self
-    {
-        if ($this->favorites->removeElement($favorite)) {
-            // set the owning side to null (unless already changed)
-            if ($favorite->getUser() === $this) {
-                $favorite->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Progress[]
@@ -458,6 +492,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setConfPassword(string $confPassword): self
     {
         $this->confPassword = $confPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Resource[]
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(Resource $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+            $favorite->addFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Resource $favorite): self
+    {
+        if ($this->favorites->removeElement($favorite)) {
+            $favorite->removeFavorite($this);
+        }
 
         return $this;
     }

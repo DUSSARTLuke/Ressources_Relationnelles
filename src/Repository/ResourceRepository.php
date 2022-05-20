@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Resource;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,6 +21,17 @@ class ResourceRepository extends ServiceEntityRepository
         parent::__construct($registry, Resource::class);
     }
 
+
+    public function recupFavoriteUser(int $user)
+    {
+        // $dql = "SELECT  FROM favorites f JOIN resource r ON f.resource_id = r.id JOIN user u ON u.id = f.user_id where f.user_id = :user";
+        return $this->createQueryBuilder('r')
+            ->join("r.Favorite", 'f', 'with f.resource_id = r.id')
+            ->Where('f.id = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Resource[] Returns an array of Resource objects
     //  */

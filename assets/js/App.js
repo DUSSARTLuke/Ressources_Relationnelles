@@ -49,4 +49,3 @@ if(location.pathname === '/'){
         })
     })
 }
-

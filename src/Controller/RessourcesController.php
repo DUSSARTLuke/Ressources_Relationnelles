@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Zenstruck\Foundry\repository;
 
 /**
  * @Route(path="/ressources", name="ressources_")
@@ -23,7 +24,28 @@ class RessourcesController extends AbstractController
     {
         $ressources = $repo->findBy(['createdBy' => $this->getUser()->getId()]);
 
-        return $this->render('pages/ressources/list.html.twig', ['ressources' => $ressources]);
+        $favRes = [];
+        foreach ($ressources as $key => $resource){
+            if($resource->getFavorite()->count() > 0){
+                foreach ($resource->getFavorite() as $favorite) {
+                    $favRes[$key]  = ['user_id' => $favorite->getId()];
+                }
+            } else {
+                $favRes[$key] = ['user_id' => -1];
+            }
+
+        }
+        return $this->render('pages/ressources/list.html.twig', ['ressources' => $ressources, 'favRes' => $favRes]);
+    }
+
+    /**
+     * @Route (path="/list_ressourcesFavorites", name="listFav")
+     */
+    public function voirRessourcesFavorites(ResourceRepository $repo)
+    {
+        $ressources = $repo->recupFavoriteUser($this->getUser()->getId());
+
+        return $this->render('pages/ressources/listFav.html.twig', ['ressources' => $ressources]);
     }
 
     /**
@@ -81,6 +103,54 @@ class RessourcesController extends AbstractController
     }
 
     /**
+     * @Route("/favorite/{id}", name="favorite")
+     */
+    public function AddFavorite(EntityManagerInterface $manager, Resource $resource): Response
+    {
+        $resource->addFavorite($this->getUser());
+        $manager->persist($resource);
+        $manager->flush();
+
+        return $this->redirectToRoute('ressources_list');
+    }
+
+    /**
+     * @Route("/favorite/{id}", name="favoriteAcc")
+     */
+    public function AddFavoriteAccueil(EntityManagerInterface $manager, Resource $resource): Response
+    {
+        $resource->addFavorite($this->getUser());
+        $manager->persist($resource);
+        $manager->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route("/unfavorite/{id}", name="unfavorite")
+     */
+    public function RemoveFavorite(EntityManagerInterface $manager, Resource $resource): Response
+    {
+        $resource->removeFavorite($this->getUser());
+        $manager->persist($resource);
+        $manager->flush();
+
+        return $this->redirectToRoute('ressources_list');
+    }
+
+    /**
+     * @Route("/unfavoriteFav/{id}", name="unfavoriteFav")
+     */
+    public function RemoveFavoriteFav(EntityManagerInterface $manager, Resource $resource): Response
+    {
+        $resource->removeFavorite($this->getUser());
+        $manager->persist($resource);
+        $manager->flush();
+
+        return $this->redirectToRoute('ressources_listFav');
+    }
+
+    /**
      * @Route(path="/delete/{id}", name="deleteRes")
      */
     public function deleteRessource(EntityManagerInterface $manager, Resource $resource): Response
@@ -90,4 +160,6 @@ class RessourcesController extends AbstractController
 
         return $this->redirectToRoute('ressources_list');
     }
+
+
 }
