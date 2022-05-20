@@ -25,10 +25,10 @@ class RessourcesController extends AbstractController
         $ressources = $repo->findBy(['createdBy' => $this->getUser()->getId()]);
 
         $favRes = [];
-        foreach ($ressources as $key => $resource){
-            if($resource->getFavorite()->count() > 0){
+        foreach ($ressources as $key => $resource) {
+            if ($resource->getFavorite()->count() > 0) {
                 foreach ($resource->getFavorite() as $favorite) {
-                    $favRes[$key]  = ['user_id' => $favorite->getId()];
+                    $favRes[$key] = ['user_id' => $favorite->getId()];
                 }
             } else {
                 $favRes[$key] = ['user_id' => -1];
@@ -97,15 +97,22 @@ class RessourcesController extends AbstractController
      */
     public function ConsultRessources(Resource $resource): Response
     {
+        $favRes = false;
+        foreach ($resource->getFavorite() as $favorite) {
+            if ($favorite->getId() === $this->getUser()->getId()) {
+                $favRes = true;
+            }
+        }
         return $this->render('pages/ressources/consultation.html.twig', [
-            'ressource' => $resource
+            'ressource' => $resource,
+            'favRes' => $favRes
         ]);
     }
 
     /**
      * @Route("/favorite/{id}", name="favorite")
      */
-    public function AddFavorite(EntityManagerInterface $manager, Resource $resource): Response
+    public function AddFavorite(Request $request, EntityManagerInterface $manager, Resource $resource): Response
     {
         $resource->addFavorite($this->getUser());
         $manager->persist($resource);
@@ -115,7 +122,7 @@ class RessourcesController extends AbstractController
     }
 
     /**
-     * @Route("/favorite/{id}", name="favoriteAcc")
+     * @Route("/favorite_home/{id}", name="favorite_home")
      */
     public function AddFavoriteAccueil(EntityManagerInterface $manager, Resource $resource): Response
     {
@@ -135,7 +142,7 @@ class RessourcesController extends AbstractController
         $manager->persist($resource);
         $manager->flush();
 
-        return $this->redirectToRoute('ressources_list');
+        return $this->redirectToRoute('home');
     }
 
     /**
