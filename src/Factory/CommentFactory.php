@@ -6,6 +6,8 @@ use App\DBAL\Types\CommentStatusType;
 use App\Entity\Comment;
 use App\Entity\User;
 use App\Repository\CommentRepository;
+use App\Repository\ResourceRepository;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ObjectManager;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
@@ -31,19 +33,27 @@ use Zenstruck\Foundry\Proxy;
  */
 final class CommentFactory extends ModelFactory
 {
-    public function __construct()
+
+    private $commentRepo;
+    private $resRepo;
+    private $uRepo;
+
+    public function __construct(CommentRepository $commentRepo, ResourceRepository $resRepo, UserRepository $uRepo)
     {
         parent::__construct();
+        $this->commentRepo = $commentRepo;
+        $this->resRepo = $resRepo;
+        $this->uRepo = $uRepo;
     }
 
     public function createCommentairesParents(ObjectManager $manager)
     {
         $comments = [];
-        for($i=0; $i< 25; $i++){
+        for ($i = 0; $i < 25; $i++) {
             $comments[] = $this->getDefaults();
         }
 
-        foreach ($comments as $comment){
+        foreach ($comments as $comment) {
             $this->createComment($comment, $manager);
         }
     }
@@ -54,49 +64,48 @@ final class CommentFactory extends ModelFactory
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
-                'user' => UserFactory::random()->object(),
-                'parent' => self::random()->object()
+                'user' => 1,
+                'parent' => 12
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
-                'user' => UserFactory::random()->object(),
-                'parent' => self::random()->object()
+                'user' => 1,
+                'parent' => 27
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
-                'user' => UserFactory::random()->object(),
-                'parent' => self::random()->object()
+                'user' => 2,
+                'parent' => 1
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
-                'user' => UserFactory::random()->object(),
-                'parent' => self::random()->object()
+                'user' => 3,
+                'parent' => 25
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
-                'user' => UserFactory::random()->object(),
-                'parent' => self::random()->object()
+                'user' => 1,
+                'parent' => 22
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
-                'user' => UserFactory::random()->object(),
-                'parent' => self::random()->object()
+                'user' => 1,
+                'parent' => 13
             ],
             [
                 'content' => self::faker()->realText,
                 'status' => self::faker()->randomElement(['WA', 'PU', 'DE']),
-                'user' => UserFactory::random()->object(),
-                'parent' => self::random()->object()
+                'user' => 2,
+                'parent' => 15
             ],
 
         ];
-
-        foreach ($comments as $comment){
+        foreach ($comments as $comment) {
             $this->createComment($comment, $manager);
         }
     }
@@ -105,17 +114,22 @@ final class CommentFactory extends ModelFactory
     public function createComment(array $comment, ObjectManager $manager)
     {
         $commentReturn = new Comment();
-
         $commentReturn
             ->setContent($comment['content'])
-            ->setUser($comment['user'])
+            ->setUser($this->uRepo->find($comment['user']))
             ->setStatus($comment['status']);
 
-        if(isset($comment['parent'])){
-            $commentReturn->setParent($comment['parent']);
+        if (isset($comment['parent'])) {
+            $commentReturn->setParent($this->commentRepo->find($comment['parent']));
         }
-        if(isset($comment['resource'])){
+        if (isset($comment['resource'])) {
             $commentReturn->setResource($comment['resource']);
+        } else {
+            dump('test');
+            $res = $this->resRepo->findParentRessource($comment['parent']);
+
+            dd($res);
+            $commentReturn->setResource($this->resRepo->findParentRessource($comment['parent']->getId()));
         }
 
         $manager->persist($commentReturn);
