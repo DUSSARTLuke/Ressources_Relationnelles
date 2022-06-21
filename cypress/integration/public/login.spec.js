@@ -42,7 +42,8 @@ describe('Test de la page login', () => {
             cy.get('.navbar > div > div > .d-flex >').should('have.length', 1)
         })
         it('Test déconnexion', () => {
-            cy.contains('Déconnexion').click()
+            cy.contains('Profil').click();
+            cy.contains('Déconnexion').click();
             cy.get('.navbar > div > div > .d-flex >').should('have.length', 2)
         })
         it('Test bouton ressources', () => {
